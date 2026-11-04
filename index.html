@@ -398,6 +398,22 @@
   .faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
   .faq .answer { padding: 0 22px 22px; color: var(--muted); display: grid; gap: 10px; }
 
+  /* ---------- What I need to get started ---------- */
+  .start-grid { display: grid; gap: 16px; }
+  .start-card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px 22px; display: grid; gap: 18px; align-content: start; }
+  .start-card header { display: grid; gap: 6px; }
+  .start-card .when { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .start-card .later { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .start-card .later li { display: flex; gap: 12px; align-items: flex-start; }
+  .start-card .later svg { width: 22px; height: 22px; flex: none; margin-top: 1px; color: var(--support); }
+  .start-card .later small, .feel small { display: block; color: var(--muted); font-size: .95rem; }
+  .feel { border-top: 1px dashed var(--line); padding-top: 16px; display: grid; gap: 10px; }
+  .feel-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 12px 0 0; }
+  .feel-chips li { background: var(--surface-2); border-radius: 999px; padding: 7px 13px; font-weight: 600; font-size: .95rem; }
+  .feel .eg { margin-top: 8px; font-style: italic; }
+  @media (min-width: 900px) { .start-grid { grid-template-columns: 1.1fr 1fr; } .start-card { padding: 32px; } }
+  section#start { padding-bottom: 24px; }
+
   /* ---------- Contact ---------- */
   .contact-box {
     background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
@@ -411,6 +427,7 @@
     font-weight: 700; font-size: .9rem;
   }
   .include small { display: block; color: var(--muted); font-size: .95rem; }
+  .contact-tip { margin-top: 14px; font-weight: 600; }
   .email-card { background: var(--bg); border-radius: 22px; padding: 24px; display: grid; gap: 16px; align-content: start; }
   .email-card label { font-weight: 700; font-size: .9rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .email-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
@@ -474,7 +491,7 @@
         <a href="#prices">Prices</a>
         <a href="#questions">Questions</a>
       </nav>
-      <a class="btn btn-sm" href="#contact">Get a free demo</a>
+      <a class="btn btn-sm" href="#start">Get a free demo</a>
     </div>
   </div>
 </header>
@@ -488,7 +505,7 @@
         <h1 id="hero-title">Your business, open online in <span class="key">one week</span></h1>
         <p class="lead">I set up your website, Google Maps listing and Instagram for you. You don't touch any of the tech. You see a free demo of your own site before you pay anything.</p>
         <div class="hero-ctas">
-          <a class="btn" href="#contact">
+          <a class="btn" href="#start">
             <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
           </a>
           <a class="link-arrow" href="#prices">See prices <span aria-hidden="true">→</span></a>
@@ -626,7 +643,7 @@
         <li class="step">
           <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">1</text></svg></div>
           <h3>Get a free demo</h3>
-          <p>Email me your business name and a few details. Within 3 days, I send you a demo of your own site. No card, no commitment.</p>
+          <p>Email me <a href="#start">a few details</a> about your business. Within 3 days, I send you a demo of your own site. No card, no commitment.</p>
         </li>
         <li class="step">
           <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">2</text></svg></div>
@@ -713,7 +730,7 @@
           <h2 id="offer-title">50% off for the first <span class="key">3</span> businesses</h2>
           <p class="lead" style="color:var(--band-muted)">I'm just getting started, so my first 3 clients get half price. In return, I ask for <strong>an honest review</strong> and <strong>permission to show your site</strong> as an example.</p>
           <div class="hero-ctas">
-            <a class="btn" href="#contact">
+            <a class="btn" href="#start">
               <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
             </a>
           </div>
@@ -820,14 +837,17 @@
     </div>
   </section>
 
-  <!-- 8. FREE DEMO CONTACT — Ready to act -->
-  <section id="contact" aria-labelledby="contact-title">
+  <!-- WHAT I NEED TO GET STARTED — Relieved, ready to act -->
+  <section id="start" aria-labelledby="start-title">
     <div class="wrap">
-      <div class="contact-box">
-        <div>
-          <span class="eyebrow">Free demo</span>
-          <h2 id="contact-title">Get your free demo</h2>
-          <p class="lead">Send me one email. I'll reply within 24 hours and send your demo within 3 days.</p>
+      <div class="section-head">
+        <span class="eyebrow">Getting started</span>
+        <h2 id="start-title">What I need to get started</h2>
+        <p class="lead">Not much. Here's everything, so there are no surprises later.</p>
+      </div>
+      <div class="start-grid">
+        <article class="start-card">
+          <header><span class="when">Step 1 · For your free demo</span><h3>Send me these in one email</h3></header>
           <ul class="include" aria-label="What to include in your email">
             <li><span class="n">1</span><div><strong>Your business name</strong><small>and what you sell or do</small></div></li>
             <li><span class="n">2</span><div><strong>Where you are</strong><small>town or neighbourhood, or "I work from home"</small></div></li>
@@ -835,6 +855,48 @@
             <li><span class="n">4</span><div><strong>Any links you already have</strong><small>old website, Google listing or Instagram</small></div></li>
             <li><span class="n">5</span><div><strong>A few photos</strong><small>your shop, your products or your menu, if you have them</small></div></li>
           </ul>
+          <div class="feel">
+            <ul class="include" style="margin:0">
+              <li><span class="n">6</span><div>
+                <strong>How you want customers to feel</strong>
+                <small>when they see your website or walk through your door. A few words is enough. I design your demo around it.</small>
+                <ul class="feel-chips" aria-label="Examples of feelings">
+                  <li>Welcome, like a regular</li>
+                  <li>In good hands</li>
+                  <li>Excited to visit</li>
+                  <li>Calm and relaxed</li>
+                  <li>It's fun and friendly</li>
+                </ul>
+                <small class="eg">For example. Say it in your own words.</small>
+              </div></li>
+            </ul>
+          </div>
+        </article>
+        <article class="start-card">
+          <header><span class="when">Step 2 · Once you say yes</span><h3>What happens after you approve</h3></header>
+          <ul class="later">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>A short agreement</strong><small>It lists exactly what's included, so we both know what to expect.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Your domain, in your name</strong><small>About $20 a year. I'll walk you through buying it.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Access to your Google listing</strong><small>I'll show you how to add me as a manager, or help you claim it.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Instagram, on the Launch package</strong><small>Add me to your account, or I'll set up a new one for you.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Full-size photos and any logo you have</strong><small>Phone photos are fine.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Pay the invoice</strong><small>By PayPal (card or PayPal) or Interac e-Transfer. Then everything goes live.</small></div></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FREE DEMO CONTACT — Ready to act -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <span class="eyebrow">Free demo</span>
+          <h2 id="contact-title">Get your free demo</h2>
+          <p class="lead">Send me one email with the 6 things above. I'll reply within 24 hours and send your demo within 3 days.</p>
+          <p class="contact-tip">Don't have everything yet? Send what you have, and I'll ask for the rest.</p>
+          <a class="link-arrow" href="#start"><span aria-hidden="true">↑</span> See what to send</a>
         </div>
         <div class="email-card">
           <label for="email-addr">Email me at</label>
@@ -846,7 +908,7 @@
           <a class="btn" href="mailto:hello@weeekone.ca" data-mailto>
             <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
           </a>
-          <p class="fine">The button opens your email app with everything above already listed. Just fill in the blanks.</p>
+          <p class="fine">The button opens your email app with all 6 things already listed. Just fill in the blanks.</p>
           <p class="fine"><strong style="color:var(--ink)">No card, no commitment.</strong> If you don't love the demo, you don't pay.</p>
         </div>
       </div>
@@ -862,7 +924,7 @@
       <a href="#how">How it works</a>
       <a href="#prices">Prices</a>
       <a href="#questions">Questions</a>
-      <a href="#contact">Get a free demo</a>
+      <a href="#start">Get a free demo</a>
     </nav>
     <p class="legal">© 2026 WeeekOne · <span data-email>hello@weeekone.ca</span></p>
   </div>
@@ -883,6 +945,7 @@
     "Hours:",
     "Phone number for customers:",
     "Links we already have (website, Google, Instagram):",
+    "How we want customers to feel (a few words):",
     "",
     "I've attached a few photos (shop, products or menu) if I have them.",
     "",
