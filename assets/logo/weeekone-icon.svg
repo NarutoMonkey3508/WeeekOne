@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="WeeekOne"><rect width="512" height="512" fill="#F4F6FA"/><g transform="translate(100 84.4) scale(2.6)">
 <defs><clipPath id="cnblf0"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs>
-<g clip-path="url(#cnblf0)"><rect x="0" y="12" width="120" height="120" fill="#131B31"/><rect x="0" y="12" width="120" height="34" fill="#D3382A"/></g>
-<rect x="28" y="0" width="14" height="28" rx="7" fill="#131B31"/><rect x="78" y="0" width="14" height="28" rx="7" fill="#131B31"/>
+<g clip-path="url(#cnblf0)"><rect x="0" y="12" width="120" height="120" fill="#02070A"/><rect x="0" y="12" width="120" height="34" fill="#FC734D"/></g>
+<rect x="28" y="0" width="14" height="28" rx="7" fill="#02070A"/><rect x="78" y="0" width="14" height="28" rx="7" fill="#02070A"/>
 <path d="M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L59.03 63.26L70.18 63.26L70.18 114.74Z" fill="#FFFFFF"/>
 </g></svg>

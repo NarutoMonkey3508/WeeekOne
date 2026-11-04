@@ -6,8 +6,8 @@
 <title>WeeekOne — Your business, open online in one week</title>
 <meta name="description" content="I set up your website, Google Maps listing, Instagram, logo and menu in about a week. See a free demo of your own site before you pay anything.">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131B31" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#02070A" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="WeeekOne — Your business, open online in one week">
@@ -23,25 +23,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* ---------- Brand tokens (from the PRD) ---------- */
+  /* ---------- Brand tokens ----------
+     Midnight Black #02070A (ink, dark backgrounds), Cantaloupe Orange #FC734D (the one accent:
+     buttons and key words), Electric Blue #0297DE (support only: checkmarks, glows). */
   :root {
-    --navy: #131B31;
-    --red: #D3382A;
-    --red-hover: #B92E22;
+    --midnight: #02070A;
+    --orange: #FC734D;
+    --orange-hover: #FF8A68;
+    --blue: #0297DE;
     --white: #FFFFFF;
-    --grey: #F4F6FA;
 
-    --bg: var(--grey);
+    --bg: #F3F6F8;
     --surface: var(--white);
-    --surface-2: #E9EDF5;
-    --ink: var(--navy);
-    --muted: #4B5672;
-    --line: #DCE1EC;
-    --band: var(--navy);          /* founding offer + footer */
+    --surface-2: #E6EDF1;
+    --ink: var(--midnight);
+    --muted: #46545E;
+    --line: #D9E1E7;
+    --accent: var(--orange);          /* button fill */
+    --accent-hover: #E9603A;
+    --on-accent: var(--midnight);     /* text on orange buttons (white fails contrast) */
+    --accent-text: #C84A26;           /* orange key words on light backgrounds */
+    --support: #0278B3;               /* blue checkmarks on light backgrounds */
+    --band: var(--midnight);          /* founding offer, examples, footer */
+    --band-surface: #0B161D;
     --band-ink: var(--white);
-    --band-muted: #B8C0D6;
-    --shadow: 0 1px 2px rgba(19,27,49,.06), 0 8px 24px rgba(19,27,49,.08);
-    --ok: #1E8E4E;
+    --band-muted: #A2B0BA;
+    --shadow: 0 1px 2px rgba(2,7,10,.06), 0 8px 24px rgba(2,7,10,.08);
+    --ok: var(--support);
 
     --font-head: "Bricolage Grotesque", system-ui, sans-serif;
     --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -50,16 +58,18 @@
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: var(--navy);
-      --surface: #1B2440;
-      --surface-2: #232E50;
-      --ink: #F4F6FA;
-      --muted: #A9B2CA;
-      --line: #2C375A;
-      --band: #0C1222;
-      --band-muted: #A9B2CA;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
-      --ok: #4CC584;
+      --bg: var(--midnight);
+      --surface: #0B161D;
+      --surface-2: #122129;
+      --ink: #F1F5F7;
+      --muted: #9AA9B3;
+      --line: #1D2D37;
+      --accent-hover: var(--orange-hover);
+      --accent-text: var(--orange);
+      --support: var(--blue);
+      --band: #060E13;
+      --band-surface: #0E1B23;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
     }
   }
 
@@ -90,7 +100,7 @@
   h2 { font-size: clamp(2rem, 6.4vw, 3rem); }
   h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
   p { margin: 0; text-wrap: pretty; }
-  .key { color: var(--red); }
+  .key { color: var(--accent-text); }
   .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
   section { padding: 72px 0; scroll-margin-top: 64px; }
   .eyebrow {
@@ -106,19 +116,19 @@
   .section-head { margin-bottom: 36px; }
   .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; border-radius: 8px; z-index: 100; }
   .skip:focus { left: 8px; }
-  :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
   /* ---------- Buttons ---------- */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     min-height: 52px; padding: 0 26px;
     border-radius: 999px; border: 0;
-    background: var(--red); color: var(--white);
+    background: var(--accent); color: var(--on-accent);
     font: 700 1.05rem/1 var(--font-body);
     text-decoration: none; cursor: pointer;
     transition: background .15s ease, transform .15s ease;
   }
-  .btn:hover { background: var(--red-hover); }
+  .btn:hover { background: var(--accent-hover); }
   .btn:active { transform: translateY(1px); }
   .btn svg { width: 20px; height: 20px; }
   .btn-sm { min-height: 42px; padding: 0 18px; font-size: .95rem; }
@@ -168,7 +178,7 @@
     position: relative; width: 290px; max-width: 82vw;
     border-radius: 44px; padding: 10px;
     background: #0B1020;
-    box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 30px 60px -20px rgba(19,27,49,.45), 0 12px 24px -12px rgba(19,27,49,.3);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 30px 60px -20px rgba(2,7,10,.45), 0 12px 24px -12px rgba(2,7,10,.3);
   }
   .screen { border-radius: 34px; overflow: hidden; background: #FFFFFF; color: #1F2433; font-size: 13px; line-height: 1.35; }
   .statusbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px 6px; font-weight: 700; font-size: 12px; }
@@ -226,9 +236,9 @@
   .open-sign .strings { width: 140px; height: 46px; margin: 0 auto; display: block; color: var(--muted); }
   .open-sign .board {
     margin-top: -2px; width: 150px;
-    background: var(--red); color: #fff; text-align: center;
+    background: var(--accent); color: var(--on-accent); text-align: center;
     border-radius: 14px; padding: 8px 10px 10px;
-    box-shadow: 0 0 0 3px #fff inset, 0 0 0 5px var(--red) inset, 0 14px 26px -10px rgba(211,56,42,.6);
+    box-shadow: 0 0 0 3px var(--white) inset, 0 0 0 5px var(--accent) inset, 0 14px 30px -10px rgba(252,115,77,.65);
   }
   .open-sign small { display: block; font-weight: 700; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .95; }
   .open-sign strong { display: block; font-family: var(--font-head); font-weight: 800; font-size: 2.6rem; line-height: .95; letter-spacing: .04em; }
@@ -260,6 +270,34 @@
   @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1000px) { .cards.five { grid-template-columns: repeat(6, 1fr); } .cards.five .card { grid-column: span 2; } .cards.five .card:nth-child(4) { grid-column: 2 / span 2; } }
 
+  /* ---------- Example designs (dark glow band, both themes) ---------- */
+  .examples {
+    color: var(--band-ink);
+    background:
+      radial-gradient(ellipse 70% 45% at 50% 0%, rgba(2,151,222,.42), transparent 70%),
+      radial-gradient(ellipse 60% 35% at 50% 100%, rgba(252,115,77,.32), transparent 70%),
+      var(--band);
+    padding-block: 80px;
+  }
+  .examples .eyebrow, .examples .lead { color: var(--band-muted); }
+  .examples .key { color: var(--orange); }
+  .gallery { display: grid; gap: 18px; }
+  .gallery figure {
+    margin: 0; border-radius: 20px; overflow: hidden;
+    background: var(--band-surface); border: 1px solid rgba(255,255,255,.1);
+  }
+  .gallery img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+  .gallery figcaption { padding: 14px 18px 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .gallery figcaption strong { display: block; font-size: 1.05rem; }
+  .gallery figcaption span { color: var(--band-muted); font-size: .95rem; }
+  .fits { font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: var(--band-ink); white-space: nowrap; }
+  .examples-note { margin-top: 22px; color: var(--band-muted); font-size: 1rem; }
+  @media (min-width: 900px) {
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .gallery figure:first-child { grid-column: 1 / -1; }
+    .gallery figure:first-child figcaption { flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+
   /* ---------- How it works ---------- */
   .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: step; }
   .step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; }
@@ -282,10 +320,10 @@
     background: var(--surface); border: 1px solid var(--line);
     border-radius: 22px; padding: 28px 24px; display: flex; flex-direction: column; position: relative;
   }
-  .price.popular { border: 2px solid var(--red); box-shadow: var(--shadow); }
+  .price.popular { border: 2px solid var(--accent); box-shadow: var(--shadow); }
   .badge {
     position: absolute; top: -14px; left: 24px;
-    background: var(--red); color: #fff;
+    background: var(--accent); color: var(--on-accent);
     font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
     padding: 5px 12px; border-radius: 999px;
   }
@@ -307,13 +345,18 @@
   /* ---------- Founding offer ---------- */
   .offer { padding: 0; }
   .offer-box {
-    background: var(--band); color: var(--band-ink);
+    background:
+      radial-gradient(ellipse 60% 80% at 100% 100%, rgba(252,115,77,.28), transparent 70%),
+      radial-gradient(ellipse 50% 70% at 0% 0%, rgba(2,151,222,.22), transparent 70%),
+      var(--band);
+    color: var(--band-ink);
     border-radius: 28px; padding: 40px 24px;
     display: grid; gap: 28px; position: relative; overflow: hidden;
   }
   .offer-box .eyebrow { color: var(--band-muted); }
   .offer-box p { color: var(--band-muted); }
   .offer-box p strong { color: var(--band-ink); }
+  .offer-box .key { color: var(--orange); }
   .offer-prices { display: grid; gap: 12px; }
   .offer-price {
     background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
@@ -378,7 +421,7 @@
     user-select: all; -webkit-user-select: all; overflow-wrap: anywhere;
   }
   .copy-btn { min-height: 54px; }
-  .copy-btn.done { background: var(--ok); }
+  .copy-btn.done { background: var(--support); color: var(--white); }
   .email-card .fine { color: var(--muted); font-size: .95rem; }
   .email-card .btn { width: 100%; }
   @media (min-width: 900px) { .contact-box { grid-template-columns: 1.1fr 1fr; padding: 56px; gap: 48px; } }
@@ -413,7 +456,7 @@
   <symbol id="i-save" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 3h12v18l-6-4-6 4z"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></g></symbol>
   <symbol id="i-hand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M9 13l2 2 4-5"/></g></symbol>
-  <symbol id="i-cal" viewBox="0 0 120 132"><defs><clipPath id="cc"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc)"><rect x="0" y="12" width="120" height="120" fill="currentColor"/><rect x="0" y="12" width="120" height="34" fill="#D3382A"/></g><rect x="28" y="0" width="14" height="28" rx="7" fill="currentColor"/><rect x="78" y="0" width="14" height="28" rx="7" fill="currentColor"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 120 132"><defs><clipPath id="cc"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc)"><rect x="0" y="12" width="120" height="120" fill="currentColor"/><rect x="0" y="12" width="120" height="34" fill="#FC734D"/></g><rect x="28" y="0" width="14" height="28" rx="7" fill="currentColor"/><rect x="78" y="0" width="14" height="28" rx="7" fill="currentColor"/></symbol>
 </svg>
 
 <header class="site-header" id="top">
@@ -426,6 +469,7 @@
     </a>
     <div class="header-right">
       <nav class="nav" aria-label="Main">
+        <a href="#examples">Examples</a>
         <a href="#how">How it works</a>
         <a href="#prices">Prices</a>
         <a href="#questions">Questions</a>
@@ -468,7 +512,7 @@
           <div class="screen" role="img" aria-label="Example listing for Maple Crumb Bakery: open now, closes 6 PM, with directions, call, website and menu buttons, photos and hours.">
             <div class="statusbar"><span>9:41</span><span class="icons"><i style="width:14px;height:8px"></i><i style="width:10px;height:8px;border-radius:4px"></i><i style="width:20px;height:9px;border-radius:3px"></i></span></div>
             <div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></g></svg>bakery near me</div>
-            <div class="map"><span class="pin"><svg viewBox="0 0 30 38"><path d="M15 37C15 37 2 23.5 2 14a13 13 0 0 1 26 0c0 9.5-13 23-13 23z" fill="#D3382A"/><circle cx="15" cy="14" r="5" fill="#fff"/></svg></span></div>
+            <div class="map"><span class="pin"><svg viewBox="0 0 30 38"><path d="M15 37C15 37 2 23.5 2 14a13 13 0 0 1 26 0c0 9.5-13 23-13 23z" fill="#FC734D"/><circle cx="15" cy="14" r="5" fill="#fff"/></svg></span></div>
             <div class="listing">
               <div class="biz">Maple Crumb Bakery</div>
               <div class="meta">Bakery · Main Street</div>
@@ -539,6 +583,38 @@
     </div>
   </section>
 
+  <!-- EXAMPLE DESIGNS — Confident in the quality.
+       Made-up businesses that show the style. Replace with real client work (REAL EXAMPLES below) once you have it.
+       Pictures are rendered from design/examples.html. -->
+  <section class="examples" id="examples" aria-labelledby="examples-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Example designs</span>
+        <h2 id="examples-title">What your business <span class="key">could look like</span></h2>
+        <p class="lead">A few sample designs to show my style. Your free demo is made for your business, with your name, hours and photos.</p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img src="assets/examples/barber.jpg" alt="Example design: a dark website for a made-up barber shop, Northside Barbers, with prices, hours and a map." width="1600" height="1000" loading="lazy" decoding="async">
+          <figcaption><div><strong>Barber shop website</strong><span>Prices, hours and a map, right on the first screen</span></div><span class="fits">Fits Launch</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/examples/bakery.jpg" alt="Example design: a warm website for a made-up bakery, Maple Crumb, with a menu and today's hours." width="1600" height="1000" loading="lazy" decoding="async">
+          <figcaption><div><strong>Bakery website</strong><span>Menu with prices and today's hours</span></div><span class="fits">Fits Launch</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/examples/cafe.jpg" alt="Example design: logo, printable menu and Instagram profile with 3 posts for a made-up café, Corner Cup." width="1600" height="1000" loading="lazy" decoding="async">
+          <figcaption><div><strong>Café logo, menu and Instagram</strong><span>One look on the menu and Instagram</span></div><span class="fits">Fits Launch</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/examples/tutor.jpg" alt="Example design: a phone website for a made-up home tutoring business, Bright Path Tutoring, with price, subjects and hours." width="1600" height="1000" loading="lazy" decoding="async">
+          <figcaption><div><strong>Home tutor website</strong><span>What you teach, your price and how to book</span></div><span class="fits">Fits Starter</span></figcaption>
+        </figure>
+      </div>
+      <p class="examples-note">These businesses are made up to show what I can do. They aren't real clients.</p>
+    </div>
+  </section>
+
   <!-- 3. HOW IT WORKS — Relieved -->
   <section id="how" aria-labelledby="how-title">
     <div class="wrap">
@@ -569,7 +645,7 @@
         </li>
       </ol>
       <div class="callout">
-        <svg aria-hidden="true" viewBox="0 0 120 132"><defs><clipPath id="cc2"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc2)"><rect x="0" y="12" width="120" height="120" style="fill:var(--ink)"/><rect x="0" y="12" width="120" height="34" fill="#D3382A"/></g><rect x="28" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><rect x="78" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><path d="M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L70.18 63.26Z" style="fill:var(--bg)"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 120 132"><defs><clipPath id="cc2"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc2)"><rect x="0" y="12" width="120" height="120" style="fill:var(--ink)"/><rect x="0" y="12" width="120" height="34" fill="#FC734D"/></g><rect x="28" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><rect x="78" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><path d="M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L70.18 63.26Z" style="fill:var(--bg)"/></svg>
         <span>From your first email to live online: about one week.</span>
       </div>
     </div>

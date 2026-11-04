@@ -1,0 +1,245 @@
+<!doctype html>
+<!-- Source for the example design pictures in assets/examples/.
+     All businesses here are made up. Re-render with: node design/render-examples.js -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WeeekOne example designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; padding: 40px; background: #ccc; display: grid; gap: 40px; font-family: "DM Sans", sans-serif; }
+  .shot { width: 1000px; height: 625px; position: relative; overflow: hidden; border-radius: 0; }
+  .tag { position: absolute; right: 40px; top: 6px; z-index: 9; font: 700 11px/1 "DM Sans"; letter-spacing: .12em; text-transform: uppercase;
+         padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.85); color: #02070A; }
+
+  /* browser frame */
+  .browser { position: absolute; inset: 34px 40px 0; border-radius: 16px 16px 0 0; overflow: hidden; box-shadow: 0 30px 70px -20px rgba(0,0,0,.55); }
+  .chrome { height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 14px; }
+  .chrome i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .chrome .url { margin-left: 18px; flex: 1; max-width: 380px; height: 22px; border-radius: 7px; font-size: 12px; display: flex; align-items: center; padding: 0 12px; }
+  .page { position: absolute; inset: 36px 0 0; }
+
+  /* ===== 1. Northside Barbers — dark glow ===== */
+  #barber { background: linear-gradient(160deg, #0b1a24, #02070A 60%); }
+  #barber .chrome { background: #0E171D; } #barber .chrome i { background: #2A3740; } #barber .chrome .url { background: #18242C; color: #8FA0AB; }
+  .barber { color: #EEF3F6; overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 55% at 50% -5%, rgba(2,151,222,.85), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 50% 100%, rgba(252,115,77,.75), transparent 70%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 9px),
+      #02070A; }
+  .barber nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; font-size: 13px; }
+  .barber .mark { font: 700 15px/1 "DM Sans"; letter-spacing: .22em; display: flex; align-items: center; gap: 8px; }
+  .barber .mark b { width: 22px; height: 22px; border-radius: 6px; background: #FC734D; display: grid; place-items: center; color: #02070A; font-size: 12px; letter-spacing: 0; }
+  .barber nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; color: #B9C6CE; }
+  .barber .pill { background: #fff; color: #02070A; padding: 8px 14px; border-radius: 999px; font-weight: 700; }
+  .barber .hero { text-align: center; padding-top: 34px; }
+  .barber .kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #CFE6F3; }
+  .barber h1 { font: 400 78px/0.98 "Instrument Serif"; margin: 14px 0 14px; letter-spacing: -.01em; }
+  .barber h1 em { font-style: italic; }
+  .barber .hero p { color: #C7D3DA; font-size: 15px; margin: 0; }
+  .barber .orb { margin: 22px auto 0; width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.35), rgba(252,115,77,.35) 60%, rgba(252,115,77,.1));
+    box-shadow: 0 0 0 1px rgba(255,255,255,.35) inset, 0 0 40px rgba(252,115,77,.6); font-weight: 700; font-size: 13px; }
+  .barber .cards { position: absolute; left: 24px; right: 24px; bottom: -14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .glass { background: rgba(10,20,27,.72); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 14px 16px 26px; backdrop-filter: blur(8px); font-size: 13px; }
+  .glass h4 { margin: 0 0 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8FB9CF; font-weight: 700; }
+  .glass .row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed rgba(255,255,255,.1); }
+  .glass .row b { color: #FC734D; }
+  .minimap { height: 58px; border-radius: 9px; position: relative; margin-bottom: 8px;
+    background: linear-gradient(90deg, transparent 46%, #2b3a44 46% 52%, transparent 52%), linear-gradient(0deg, transparent 40%, #2b3a44 40% 47%, transparent 47%), #15232b; }
+  .minimap::after { content: ""; position: absolute; left: 49%; top: 18%; width: 14px; height: 14px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #FC734D; box-shadow: 0 0 14px #FC734D; }
+
+  /* ===== 2. Maple Crumb Bakery — warm light ===== */
+  #bakery { background: linear-gradient(140deg, #0297DE 0%, #6cc3ee 45%, #FC734D 110%); }
+  #bakery .chrome { background: #EFE7DC; } #bakery .chrome i { background: #D6C7B4; } #bakery .chrome .url { background: #fff; color: #7a6a58; }
+  .bakery { background: #FBF6EF; color: #3B2618; }
+  .bakery nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; font-size: 14px; }
+  .bakery .mark { font: 700 21px/1 "Fraunces"; display: flex; gap: 8px; align-items: center; }
+  .bakery .mark span { color: #B5562B; }
+  .bakery nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; color: #7a5b45; }
+  .bakery .btn { background: #3B2618; color: #FBF6EF; padding: 10px 16px; border-radius: 10px; font-weight: 700; display: inline-block; font-size: 14px; }
+  .bakery .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; padding: 14px 32px 0; align-items: center; }
+  .bakery .kicker { color: #B5562B; font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+  .bakery h1 { font: 700 54px/1.02 "Fraunces"; margin: 10px 0 14px; letter-spacing: -.02em; }
+  .bakery .hero p { font-size: 16px; color: #6d5240; margin: 0 0 22px; line-height: 1.5; }
+  .bakery .ghost { margin-left: 10px; font-weight: 700; font-size: 14px; color: #3B2618; }
+  .bakery .art { height: 270px; border-radius: 26px; background: radial-gradient(circle at 35% 30%, #FFE3B8, #F2B36B 55%, #C9783C); position: relative; display: grid; place-items: center; font-size: 130px; }
+  .bakery .art .hours { position: absolute; left: -22px; bottom: 22px; background: #fff; border-radius: 14px; padding: 12px 14px; font-size: 13px; box-shadow: 0 12px 30px -10px rgba(59,38,24,.4); }
+  .bakery .art .hours b { color: #188038; display: block; font-size: 14px; }
+  .bakery .menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 26px 32px; }
+  .bakery .item { background: #fff; border-radius: 16px; padding: 12px; display: flex; gap: 12px; align-items: center; box-shadow: 0 1px 0 #EDE2D3; }
+  .bakery .item i { width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; font-size: 28px; font-style: normal; background: #F7E6CF; }
+  .bakery .visit { margin: 0 32px; padding: 14px 18px; border-radius: 14px; background: #3B2618; color: #F7E9D7; display: flex; justify-content: space-between; font-size: 14px; }
+  .bakery .visit b { color: #FFC98F; }
+  .bakery .item b { display: block; font-size: 15px; } .bakery .item span { color: #B5562B; font-weight: 700; font-size: 14px; }
+
+  /* ===== 3. Corner Cup Café — logo, menu, Instagram ===== */
+  #cafe { background: radial-gradient(ellipse at 20% 0%, rgba(2,151,222,.55), transparent 60%), radial-gradient(ellipse at 90% 100%, rgba(252,115,77,.55), transparent 55%), #02070A; }
+  .cafe-logo { position: absolute; left: 60px; top: 56px; width: 230px; height: 230px; border-radius: 28px; background: #2F4A3A; display: grid; place-items: center; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); }
+  .badge { width: 170px; height: 170px; border-radius: 50%; border: 3px solid #F3E9D8; display: grid; place-items: center; text-align: center; color: #F3E9D8; }
+  .badge svg { width: 54px; height: 54px; margin: 0 auto 4px; display: block; }
+  .badge b { font: 700 24px/1 "Fraunces"; display: block; } .badge small { font-size: 10px; letter-spacing: .3em; }
+  .paper { position: absolute; left: 330px; top: 46px; width: 300px; height: 520px; background: #F6EFE3; border-radius: 6px; padding: 26px 28px; box-sizing: border-box; color: #2F4A3A; transform: rotate(-3deg); box-shadow: 0 30px 60px -18px rgba(0,0,0,.7); }
+  .paper .top { text-align: center; border-bottom: 2px solid #2F4A3A; padding-bottom: 12px; margin-bottom: 14px; }
+  .paper .top b { font: 700 30px/1 "Fraunces"; display: block; } .paper .top small { font-size: 10px; letter-spacing: .3em; }
+  .paper h5 { font: 700 13px/1 "DM Sans"; letter-spacing: .2em; text-transform: uppercase; margin: 16px 0 8px; color: #B5562B; }
+  .paper .r { display: flex; justify-content: space-between; font-size: 15px; padding: 5px 0; border-bottom: 1px dotted #b9ad99; }
+  .paper .foot { position: absolute; left: 28px; right: 28px; bottom: 22px; text-align: center; font-size: 12px; color: #5d6f63; }
+  .phone { position: absolute; right: 70px; top: 40px; width: 262px; height: 560px; border-radius: 40px; background: #0B1014; padding: 10px; box-sizing: border-box; box-shadow: 0 30px 60px -18px rgba(0,0,0,.7); }
+  .phone .scr { width: 100%; height: 100%; border-radius: 31px; background: #fff; overflow: hidden; color: #111; font-size: 12px; }
+  .ig-top { display: flex; justify-content: space-between; padding: 16px 16px 8px; font-weight: 700; font-size: 14px; }
+  .ig-head { display: flex; align-items: center; gap: 16px; padding: 4px 16px; }
+  .ig-av { width: 66px; height: 66px; border-radius: 50%; background: #2F4A3A; display: grid; place-items: center; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #FC734D; }
+  .ig-av svg { width: 30px; height: 30px; }
+  .ig-stats { display: flex; gap: 14px; text-align: center; } .ig-stats b { display: block; font-size: 15px; }
+  .ig-bio { padding: 10px 16px 0; line-height: 1.45; } .ig-bio b { font-size: 13px; } .ig-bio a { color: #00376B; font-weight: 700; text-decoration: none; }
+  .ig-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 10px 16px; }
+  .ig-btns span { background: #EFEFEF; border-radius: 8px; text-align: center; padding: 7px; font-weight: 700; }
+  .ig-btns span:first-child { background: #0297DE; color: #fff; }
+  .ig-hl { display: flex; gap: 14px; padding: 4px 16px 10px; text-align: center; font-size: 10.5px; }
+  .ig-hl i { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #ccc; display: grid; place-items: center; font-style: normal; font: 700 10px "Fraunces"; color: #2F4A3A; background: #F6EFE3; margin-bottom: 4px; box-shadow: inset 0 0 0 3px #fff; }
+  .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 6px; }
+  .ig-grid div { aspect-ratio: 1; display: grid; place-items: center; text-align: center; font: 700 13px/1.1 "Fraunces"; padding: 6px; }
+  .ig-grid div:nth-child(1) { background: #2F4A3A; color: #F3E9D8; } .ig-grid div:nth-child(2) { background: #F6EFE3; color: #2F4A3A; } .ig-grid div:nth-child(3) { background: #B5562B; color: #fff; }
+  .ig-grid div small { display: block; font: 500 9px/1.2 "DM Sans"; margin-top: 4px; }
+  .labels { position: absolute; left: 60px; top: 312px; display: grid; gap: 10px; color: #E9F1F5; font-size: 15px; }
+  .labels span { display: flex; align-items: center; gap: 10px; } .labels i { width: 10px; height: 10px; border-radius: 50%; background: #FC734D; display: block; }
+  .labels .ttl { font: 400 40px/1 "Instrument Serif"; margin-bottom: 8px; }
+
+  /* ===== 4. Bright Path Tutoring — home business, two phones ===== */
+  #tutor { background: radial-gradient(ellipse at 70% 0%, rgba(2,151,222,.9), transparent 60%), radial-gradient(ellipse at 20% 110%, rgba(252,115,77,.7), transparent 55%), #02070A; }
+  #tutor .phone { top: 40px; }
+  #tutor .p1 { right: auto; left: 300px; } #tutor .p2 { right: 120px; top: 70px; }
+  .tut { font-family: "Nunito", sans-serif; color: #1B2A4A; height: 100%; background: #F5F8FF; }
+  .tut .bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 10px; }
+  .tut .logo { font-weight: 800; font-size: 15px; display: flex; gap: 6px; align-items: center; } .tut .logo i { width: 18px; height: 18px; border-radius: 50%; background: conic-gradient(#FC734D 0 50%, #0297DE 0); display: block; }
+  .tut .burger { width: 18px; height: 12px; border-top: 2px solid #1B2A4A; border-bottom: 2px solid #1B2A4A; position: relative; }
+  .tut .hero { margin: 4px 12px; border-radius: 20px; padding: 20px 16px; background: linear-gradient(160deg, #DDEBFF, #FFE7DD); }
+  .tut .hero small { font-weight: 800; color: #0278B3; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .tut h2 { font-weight: 800; font-size: 26px; line-height: 1.08; margin: 8px 0 10px; }
+  .tut .hero p { margin: 0 0 14px; font-size: 13px; color: #44557a; }
+  .tut .cta { display: block; text-align: center; background: #FC734D; color: #1B0E08; border-radius: 12px; padding: 11px; font-weight: 800; font-size: 13px; }
+  .tut .price { margin: 12px; background: #fff; border-radius: 16px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 0 #E2E8F5; }
+  .tut .price > div { white-space: nowrap; } .tut .price b { font-size: 22px; } .tut .price span { color: #44557a; font-size: 12px; }
+  .tut .sec { margin: 12px; } .tut .sec h3 { font-size: 15px; margin: 4px 0 8px; font-weight: 800; }
+  .tut .chip { display: inline-block; background: #fff; border: 1px solid #DCE4F5; border-radius: 999px; padding: 6px 10px; margin: 0 4px 6px 0; font-weight: 700; font-size: 12px; }
+  .tut .hr { display: flex; justify-content: space-between; background: #fff; border-radius: 12px; padding: 10px 12px; margin-bottom: 6px; font-size: 12.5px; font-weight: 700; } .tut .hr span { color: #44557a; font-weight: 500; }
+  .tut-label { position: absolute; left: 60px; top: 70px; width: 220px; color: #E9F1F5; }
+  .tut-label .ttl { font: 400 40px/1.02 "Instrument Serif"; margin-bottom: 14px; }
+  .tut-label p { font-size: 15px; color: #BFD0DA; line-height: 1.5; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<div class="shot" id="barber">
+  <div class="browser">
+    <div class="chrome"><i></i><i></i><i></i><div class="url">northsidebarbers.ca</div></div>
+    <div class="page barber">
+      <nav><div class="mark"><b>N</b>NORTHSIDE</div><ul><li>Services</li><li>Prices</li><li>Hours</li><li>Visit</li></ul><span class="pill">Book a cut</span></nav>
+      <div class="hero">
+        <div class="kicker">Walk-ins welcome · King Street</div>
+        <h1>Sharp cuts,<br><em>no wait.</em></h1>
+        <p>Classic cuts, fades and beard trims. Open 7 days a week.</p>
+        <div class="orb">Book now</div>
+      </div>
+      <div class="cards">
+        <div class="glass"><h4>Prices</h4><div class="row">Haircut<b>$30</b></div><div class="row">Skin fade<b>$35</b></div><div class="row">Beard trim<b>$15</b></div></div>
+        <div class="glass"><h4>Hours</h4><div class="row">Mon–Fri<span>9 – 7</span></div><div class="row">Saturday<span>9 – 5</span></div><div class="row">Sunday<span>10 – 4</span></div></div>
+        <div class="glass"><h4>Find us</h4><div class="minimap"></div>214 King Street · Parking out back</div>
+      </div>
+    </div>
+  </div>
+  <span class="tag">Example design</span>
+</div>
+
+<!-- 2 -->
+<div class="shot" id="bakery">
+  <div class="browser">
+    <div class="chrome"><i></i><i></i><i></i><div class="url">maplecrumb.ca</div></div>
+    <div class="page bakery">
+      <nav><div class="mark">Maple <span>Crumb</span></div><ul><li>Menu</li><li>Hours</li><li>Visit</li></ul><span class="btn">Order for pickup</span></nav>
+      <div class="hero">
+        <div>
+          <div class="kicker">Bakery on Main Street</div>
+          <h1>Fresh bread, every morning.</h1>
+          <p>Croissants, sourdough and cupcakes, baked before you wake up.</p>
+          <span class="btn">See the menu</span><span class="ghost">Get directions →</span>
+        </div>
+        <div class="art">🥐<div class="hours"><b>Open today</b>7 AM – 6 PM</div></div>
+      </div>
+      <div class="menu">
+        <div class="item"><i>🥐</i><div><b>Butter croissant</b><span>$3.75</span></div></div>
+        <div class="item"><i>🍞</i><div><b>Sourdough loaf</b><span>$8.00</span></div></div>
+        <div class="item"><i>🧁</i><div><b>Vanilla cupcake</b><span>$4.00</span></div></div>
+      </div>
+      <div class="visit"><span><b>Visit us</b> · 12 Main Street</span><span>Mon–Sat 7 AM – 6 PM · Sun closed</span></div>
+    </div>
+  </div>
+  <span class="tag">Example design</span>
+</div>
+
+<!-- 3 -->
+<div class="shot" id="cafe">
+  <div class="cafe-logo"><div class="badge"><div>
+    <svg viewBox="0 0 48 48" fill="none" stroke="#F3E9D8" stroke-width="3" stroke-linecap="round"><path d="M9 18h26v10a11 11 0 0 1-11 11h-4A11 11 0 0 1 9 28z"/><path d="M35 21h3a5 5 0 0 1 0 10h-4"/><path d="M17 6c-2 3 2 5 0 8M24 6c-2 3 2 5 0 8M31 6c-2 3 2 5 0 8"/></svg>
+    <b>Corner Cup</b><small>CAFÉ</small></div></div></div>
+  <div class="labels"><div class="ttl">Corner Cup Café</div><span><i></i>Logo</span><span><i></i>Printable menu</span><span><i></i>Instagram with 3 posts</span></div>
+  <div class="paper">
+    <div class="top"><b>Corner Cup</b><small>CAFÉ · ELM STREET</small></div>
+    <h5>Coffee</h5>
+    <div class="r"><span>Espresso</span><span>3.00</span></div>
+    <div class="r"><span>Latte</span><span>4.75</span></div>
+    <div class="r"><span>Cold brew</span><span>4.50</span></div>
+    <div class="r"><span>Hot chocolate</span><span>4.00</span></div>
+    <h5>Bakery</h5>
+    <div class="r"><span>Blueberry muffin</span><span>3.25</span></div>
+    <div class="r"><span>Cheese scone</span><span>3.50</span></div>
+    <div class="r"><span>Banana bread</span><span>3.75</span></div>
+    <div class="foot">Open daily 7 AM – 4 PM</div>
+  </div>
+  <div class="phone"><div class="scr">
+    <div class="ig-top"><span>cornercup.cafe</span><span>☰</span></div>
+    <div class="ig-head">
+      <div class="ig-av"><svg viewBox="0 0 48 48" fill="none" stroke="#F3E9D8" stroke-width="3.5" stroke-linecap="round"><path d="M9 18h26v10a11 11 0 0 1-11 11h-4A11 11 0 0 1 9 28z"/><path d="M35 21h3a5 5 0 0 1 0 10h-4"/></svg></div>
+      <div class="ig-stats"><div><b>3</b>posts</div><div><b>Café</b>Elm St</div></div>
+    </div>
+    <div class="ig-bio"><b>Corner Cup Café</b><br>Coffee and fresh baking on Elm Street.<br>Open daily 7 AM – 4 PM<br><a>cornercup.ca</a></div>
+    <div class="ig-btns"><span>Follow</span><span>Message</span></div>
+    <div class="ig-hl"><div><i>☕</i>Menu</div><div><i>7–4</i>Hours</div><div><i>📍</i>Visit</div><div><i>🥐</i>Baking</div></div>
+    <div class="ig-grid">
+      <div>We're open!<small>Come say hi</small></div>
+      <div>Our menu<small>Coffee · Bakery</small></div>
+      <div>7 AM – 4 PM<small>Every day</small></div>
+    </div>
+  </div></div>
+  <span class="tag">Example design</span>
+</div>
+
+<!-- 4 -->
+<div class="shot" id="tutor">
+  <div class="tut-label"><div class="ttl">Bright Path Tutoring</div><p>A home business site for a tutor: what you teach, your price and how to book.</p></div>
+  <div class="phone p1"><div class="scr tut">
+    <div class="bar"><div class="logo"><i></i>Bright Path</div><div class="burger"></div></div>
+    <div class="hero"><small>Tutoring · Grades 1–8</small><h2>Math and reading help that sticks.</h2><p>Lessons at my home or online, after school and weekends.</p><span class="cta">Book a free first chat</span></div>
+    <div class="price"><div><b>$35</b><span> / hour</span></div><span>Packages of 4 save $20</span></div>
+    <div class="sec"><h3>Subjects</h3><span class="chip">Math</span><span class="chip">Reading</span><span class="chip">Writing</span><span class="chip">French</span></div>
+  </div></div>
+  <div class="phone p2"><div class="scr tut">
+    <div class="bar"><div class="logo"><i></i>Bright Path</div><div class="burger"></div></div>
+    <div class="sec"><h3>When I'm available</h3>
+      <div class="hr">Mon – Thu<span>3:30 – 7 PM</span></div>
+      <div class="hr">Saturday<span>10 AM – 2 PM</span></div>
+      <div class="hr">Sunday<span>Online only</span></div></div>
+    <div class="sec"><h3>How it works</h3>
+      <div class="hr">1. Free 15-minute chat</div>
+      <div class="hr">2. A plan for your child</div>
+      <div class="hr">3. Weekly lessons</div></div>
+    <div class="sec"><span class="cta">Send a message</span></div>
+  </div></div>
+  <span class="tag">Example design</span>
+</div>
+
+</body>
+</html>
