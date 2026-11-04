@@ -16,9 +16,10 @@ The whole site is plain HTML in `index.html`, with no build step and no librarie
 ## Before launch
 
 1. **Set the real email.** In `index.html`, find `const EMAIL = "hello@weeekone.ca";` and change it. Also replace the two `hello@weeekone.ca` fallbacks in the HTML so the address is right even without JavaScript.
-2. **Check the package details** under Prices so they match exactly what you'll deliver.
+2. **Payments.** The FAQ says clients pay by PayPal invoice (card or PayPal) or Interac e-Transfer. Set up the PayPal Business account with a parent before the first invoice.
 3. **Founding offer.** Once the 3 spots are taken, remove or update the `#founding` section.
-4. **Real examples.** After the first clients, add before/after screenshots and real quotes where the `REAL EXAMPLES` comment is. Never use made-up reviews, ratings or numbers.
+4. **Idea Launch.** Once the first local clients are done and the price is decided ($400 or $600), add it where the `IDEA LAUNCH` comment is.
+5. **Real examples.** After the first clients, add before/after screenshots and real quotes where the `REAL EXAMPLES` comment is. Never use made-up reviews, ratings or numbers.
 
 ## Preview locally
 
