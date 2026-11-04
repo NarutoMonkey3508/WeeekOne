@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WeeekOne — Your business, open online in one week</title>
+<meta name="description" content="I set up your website, Google Maps listing, Instagram, logo and menu in about a week. See a free demo of your own site before you pay anything.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131B31" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="WeeekOne — Your business, open online in one week">
+<meta property="og:description" content="Website, Google Maps listing, Instagram, logo and menu. Free demo before you pay anything.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/logo/weeekone-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Brand tokens (from the PRD) ---------- */
+  :root {
+    --navy: #131B31;
+    --red: #D3382A;
+    --red-hover: #B92E22;
+    --white: #FFFFFF;
+    --grey: #F4F6FA;
+
+    --bg: var(--grey);
+    --surface: var(--white);
+    --surface-2: #E9EDF5;
+    --ink: var(--navy);
+    --muted: #4B5672;
+    --line: #DCE1EC;
+    --band: var(--navy);          /* founding offer + footer */
+    --band-ink: var(--white);
+    --band-muted: #B8C0D6;
+    --shadow: 0 1px 2px rgba(19,27,49,.06), 0 8px 24px rgba(19,27,49,.08);
+    --ok: #1E8E4E;
+
+    --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 18px;
+    --wrap: 1120px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: var(--navy);
+      --surface: #1B2440;
+      --surface-2: #232E50;
+      --ink: #F4F6FA;
+      --muted: #A9B2CA;
+      --line: #2C375A;
+      --band: #0C1222;
+      --band-muted: #A9B2CA;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --ok: #4CC584;
+    }
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(2.5rem, 9vw, 4.25rem); }
+  h2 { font-size: clamp(2rem, 6.4vw, 3rem); }
+  h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
+  p { margin: 0; text-wrap: pretty; }
+  .key { color: var(--red); }
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; scroll-margin-top: 64px; }
+  .eyebrow {
+    display: inline-block;
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 38em; margin-top: 16px; }
+  .section-head { margin-bottom: 36px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; border-radius: 8px; z-index: 100; }
+  .skip:focus { left: 8px; }
+  :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 52px; padding: 0 26px;
+    border-radius: 999px; border: 0;
+    background: var(--red); color: var(--white);
+    font: 700 1.05rem/1 var(--font-body);
+    text-decoration: none; cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn:hover { background: var(--red-hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn svg { width: 20px; height: 20px; }
+  .btn-sm { min-height: 42px; padding: 0 18px; font-size: .95rem; }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    box-shadow: inset 0 0 0 2px var(--line);
+  }
+  .btn-ghost:hover { background: var(--surface-2); }
+  .link-arrow { font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; min-height: 52px; padding: 0 6px; }
+  .link-arrow:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .site-header.scrolled { border-bottom-color: var(--line); }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+  .brand { display: block; margin-left: -10px; }
+  .brand img { height: 50px; width: auto; }
+  .nav { display: none; gap: 28px; font-weight: 600; font-size: 1rem; }
+  .nav a { text-decoration: none; color: var(--muted); }
+  .nav a:hover { color: var(--ink); }
+  .header-right { display: flex; align-items: center; gap: 28px; }
+  @media (min-width: 860px) { .nav { display: flex; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 36px 0 64px; overflow: hidden; }
+  .hero .wrap { display: grid; gap: 48px; align-items: center; }
+  .hero p.lead { color: var(--muted); font-size: 1.2rem; }
+  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 28px; }
+  .assure { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 10px; font-weight: 600; font-size: 1rem; }
+  .assure li { display: flex; align-items: center; gap: 10px; }
+  .assure svg { width: 22px; height: 22px; flex: none; color: var(--ok); }
+  @media (min-width: 960px) {
+    .hero { padding: 56px 0 88px; }
+    .hero .wrap { grid-template-columns: 1.1fr .9fr; gap: 40px; }
+  }
+
+  /* Phone + example listing */
+  .stage { position: relative; display: flex; justify-content: center; padding: 70px 0 10px; }
+  .phone {
+    position: relative; width: 290px; max-width: 82vw;
+    border-radius: 44px; padding: 10px;
+    background: #0B1020;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 30px 60px -20px rgba(19,27,49,.45), 0 12px 24px -12px rgba(19,27,49,.3);
+  }
+  .screen { border-radius: 34px; overflow: hidden; background: #FFFFFF; color: #1F2433; font-size: 13px; line-height: 1.35; }
+  .statusbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px 6px; font-weight: 700; font-size: 12px; }
+  .statusbar .icons { display: flex; gap: 5px; align-items: center; }
+  .statusbar .icons i { display: block; background: #1F2433; border-radius: 2px; }
+  .notch { width: 84px; height: 22px; background: #0B1020; border-radius: 0 0 14px 14px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); }
+  .search { margin: 6px 12px 0; display: flex; align-items: center; gap: 8px; background: #F1F3F6; border-radius: 999px; padding: 9px 14px; color: #5F6675; }
+  .search svg { width: 14px; height: 14px; }
+  .map {
+    position: relative; height: 128px; margin-top: 10px;
+    background:
+      linear-gradient(90deg, transparent 47%, #FFFFFF 47%, #FFFFFF 53%, transparent 53%) 0 0 / 100% 100%,
+      linear-gradient(0deg, transparent 58%, #FFFFFF 58%, #FFFFFF 64%, transparent 64%) 0 0 / 100% 100%,
+      linear-gradient(28deg, transparent 30%, #FDE7B8 30%, #FDE7B8 33%, transparent 33%) 0 0 / 100% 100%,
+      radial-gradient(circle at 18% 28%, #CDEBC9 0 22px, transparent 23px),
+      radial-gradient(circle at 82% 78%, #CDEBC9 0 30px, transparent 31px),
+      #E8ECEF;
+  }
+  .pin { position: absolute; left: 50%; top: 61%; transform: translate(-50%, -100%); }
+  .pin svg { width: 30px; height: 38px; filter: drop-shadow(0 3px 3px rgba(0,0,0,.25)); }
+  .listing { padding: 14px 16px 18px; }
+  .biz { font-size: 19px; font-weight: 700; color: #1F2433; letter-spacing: -.01em; }
+  .meta { color: #5F6675; margin-top: 2px; }
+  .open-now { margin-top: 6px; font-weight: 600; }
+  .open-now b { color: #188038; }
+  .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 14px 0 12px; text-align: center; font-size: 11px; font-weight: 600; color: #1A5FC7; }
+  .actions span { display: grid; justify-items: center; gap: 4px; }
+  .actions i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #E8F0FE; }
+  .actions i.primary { background: #1A5FC7; color: #fff; }
+  .actions svg { width: 16px; height: 16px; }
+  .photos { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; height: 74px; }
+  .photos div { border-radius: 10px; display: grid; place-items: center; font-size: 26px; }
+  .photos div:nth-child(1) { background: linear-gradient(135deg, #F6C987, #D98C4A); }
+  .photos div:nth-child(2) { background: linear-gradient(135deg, #F3DCC0, #C99A6B); }
+  .photos div:nth-child(3) { background: linear-gradient(135deg, #F7D6DE, #D99AA9); }
+  .rows { margin-top: 12px; display: grid; gap: 8px; color: #3C4352; }
+  .rows div { display: flex; gap: 10px; align-items: flex-start; }
+  .rows svg { width: 15px; height: 15px; flex: none; margin-top: 1px; color: #5F6675; }
+  .rows .site { color: #1A5FC7; font-weight: 600; }
+
+  .example-tag {
+    position: absolute; z-index: 3; right: max(0px, calc(50% - 175px)); top: 92px;
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); box-shadow: var(--shadow);
+    font-size: .8rem; font-weight: 700; letter-spacing: .02em;
+    padding: 6px 12px; border-radius: 999px;
+  }
+
+  /* OPEN sign — signature visual */
+  .open-sign {
+    position: absolute; z-index: 4; left: max(0px, calc(50% - 205px)); top: 0;
+    transform-origin: 50% 0;
+    animation: swing 5s ease-in-out infinite;
+  }
+  .open-sign .strings { width: 140px; height: 46px; margin: 0 auto; display: block; color: var(--muted); }
+  .open-sign .board {
+    margin-top: -2px; width: 150px;
+    background: var(--red); color: #fff; text-align: center;
+    border-radius: 14px; padding: 8px 10px 10px;
+    box-shadow: 0 0 0 3px #fff inset, 0 0 0 5px var(--red) inset, 0 14px 26px -10px rgba(211,56,42,.6);
+  }
+  .open-sign small { display: block; font-weight: 700; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .95; }
+  .open-sign strong { display: block; font-family: var(--font-head); font-weight: 800; font-size: 2.6rem; line-height: .95; letter-spacing: .04em; }
+  @keyframes swing { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } }
+  @media (prefers-reduced-motion: reduce) { .open-sign { animation: none; transform: rotate(-3deg); } }
+
+  /* ---------- Sound familiar + What you get ---------- */
+  .pains { display: grid; gap: 12px; margin-bottom: 48px; }
+  .pain {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 18px 20px;
+    font-weight: 600; font-size: 1.1rem; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .pain::before { content: "\201C"; font-family: var(--font-head); font-size: 2.2rem; line-height: .8; color: var(--muted); }
+  @media (min-width: 760px) { .pains { grid-template-columns: repeat(3, 1fr); } }
+
+  .cards { display: grid; gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .card .ico {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: grid; place-items: center;
+    background: var(--surface-2); color: var(--ink); margin-bottom: 16px;
+  }
+  .card .ico svg { width: 26px; height: 26px; }
+  .card p { color: var(--muted); margin-top: 8px; }
+  @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .cards.five { grid-template-columns: repeat(6, 1fr); } .cards.five .card { grid-column: span 2; } .cards.five .card:nth-child(4) { grid-column: 2 / span 2; } }
+
+  /* ---------- How it works ---------- */
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: step; }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; }
+  .step .num {
+    width: 44px; height: 50px; margin-bottom: 16px; position: relative;
+  }
+  .step .num svg { width: 44px; height: 50px; }
+  .step p { color: var(--muted); margin-top: 8px; }
+  .callout {
+    margin-top: 24px; display: flex; gap: 14px; align-items: center;
+    background: var(--surface-2); border-radius: var(--radius); padding: 18px 22px; font-weight: 600;
+  }
+  .callout svg { width: 28px; height: 28px; flex: none; }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ---------- Prices ---------- */
+  .prices { display: grid; gap: 16px; align-items: stretch; }
+  .price {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 22px; padding: 28px 24px; display: flex; flex-direction: column; position: relative;
+  }
+  .price.popular { border: 2px solid var(--red); box-shadow: var(--shadow); }
+  .badge {
+    position: absolute; top: -14px; left: 24px;
+    background: var(--red); color: #fff;
+    font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .price .for { color: var(--muted); margin-top: 6px; font-size: 1rem; }
+  .amount { margin: 18px 0 4px; display: flex; align-items: baseline; gap: 6px; }
+  .amount b { font-family: var(--font-head); font-weight: 800; font-size: 3rem; line-height: 1; letter-spacing: -.02em; }
+  .amount span { color: var(--muted); font-weight: 600; }
+  .price ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; font-size: 1rem; }
+  .price li { display: flex; gap: 10px; align-items: flex-start; }
+  .price li svg { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--ok); }
+  .price-note {
+    margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
+    border: 1px dashed var(--line); color: var(--muted); font-size: 1rem;
+    display: grid; gap: 6px;
+  }
+  .price-note strong { color: var(--ink); }
+  @media (min-width: 900px) { .prices { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- Founding offer ---------- */
+  .offer { padding: 0; }
+  .offer-box {
+    background: var(--band); color: var(--band-ink);
+    border-radius: 28px; padding: 40px 24px;
+    display: grid; gap: 28px; position: relative; overflow: hidden;
+  }
+  .offer-box .eyebrow { color: var(--band-muted); }
+  .offer-box p { color: var(--band-muted); }
+  .offer-box p strong { color: var(--band-ink); }
+  .offer-prices { display: grid; gap: 12px; }
+  .offer-price {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--radius); padding: 18px 20px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .offer-price .name { font-weight: 700; }
+  .offer-price s { color: var(--band-muted); margin-right: 8px; }
+  .offer-price b { font-family: var(--font-head); font-size: 1.9rem; }
+  @media (min-width: 900px) {
+    .offer-box { grid-template-columns: 1.2fr 1fr; padding: 56px; align-items: center; gap: 48px; }
+  }
+
+  /* ---------- Who it's for ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .chips li {
+    background: var(--surface); border: 1px solid var(--line);
+    padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 1rem;
+  }
+  .chips li.home { background: var(--surface-2); }
+  .home-note { margin-top: 28px; display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+  .home-note svg { width: 28px; height: 28px; flex: none; margin-top: 2px; }
+  .home-note p { color: var(--muted); margin-top: 4px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { display: grid; gap: 10px; max-width: 820px; }
+  .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 20px 22px;
+    font-weight: 700; font-size: 1.1rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: ""; width: 12px; height: 12px; flex: none;
+    border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor;
+    transform: rotate(45deg) translate(-3px, -3px); transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+  .faq .answer { padding: 0 22px 22px; color: var(--muted); display: grid; gap: 10px; }
+
+  /* ---------- Contact ---------- */
+  .contact-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+    padding: 36px 24px; display: grid; gap: 32px; box-shadow: var(--shadow);
+  }
+  .include { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+  .include li { display: flex; gap: 12px; align-items: flex-start; }
+  .include li span.n {
+    flex: none; width: 28px; height: 28px; border-radius: 8px;
+    background: var(--surface-2); display: grid; place-items: center;
+    font-weight: 700; font-size: .9rem;
+  }
+  .include small { display: block; color: var(--muted); font-size: .95rem; }
+  .email-card { background: var(--bg); border-radius: 22px; padding: 24px; display: grid; gap: 16px; align-content: start; }
+  .email-card label { font-weight: 700; font-size: .9rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .email-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .email-row output {
+    flex: 1 1 200px; min-width: 0;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; font-weight: 700; font-size: 1.15rem;
+    user-select: all; -webkit-user-select: all; overflow-wrap: anywhere;
+  }
+  .copy-btn { min-height: 54px; }
+  .copy-btn.done { background: var(--ok); }
+  .email-card .fine { color: var(--muted); font-size: .95rem; }
+  .email-card .btn { width: 100%; }
+  @media (min-width: 900px) { .contact-box { grid-template-columns: 1.1fr 1fr; padding: 56px; gap: 48px; } }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--band); color: var(--band-muted); padding: 48px 0 40px; margin-top: 72px; font-size: 1rem; }
+  footer .wrap { display: grid; gap: 20px; }
+  footer img { height: 56px; width: auto; margin-left: -12px; }
+  footer p strong { color: var(--band-ink); }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+  footer nav a { color: var(--band-ink); text-decoration: none; }
+  footer nav a:hover { text-decoration: underline; }
+  footer .legal { font-size: .9rem; }
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- SVG sprite: small line icons used across the page -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></g></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></g></symbol>
+  <symbol id="i-logo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></g></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-dir" viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 3h12v18l-6-4-6 4z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></g></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M9 13l2 2 4-5"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 120 132"><defs><clipPath id="cc"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc)"><rect x="0" y="12" width="120" height="120" fill="currentColor"/><rect x="0" y="12" width="120" height="34" fill="#D3382A"/></g><rect x="28" y="0" width="14" height="28" rx="7" fill="currentColor"/><rect x="78" y="0" width="14" height="28" rx="7" fill="currentColor"/></symbol>
+</svg>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="WeeekOne home">
+      <picture>
+        <source srcset="assets/logo/weeekone-logo-dark.svg" media="(prefers-color-scheme: dark)">
+        <img src="assets/logo/weeekone-logo.svg" alt="WeeekOne" width="189" height="50">
+      </picture>
+    </a>
+    <div class="header-right">
+      <nav class="nav" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#prices">Prices</a>
+        <a href="#questions">Questions</a>
+      </nav>
+      <a class="btn btn-sm" href="#contact">Get a free demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. HERO — Understood, relieved -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <h1 id="hero-title">Your business, open online in <span class="key">one week</span></h1>
+        <p class="lead">I set up your website, Google Maps listing and Instagram for you. You don't touch any of the tech. You see a free demo of your own site before you pay anything.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#contact">
+            <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
+          </a>
+          <a class="link-arrow" href="#prices">See prices <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="assure">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Free demo, no card needed</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Live in about a week</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>You own your site, and you pay only after you approve</li>
+        </ul>
+      </div>
+
+      <div class="stage" aria-label="Example: a bakery's Google Maps listing on a phone">
+        <div class="open-sign" aria-hidden="true">
+          <svg class="strings" viewBox="0 0 140 46"><circle cx="70" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M66 9L22 46M74 9l44 37" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <div class="board"><small>Come in, we're</small><strong>OPEN</strong></div>
+        </div>
+        <span class="example-tag">Example listing</span>
+
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen" role="img" aria-label="Example listing for Maple Crumb Bakery: open now, closes 6 PM, with directions, call, website and menu buttons, photos and hours.">
+            <div class="statusbar"><span>9:41</span><span class="icons"><i style="width:14px;height:8px"></i><i style="width:10px;height:8px;border-radius:4px"></i><i style="width:20px;height:9px;border-radius:3px"></i></span></div>
+            <div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></g></svg>bakery near me</div>
+            <div class="map"><span class="pin"><svg viewBox="0 0 30 38"><path d="M15 37C15 37 2 23.5 2 14a13 13 0 0 1 26 0c0 9.5-13 23-13 23z" fill="#D3382A"/><circle cx="15" cy="14" r="5" fill="#fff"/></svg></span></div>
+            <div class="listing">
+              <div class="biz">Maple Crumb Bakery</div>
+              <div class="meta">Bakery · Main Street</div>
+              <div class="open-now"><b>Open</b> · Closes 6 PM</div>
+              <div class="actions">
+                <span><i class="primary"><svg><use href="#i-dir"/></svg></i>Directions</span>
+                <span><i><svg><use href="#i-phone"/></svg></i>Call</span>
+                <span><i><svg><use href="#i-web"/></svg></i>Website</span>
+                <span><i><svg><use href="#i-save"/></svg></i>Save</span>
+              </div>
+              <div class="photos"><div>🥐</div><div>🍞</div><div>🧁</div></div>
+              <div class="rows">
+                <div><svg><use href="#i-clock"/></svg><span>Mon–Sat 7 AM – 6 PM · Sun closed</span></div>
+                <div><svg><use href="#i-web"/></svg><span class="site">maplecrumb.ca</span></div>
+                <div><svg><use href="#i-menu"/></svg><span>Menu: croissants, sourdough, cupcakes</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. WHAT YOU GET — Understood -->
+  <section id="what" aria-labelledby="what-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Sound familiar?</span>
+      </div>
+      <div class="pains">
+        <p class="pain">People keep calling to ask when you're open.</p>
+        <p class="pain">Your website is years out of date, or you don't have one.</p>
+        <p class="pain">Your Google listing has the wrong hours, or no photos.</p>
+      </div>
+
+      <div class="section-head">
+        <span class="eyebrow">What you get</span>
+        <h2 id="what-title">Everything a local business needs to be found</h2>
+        <p class="lead">I set it all up, so customers can find you, see your hours and know what you sell.</p>
+      </div>
+      <div class="cards five">
+        <article class="card">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
+          <h3>Website</h3>
+          <p>A clean, fast site that looks great on phones and shows your hours, location and what you sell.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></div>
+          <h3>Google Maps listing</h3>
+          <p>Your business on the map with the right hours, phone number and photos, so people stop calling to ask.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-insta"/></svg></div>
+          <h3>Instagram</h3>
+          <p>A profile that looks like your business, with your logo, a clear bio and a link to your site.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-logo"/></svg></div>
+          <h3>Logo</h3>
+          <p>A simple logo that works on your sign, your bags and your Instagram.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-menu"/></svg></div>
+          <h3>Menu</h3>
+          <p>A good-looking menu or price list on your site, also ready to print for the counter.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. HOW IT WORKS — Relieved -->
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-title">Four steps. You don't touch any of the tech.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">1</text></svg></div>
+          <h3>Get a free demo</h3>
+          <p>Email me your business name and a few details. Within 3 days, I send you a demo of your own site. No card, no commitment.</p>
+        </li>
+        <li class="step">
+          <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">2</text></svg></div>
+          <h3>Pick a package</h3>
+          <p>Like what you see? Choose Starter or Launch. You only pay once you've approved the demo.</p>
+        </li>
+        <li class="step">
+          <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">3</text></svg></div>
+          <h3>Go live</h3>
+          <p>I put your site online, fix your Google listing and set up your Instagram. You're live in about a week.</p>
+        </li>
+        <li class="step">
+          <div class="num" aria-hidden="true"><svg viewBox="0 0 120 132"><use href="#i-cal" style="color:var(--ink)"/><text x="60" y="110" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="62" style="fill:var(--bg)">4</text></svg></div>
+          <h3>Stay up to date</h3>
+          <p>Hours and prices change. On the care plan, just email me and I update everything for you.</p>
+        </li>
+      </ol>
+      <div class="callout">
+        <svg aria-hidden="true" viewBox="0 0 120 132"><defs><clipPath id="cc2"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc2)"><rect x="0" y="12" width="120" height="120" style="fill:var(--ink)"/><rect x="0" y="12" width="120" height="34" fill="#D3382A"/></g><rect x="28" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><rect x="78" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><path d="M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L70.18 63.26Z" style="fill:var(--bg)"/></svg>
+        <span>From your first email to live online: about one week.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRICES — Safe -->
+  <section id="prices" aria-labelledby="prices-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Prices</span>
+        <h2 id="prices-title">Simple prices, shown upfront</h2>
+        <p class="lead">One-time price for setup. No hidden fees. You pay only after you approve your demo.</p>
+      </div>
+      <div class="prices">
+        <article class="price">
+          <h3>Starter</h3>
+          <p class="for">For home businesses and small shops that need the basics.</p>
+          <div class="amount"><b>$150</b><span>one time</span></div>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>One-page website that works on phones</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Google Maps listing set up or fixed</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Your hours, location, contact and services</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Live in about a week</li>
+          </ul>
+        </article>
+        <article class="price popular">
+          <span class="badge">Most popular</span>
+          <h3>Launch</h3>
+          <p class="for">Everything you need to look established online.</p>
+          <div class="amount"><b>$300</b><span>one time</span></div>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Everything in Starter</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>A bigger site with room for your menu, photos and story</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Instagram profile set up</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Your logo</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Menu or price list, online and ready to print</li>
+          </ul>
+        </article>
+        <article class="price">
+          <h3>Care plan</h3>
+          <p class="for">Keeps everything current after you launch.</p>
+          <div class="amount"><b>$25</b><span>per month</span></div>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hours, prices and menu updates</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Google listing kept up to date</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Small fixes and changes when you need them</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Optional, cancel any time</li>
+          </ul>
+        </article>
+      </div>
+      <div class="price-note">
+        <p><strong>The only extra cost is your domain name</strong> (like yourbakery.ca), about $20 a year.</p>
+        <p>It's registered in your name, so your site and your address are always yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FOUNDING OFFER — Ready to act
+       Remove or update this section once the 3 founding spots are taken. -->
+  <section class="offer" id="founding" aria-labelledby="offer-title">
+    <div class="wrap">
+      <div class="offer-box">
+        <div>
+          <span class="eyebrow">Founding offer</span>
+          <h2 id="offer-title">50% off for the first <span class="key">3</span> businesses</h2>
+          <p class="lead" style="color:var(--band-muted)">I'm just getting started, so my first 3 clients get half price. In return, I ask for <strong>an honest review</strong> and <strong>permission to show your site</strong> as an example.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="#contact">
+              <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
+            </a>
+          </div>
+        </div>
+        <div class="offer-prices">
+          <div class="offer-price"><span class="name">Starter</span><span><s>$150</s><b>$75</b></span></div>
+          <div class="offer-price"><span class="name">Launch</span><span><s>$300</s><b>$150</b></span></div>
+          <p style="font-size:1rem">The demo is still free, and you still pay only after you approve it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHO IT'S FOR — Understood -->
+  <section id="who" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Who it's for</span>
+        <h2 id="who-title">Made for local businesses like yours</h2>
+      </div>
+      <ul class="chips">
+        <li>Bakeries</li>
+        <li>Cafés</li>
+        <li>Restaurants</li>
+        <li>Food trucks</li>
+        <li>Hair and nail salons</li>
+        <li>Barbers</li>
+        <li>Florists</li>
+        <li>Corner stores</li>
+        <li>Gift shops</li>
+        <li>Auto repair</li>
+        <li>Pet groomers</li>
+        <li>Fitness trainers</li>
+        <li>Contractors</li>
+        <li class="home">Home bakers</li>
+        <li class="home">Tutors</li>
+        <li class="home">Cleaners</li>
+        <li class="home">Crafters</li>
+        <li class="home">Music teachers</li>
+      </ul>
+      <div class="home-note">
+        <svg aria-hidden="true"><use href="#i-home"/></svg>
+        <div>
+          <strong>Run your business from home? This is for you too.</strong>
+          <p>You don't need a storefront. The Starter package was made for home bakers, tutors and cleaners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Later: REAL EXAMPLES — Confident in the quality.
+       After the first 3 clients, add a section here with before/after screenshots,
+       a short quote (with the owner's permission) and a link to their live site.
+       Never add made-up reviews, ratings or client logos. -->
+
+  <!-- 7. QUESTIONS — Safe, respected -->
+  <section id="questions" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Questions</span>
+        <h2 id="faq-title">Straight answers</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Do I need any tech skills?</summary>
+          <div class="answer"><p>No. I do all the setup. You send me your details and photos, then tell me what you think of the demo.</p></div>
+        </details>
+        <details>
+          <summary>Who owns the website?</summary>
+          <div class="answer"><p>You do. Your domain is registered in your name, and the site, logo and menu are yours to keep, even if you stop working with me.</p></div>
+        </details>
+        <details>
+          <summary>Are there any extra costs?</summary>
+          <div class="answer"><p>Only your domain name, about $20 a year. The care plan is optional at $25 a month. There are no hidden fees.</p></div>
+        </details>
+        <details>
+          <summary>How long does it take?</summary>
+          <div class="answer"><p>I reply within 24 hours and send your free demo within 3 days. Once you approve it, you're live in about a week.</p></div>
+        </details>
+        <details>
+          <summary>I already have a website. Can you help?</summary>
+          <div class="answer"><p>Yes. I can rebuild an outdated site, or just fix your Google listing and Instagram so they match. Send me the link and I'll take a look.</p></div>
+        </details>
+        <details>
+          <summary>When and how do I pay?</summary>
+          <div class="answer"><p>Only after you've seen and approved your demo. You get a proper invoice, and you can pay by e-transfer or card.</p></div>
+        </details>
+        <details>
+          <summary>Is the demo really free?</summary>
+          <div class="answer"><p>Yes. No card and no commitment. If it's not right for you, you don't pay anything.</p></div>
+        </details>
+        <details>
+          <summary>Who runs WeeekOne?</summary>
+          <div class="answer"><p>WeeekOne is a student-run studio. I build every site myself.</p><p>A parent handles invoices and agreements, so the paperwork is always done properly.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FREE DEMO CONTACT — Ready to act -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <span class="eyebrow">Free demo</span>
+          <h2 id="contact-title">Get your free demo</h2>
+          <p class="lead">Send me one email. I'll reply within 24 hours and send your demo within 3 days.</p>
+          <ul class="include" aria-label="What to include in your email">
+            <li><span class="n">1</span><div><strong>Your business name</strong><small>and what you sell or do</small></div></li>
+            <li><span class="n">2</span><div><strong>Where you are</strong><small>town or neighbourhood, or "I work from home"</small></div></li>
+            <li><span class="n">3</span><div><strong>Your hours and phone number</strong><small>the ones customers should see</small></div></li>
+            <li><span class="n">4</span><div><strong>Any links you already have</strong><small>old website, Google listing or Instagram</small></div></li>
+            <li><span class="n">5</span><div><strong>A few photos</strong><small>your shop, your products or your menu, if you have them</small></div></li>
+          </ul>
+        </div>
+        <div class="email-card">
+          <label for="email-addr">Email me at</label>
+          <div class="email-row">
+            <output id="email-addr" data-email>hello@weeekone.ca</output>
+            <button class="btn btn-ghost copy-btn" type="button" id="copy-btn" aria-describedby="copy-status">Copy</button>
+          </div>
+          <span id="copy-status" class="fine" aria-live="polite"></span>
+          <a class="btn" href="mailto:hello@weeekone.ca" data-mailto>
+            <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
+          </a>
+          <p class="fine">The button opens your email app with everything above already listed. Just fill in the blanks.</p>
+          <p class="fine"><strong style="color:var(--ink)">No card, no commitment.</strong> If you don't love the demo, you don't pay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo/weeekone-logo-dark.svg" alt="WeeekOne" width="211" height="56" loading="lazy">
+    <p><strong>Your business, open online in one week.</strong><br>A student-run studio. A parent handles invoices and agreements.</p>
+    <nav aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#prices">Prices</a>
+      <a href="#questions">Questions</a>
+      <a href="#contact">Get a free demo</a>
+    </nav>
+    <p class="legal">© 2026 WeeekOne · <span data-email>hello@weeekone.ca</span></p>
+  </div>
+</footer>
+
+<script>
+  /* ====== CHANGE THIS to the real business email before launch ====== */
+  const EMAIL = "hello@weeekone.ca";
+
+  const BODY = [
+    "Hi WeeekOne,",
+    "",
+    "I'd like a free demo for my business.",
+    "",
+    "Business name:",
+    "What we sell or do:",
+    "Where we are (town or neighbourhood):",
+    "Hours:",
+    "Phone number for customers:",
+    "Links we already have (website, Google, Instagram):",
+    "",
+    "I've attached a few photos (shop, products or menu) if I have them.",
+    "",
+    "Thanks!"
+  ].join("\n");
+
+  function mailto(subject) {
+    return "mailto:" + EMAIL +
+      "?subject=" + encodeURIComponent(subject || "Free demo request") +
+      "&body=" + encodeURIComponent(BODY);
+  }
+
+  document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
+  document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject); });
+
+  /* Copy email button */
+  const copyBtn = document.getElementById("copy-btn");
+  const status = document.getElementById("copy-status");
+  copyBtn.addEventListener("click", async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(EMAIL); ok = true; }
+    catch (e) {
+      const t = document.createElement("textarea");
+      t.value = EMAIL; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+      t.remove();
+    }
+    if (ok) {
+      copyBtn.textContent = "Copied!";
+      copyBtn.classList.add("done");
+      status.textContent = "Email address copied.";
+    } else {
+      status.textContent = "Press and hold the address to copy it.";
+    }
+    setTimeout(() => { copyBtn.textContent = "Copy"; copyBtn.classList.remove("done"); status.textContent = ""; }, 2500);
+  });
+
+  /* Header border on scroll */
+  const header = document.querySelector(".site-header");
+  addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+</script>
+</body>
+</html>
