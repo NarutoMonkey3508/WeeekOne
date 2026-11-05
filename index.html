@@ -440,6 +440,9 @@
   .copy-btn { min-height: 54px; }
   .copy-btn.done { background: var(--support); color: var(--white); }
   .email-card .fine { color: var(--muted); font-size: .95rem; }
+  .phone-block { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .phone-links { display: flex; gap: 18px; }
+  .phone-links .link-arrow { min-height: 44px; }
   .email-card .btn { width: 100%; }
   @media (min-width: 900px) { .contact-box { grid-template-columns: 1.1fr 1fr; padding: 56px; gap: 48px; } }
 
@@ -819,7 +822,7 @@
         </details>
         <details>
           <summary>When and how do I pay?</summary>
-          <div class="answer"><p>Only after you've seen and approved your demo. A parent emails you a PayPal invoice, and you can pay it by card or PayPal.</p><p>Local clients can also pay by Interac e-Transfer. The care plan is a monthly invoice.</p></div>
+          <div class="answer"><p>Only after you've seen and approved your demo. You get an invoice from WeeekOne by email, sent through PayPal.</p><p>Tap "Pay Now" in the email and pay with a credit or debit card or your PayPal account. Local clients can also pay by Interac e-Transfer.</p><p>The care plan is a monthly invoice, paid the same way.</p></div>
         </details>
         <details>
           <summary>What exactly is included?</summary>
@@ -880,7 +883,7 @@
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Access to your Google listing</strong><small>I'll show you how to add me as a manager, or help you claim it.</small></div></li>
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Instagram, on the Launch package</strong><small>Add me to your account, or I'll set up a new one for you.</small></div></li>
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Full-size photos and any logo you have</strong><small>Phone photos are fine.</small></div></li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Pay the invoice</strong><small>By PayPal (card or PayPal) or Interac e-Transfer. Then everything goes live.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Pay the invoice</strong><small>Tap "Pay Now" in the PayPal invoice email (card or PayPal), or send an Interac e-Transfer. Then everything goes live.</small></div></li>
           </ul>
         </article>
       </div>
@@ -901,15 +904,26 @@
         <div class="email-card">
           <label for="email-addr">Email me at</label>
           <div class="email-row">
-            <output id="email-addr" data-email>hello@weeekone.ca</output>
-            <button class="btn btn-ghost copy-btn" type="button" id="copy-btn" aria-describedby="copy-status">Copy</button>
+            <output id="email-addr" data-email>weeekone@gmail.com</output>
+            <button class="btn btn-ghost copy-btn" type="button" id="copy-btn" data-copy="email" aria-describedby="copy-status">Copy</button>
           </div>
-          <span id="copy-status" class="fine" aria-live="polite"></span>
-          <a class="btn" href="mailto:hello@weeekone.ca" data-mailto>
+          <a class="btn" href="mailto:weeekone@gmail.com" data-mailto>
             <svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo
           </a>
           <p class="fine">The button opens your email app with all 6 things already listed. Just fill in the blanks.</p>
           <p class="fine"><strong style="color:var(--ink)">No card, no commitment.</strong> If you don't love the demo, you don't pay.</p>
+          <div class="phone-block">
+            <label for="phone-num">Rather call or text?</label>
+            <div class="email-row">
+              <output id="phone-num" data-phone>(647) 960-3508</output>
+              <button class="btn btn-ghost copy-btn" type="button" id="copy-phone" data-copy="phone" aria-describedby="copy-status">Copy</button>
+            </div>
+            <div class="phone-links">
+              <a class="link-arrow" href="tel:+16479603508">Call</a>
+              <a class="link-arrow" href="sms:+16479603508">Text</a>
+            </div>
+          </div>
+          <span id="copy-status" class="fine" aria-live="polite"></span>
         </div>
       </div>
     </div>
@@ -926,13 +940,15 @@
       <a href="#questions">Questions</a>
       <a href="#start">Get a free demo</a>
     </nav>
-    <p class="legal">© 2026 WeeekOne · <span data-email>hello@weeekone.ca</span></p>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span> · <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
   </div>
 </footer>
 
 <script>
-  /* ====== CHANGE THIS to the real business email before launch ====== */
-  const EMAIL = "hello@weeekone.ca";
+  /* ====== Contact details: change them here ====== */
+  const EMAIL = "weeekone@gmail.com";
+  const PHONE = "(647) 960-3508";
+  const PHONE_LINK = "+16479603508";
 
   const BODY = [
     "Hi WeeekOne,",
@@ -960,28 +976,34 @@
 
   document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
   document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject); });
+  document.querySelectorAll("[data-phone]").forEach(el => { el.textContent = PHONE; });
+  document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = "tel:" + PHONE_LINK; });
+  document.querySelectorAll('a[href^="sms:"]').forEach(a => { a.href = "sms:" + PHONE_LINK; });
 
-  /* Copy email button */
-  const copyBtn = document.getElementById("copy-btn");
+  /* Copy buttons (email and phone) */
   const status = document.getElementById("copy-status");
-  copyBtn.addEventListener("click", async () => {
-    let ok = false;
-    try { await navigator.clipboard.writeText(EMAIL); ok = true; }
-    catch (e) {
-      const t = document.createElement("textarea");
-      t.value = EMAIL; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
-      document.body.appendChild(t); t.select();
-      try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
-      t.remove();
-    }
-    if (ok) {
-      copyBtn.textContent = "Copied!";
-      copyBtn.classList.add("done");
-      status.textContent = "Email address copied.";
-    } else {
-      status.textContent = "Press and hold the address to copy it.";
-    }
-    setTimeout(() => { copyBtn.textContent = "Copy"; copyBtn.classList.remove("done"); status.textContent = ""; }, 2500);
+  document.querySelectorAll("[data-copy]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const isPhone = btn.dataset.copy === "phone";
+      const text = isPhone ? PHONE : EMAIL;
+      let ok = false;
+      try { await navigator.clipboard.writeText(text); ok = true; }
+      catch (e) {
+        const t = document.createElement("textarea");
+        t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+        document.body.appendChild(t); t.select();
+        try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+        t.remove();
+      }
+      if (ok) {
+        btn.textContent = "Copied!";
+        btn.classList.add("done");
+        status.textContent = isPhone ? "Phone number copied." : "Email address copied.";
+      } else {
+        status.textContent = "Press and hold to copy it.";
+      }
+      setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); status.textContent = ""; }, 2500);
+    });
   });
 
   /* Header border on scroll */
