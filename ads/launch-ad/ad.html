@@ -1,0 +1,226 @@
+<!doctype html>
+<!-- WeeekOne launch ad: 15 s, 9:16 (1080x1920), rendered frame by frame by render.js.
+     window.renderFrame(seconds) draws one exact frame, so the video is the same every time. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WeeekOne launch ad</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #02070A; }
+  #bg { position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 85% 45% at 50% -4%, rgba(2,151,222,.75), transparent 70%),
+      radial-gradient(ellipse 80% 38% at 50% 106%, rgba(252,115,77,.62), transparent 70%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 2px, transparent 2px 18px),
+      #02070A; }
+  canvas { position: absolute; inset: 0; }
+  .t { position: absolute; left: 70px; right: 70px; text-align: center; text-wrap: balance; color: #fff; opacity: 0; will-change: transform, opacity; }
+  .h { font: 800 112px/1.0 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; }
+  .h .o { color: #FC734D; }
+  .s { font: 600 46px/1.3 "Figtree", sans-serif; color: #C9D6DE; }
+  .pill { display: inline-block; font: 700 40px/1 "Figtree"; padding: 26px 40px; border-radius: 999px; background: #FC734D; color: #02070A; }
+  .chip { display: inline-block; font: 700 38px/1 "Figtree"; padding: 20px 28px; margin: 8px; border-radius: 999px; background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.18); color: #fff; }
+  .small { font: 600 30px/1.2 "Figtree"; color: #9FB2BD; letter-spacing: .14em; text-transform: uppercase; }
+  #logo { position: absolute; left: 0; right: 0; text-align: center; top: 1090px; opacity: 0; font: 800 150px/1 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; color: #fff; }
+  #logo span { color: #FC734D; }
+</style>
+<script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js", "three/addons/": "../node_modules/three/examples/jsm/" } }</script>
+</head>
+<body>
+<div id="bg"></div>
+
+<div class="t h" id="t1" style="top:230px">Customers can't<br>find you <span class="o">online?</span></div>
+<div class="t" id="t2" style="top:200px"><div class="s">Get your business online in</div><div class="h" style="font-size:170px;margin-top:10px"><span class="o">one week.</span></div></div>
+<div class="t" id="t3" style="top:1500px"><span class="chip">Website</span><span class="chip">Google Maps</span><span class="chip">Instagram</span><span class="chip">Logo &amp; menu</span></div>
+<div class="t small" id="tex" style="top:1700px">Example listing</div>
+<div class="t" id="t4" style="top:190px"><div class="h" style="font-size:96px">See a <span class="o">free demo</span><br>of your own site</div><div class="s" style="margin-top:28px">Pay only if you love it. From $150.</div></div>
+<div class="t small" id="tex2" style="top:1730px">Example designs</div>
+<div class="t" id="t5" style="top:1400px"><div class="s" style="color:#fff;font-size:54px">Your business, open online in one week.</div><div style="margin-top:44px"><span class="pill">Get a free demo</span></div><div class="s" style="margin-top:40px;font-size:42px">weeekone@gmail.com</div></div>
+<div id="logo">Weeek<span>One</span></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.insertBefore(renderer.domElement, document.getElementById('t1'));
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = .55;
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.1, 100);
+
+// Brand-coloured rim lights, like the glow in the background
+const blueL = new THREE.PointLight(0x0297DE, 60, 30); blueL.position.set(-3, 4, 3); scene.add(blueL);
+const orangeL = new THREE.PointLight(0xFC734D, 50, 30); orangeL.position.set(3, -3, 3); scene.add(orangeL);
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(2, 3, 5); scene.add(key);
+
+const mat = {
+  midnight: new THREE.MeshPhysicalMaterial({ color: 0x0b1419, roughness: .32, metalness: .1, clearcoat: 1, clearcoatRoughness: .2 }),
+  orange: new THREE.MeshPhysicalMaterial({ color: 0xFC734D, roughness: .3, clearcoat: 1, clearcoatRoughness: .15 }),
+  white: new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .25, clearcoat: 1, emissive: 0xffffff, emissiveIntensity: .3 }),
+  metal: new THREE.MeshPhysicalMaterial({ color: 0x1a232a, roughness: .25, metalness: .85, clearcoat: 1 }),
+  string: new THREE.MeshStandardMaterial({ color: 0xaeb9c1, roughness: .6, metalness: .4 }),
+};
+
+function roundedRect(x, y, w, h, r, topOnly = false) {
+  const s = new THREE.Shape();
+  s.moveTo(x + r, y + h);
+  s.lineTo(x + w - r, y + h); s.quadraticCurveTo(x + w, y + h, x + w, y + h - r);
+  if (topOnly) { s.lineTo(x + w, y); s.lineTo(x, y); }
+  else { s.lineTo(x + w, y + r); s.quadraticCurveTo(x + w, y, x + w - r, y); s.lineTo(x + r, y); s.quadraticCurveTo(x, y, x, y + r); }
+  s.lineTo(x, y + h - r); s.quadraticCurveTo(x, y + h, x + r, y + h);
+  return s;
+}
+const ext = (shape, depth, bevel = .03) => {
+  const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 4, curveSegments: 24 });
+  g.translate(0, 0, -depth / 2); return g;
+};
+
+/* ---------- 3D WeeekOne calendar (same proportions as the logo: 120 x 120 body, 34 band, rings) ---------- */
+const cal = new THREE.Group(); scene.add(cal);
+const U = 0.01; // 1 logo unit = 0.01 world units
+cal.add(new THREE.Mesh(ext(roundedRect(-60*U, -60*U, 120*U, 120*U, 24*U), .22), mat.midnight));
+const band = new THREE.Mesh(ext(roundedRect(-60*U, 26*U, 120*U, 34*U, 24*U, true), .24), mat.orange); band.position.z = .006; cal.add(band);
+for (const x of [-25, 25]) { const ring = new THREE.Mesh(new THREE.CapsuleGeometry(7*U, 14*U, 8, 24), mat.midnight); ring.position.set(x*U, 58*U, .13); cal.add(ring); }
+{
+  const d = 'M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L70.18 63.26Z';
+  const shapes = SVGLoader.createShapes(new SVGLoader().parse(`<svg><path d="${d}"/></svg>`).paths[0]);
+  const g = new THREE.ExtrudeGeometry(shapes, { depth: 6, bevelEnabled: true, bevelThickness: 1, bevelSize: .6, bevelSegments: 3 });
+  g.translate(-60, -72, 0); g.scale(U, U, U); g.rotateX(Math.PI); // flip y without flipping the faces
+  const one = new THREE.Mesh(g, mat.white); one.position.z = .2; cal.add(one);
+}
+
+/* ---------- Phone with the example listing ---------- */
+const phone = new THREE.Group(); scene.add(phone);
+const PW = 1.0, PH = PW / 0.479 * 1.0 + .08;
+phone.add(new THREE.Mesh(ext(roundedRect(-PW/2 - .06, -PH/2, PW + .12, PH, .16), .1, .02), mat.metal));
+const screenMat = new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false });
+const screen = new THREE.Mesh(new THREE.PlaneGeometry(PW, PW / 0.479), screenMat); screen.position.z = .075; phone.add(screen);
+
+/* ---------- OPEN sign ---------- */
+const sign = new THREE.Group(); scene.add(sign);
+const board = new THREE.Group(); board.position.y = -.62; sign.add(board);
+board.add(new THREE.Mesh(ext(roundedRect(-.62, -.3, 1.24, .6, .1), .06, .02), mat.orange));
+const signMat = new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false });
+const signFace = new THREE.Mesh(new THREE.PlaneGeometry(1.16, .56), signMat); signFace.position.z = .06; board.add(signFace);
+for (const sx of [-1, 1]) {
+  const len = Math.hypot(.5, .34); const c = new THREE.Mesh(new THREE.CylinderGeometry(.008, .008, len, 8), mat.string);
+  c.position.set(sx * .25, -.17, 0); c.rotation.z = sx * Math.atan2(.5, .34); sign.add(c);
+}
+const hook = new THREE.Mesh(new THREE.TorusGeometry(.035, .01, 8, 24), mat.string); sign.add(hook);
+
+/* ---------- Example design cards ---------- */
+const cards = ['barber', 'bakery', 'cafe'].map(n => {
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(ext(roundedRect(-.82, -.52, 1.64, 1.04, .05), .02, .01), mat.metal));
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.0), new THREE.MeshBasicMaterial({ toneMapped: false })); m.position.z = .022; g.add(m);
+  new THREE.TextureLoader().load(`../../assets/examples/${n}.jpg`, t => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; m.material.map = t; m.material.needsUpdate = true; });
+  scene.add(g); return g;
+});
+
+/* ---------- Textures drawn once fonts are ready ---------- */
+async function buildTextures() {
+  await document.fonts.load('800 100px "Bricolage Grotesque"'); await document.fonts.load('700 40px Figtree');
+  const img = new Image(); img.src = 'textures/listing.png'; await img.decode();
+  const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; const x = c.getContext('2d');
+  x.beginPath(); x.roundRect(0, 0, c.width, c.height, 34 * 3); x.clip(); x.drawImage(img, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; screenMat.map = t; screenMat.needsUpdate = true;
+
+  const s = document.createElement('canvas'); s.width = 1160; s.height = 560; const y = s.getContext('2d');
+  y.fillStyle = '#FC734D'; y.beginPath(); y.roundRect(0, 0, 1160, 560, 80); y.fill();
+  y.strokeStyle = '#fff'; y.lineWidth = 16; y.beginPath(); y.roundRect(30, 30, 1100, 500, 60); y.stroke();
+  y.fillStyle = '#02070A'; y.textAlign = 'center';
+  y.font = '700 64px Figtree'; y.letterSpacing = '8px'; y.fillText("COME IN, WE'RE", 580, 170);
+  y.font = '800 290px "Bricolage Grotesque"'; y.letterSpacing = '16px'; y.fillText('OPEN', 580, 440);
+  const st = new THREE.CanvasTexture(s); st.colorSpace = THREE.SRGBColorSpace; signMat.map = st; signMat.needsUpdate = true;
+}
+
+/* ---------- Timeline helpers ---------- */
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;      // easeInOutCubic
+const out = p => 1 - Math.pow(1 - p, 4);                                         // easeOutQuart
+const back = p => { const c = 1.6; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+const fade = (t, a, b, inD = .35, outD = .35) => Math.min(prog(t, a, a + inD), 1 - prog(t, b - outD, b));
+function text(id, t, a, b, rise = 40) {
+  const el = document.getElementById(id), o = fade(t, a, b);
+  el.style.opacity = o; el.style.transform = `translateY(${(1 - out(prog(t, a, a + .5))) * rise}px)`;
+}
+
+window.renderFrame = (t) => {
+  /* Scene 1 (0–3 s): calendar flies in and spins. Scene 2 (3–6 s): push in, "one week". */
+  const inP = out(prog(t, 0, 1.6));
+  const calOut = ease(prog(t, 5.6, 6.5));
+  const calBack = out(prog(t, 12.4, 13.4));
+  let cs = lerp(.2, 1.25, inP);
+  cal.position.set(0, lerp(-.25, -.15, inP) + Math.sin(t * 1.6) * .03, lerp(-6, 0, inP));
+  cal.rotation.set(lerp(.6, .12, inP) + Math.sin(t * .9) * .05, lerp(-Math.PI * 2.2, -.35, inP) + prog(t, 1.6, 5.6) * .7, lerp(-.4, 0, inP));
+  // scene 2 push-in with a little tilt
+  const push = ease(prog(t, 2.8, 4.2));
+  cs *= lerp(1, 1.18, push); cal.position.y += lerp(0, -.35, push);
+  // leave to the side for the phone, come back small for the end card
+  cal.position.x += lerp(0, -3.2, calOut); cal.rotation.y += calOut * 1.2;
+  if (t > 12.4) { cs = lerp(.2, .62, back(calBack)); cal.position.set(0, .95, 0); cal.rotation.set(.08 + Math.sin(t * 1.4) * .04, Math.sin(t * 1.1) * .35 + (1 - calBack) * 3, 0); }
+  cal.scale.setScalar(cs);
+  cal.visible = t < 6.6 || t > 12.4;
+
+  /* Scene 3 (6–9.5 s): phone rises with the listing, OPEN sign swings in */
+  const phIn = out(prog(t, 5.9, 7.3)), phOut = ease(prog(t, 9.4, 10.3));
+  phone.visible = t > 5.8 && t < 10.4;
+  phone.position.set(lerp(.15, .35, phIn), lerp(-3.6, -.12, phIn) + Math.sin(t * 1.3) * .025 - phOut * 4.2, 0);
+  phone.rotation.set(lerp(.5, .06, phIn), lerp(-1.1, -.28, phIn) + Math.sin(t * .8) * .06 + phOut * .28, lerp(.15, 0, phIn));
+  phone.scale.setScalar(lerp(.95, 1, phIn));
+  const sIn = back(prog(t, 6.5, 7.7)), sOut = ease(prog(t, 9.2, 9.8));
+  sign.visible = t > 6.4 && t < 9.9;
+  sign.position.set(lerp(-1.5, -.42, sIn) + sOut * -2.6, lerp(3.2, 1.62, sIn), .5);
+  sign.rotation.set(0, .25, Math.sin((t - 6.5) * 3.1) * .22 * Math.exp(-(t - 6.5) * .45) + .02);
+  sign.scale.setScalar(.66);
+
+  /* Scene 4 (9.5–12.5 s): example designs fan out around the phone */
+  cards.forEach((g, i) => {
+    const p = back(prog(t, 9.6 + i * .18, 10.6 + i * .18)), o = ease(prog(t, 12.0, 12.6));
+    const slots = [[0, -.8, .7, 0], [-.74, .12, 0, .32], [.74, .12, 0, -.32]];
+    const [x, y, z, ry] = slots[i];
+    g.visible = t > 9.5 && t < 12.7;
+    g.position.set(lerp(x * .2, x, p), lerp(y * .2 - .2, y, p) + Math.sin(t * 1.5 + i) * .02, lerp(-1.2, z, p) + o * 3);
+    g.rotation.set(-.05, ry + Math.sin(t * .7 + i) * .05, (i - 1) * .03);
+    g.scale.setScalar(lerp(.3, .82, p) * (1 - o * .5));
+  });
+
+  /* Camera: slow orbit + push, like a cinematic dolly */
+  const camZ = lerp(7.6, 6.9, prog(t, 0, 15));
+  camera.position.set(Math.sin(t * .35) * .35, .1 + Math.sin(t * .27) * .08, camZ);
+  camera.lookAt(0, 0, 0);
+
+  /* Text overlays */
+  text('t1', t, .5, 2.95);
+  text('t2', t, 3.1, 5.9);
+  text('t3', t, 7.0, 9.4);
+  text('tex', t, 7.2, 9.3, 0);
+  text('t4', t, 9.7, 12.3);
+  text('tex2', t, 10.4, 12.2, 0);
+  text('t5', t, 13.0, 15.2);
+  const lg = document.getElementById('logo'), lo = out(prog(t, 12.8, 13.5));
+  lg.style.opacity = lo; lg.style.transform = `translateY(${(1 - lo) * 30}px)`;
+
+  renderer.render(scene, camera);
+};
+
+window.ready = (async () => {
+  await buildTextures();
+  await new Promise(r => setTimeout(r, 300)); // let the example card textures load
+  window.renderFrame(0);
+  return true;
+})();
+</script>
+</body>
+</html>

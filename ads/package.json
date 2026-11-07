@@ -1,0 +1,6 @@
+{
+  "name": "weeekone-ads",
+  "private": true,
+  "description": "3D animated ads for WeeekOne, rendered with three.js + Playwright + ffmpeg",
+  "dependencies": { "three": "0.170.0" }
+}
