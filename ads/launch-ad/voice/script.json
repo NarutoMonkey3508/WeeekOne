@@ -1,0 +1,12 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "lines": [
+    { "id": "hook",  "text": "Customers can't find you online?" },
+    { "id": "week",  "text": "I'm Week One. I get local businesses online in one week." },
+    { "id": "what",  "text": "Your website, your Google Maps listing, Instagram, even your logo and menu." },
+    { "id": "demo",  "text": "Here's how it works. Send me a few details, and within three days, I'll make a free demo of your own site." },
+    { "id": "steps", "text": "Love it? Pick a package, from a hundred and fifty dollars, and you're live in about a week. Don't love it? You don't pay a thing." },
+    { "id": "end",   "text": "Get your free demo. Just email me today." }
+  ]
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- WeeekOne launch ad: 15 s, 9:16 (1080x1920), rendered frame by frame by render.js.
+<!-- WeeekOne launch ad with voiceover: about 29 s, 9:16 (1080x1920), rendered frame by frame by render.js.
      window.renderFrame(seconds) draws one exact frame, so the video is the same every time. -->
 <html lang="en">
 <head>
@@ -22,6 +22,10 @@
   .pill { display: inline-block; font: 700 40px/1 "Figtree"; padding: 26px 40px; border-radius: 999px; background: #FC734D; color: #02070A; }
   .chip { display: inline-block; font: 700 38px/1 "Figtree"; padding: 20px 28px; margin: 8px; border-radius: 999px; background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.18); color: #fff; }
   .small { font: 600 30px/1.2 "Figtree"; color: #9FB2BD; letter-spacing: .14em; text-transform: uppercase; }
+  #steps { position: absolute; left: 110px; right: 110px; top: 760px; display: grid; gap: 26px; }
+  .step { display: flex; align-items: center; gap: 34px; padding: 26px 34px; border-radius: 34px; background: rgba(11,22,29,.78); border: 2px solid rgba(255,255,255,.12); opacity: 0; font: 700 52px/1.1 "Figtree", sans-serif; color: #fff; }
+  .step b { flex: none; width: 92px; height: 92px; border-radius: 26px; display: grid; place-items: center; background: #FC734D; color: #02070A; font: 800 58px/1 "Bricolage Grotesque", sans-serif; }
+  .step em { font-style: normal; color: #FC734D; }
   #logo { position: absolute; left: 0; right: 0; text-align: center; top: 1090px; opacity: 0; font: 800 150px/1 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; color: #fff; }
   #logo span { color: #FC734D; }
 </style>
@@ -34,7 +38,15 @@
 <div class="t" id="t2" style="top:200px"><div class="s">Get your business online in</div><div class="h" style="font-size:170px;margin-top:10px"><span class="o">one week.</span></div></div>
 <div class="t" id="t3" style="top:1500px"><span class="chip">Website</span><span class="chip">Google Maps</span><span class="chip">Instagram</span><span class="chip">Logo &amp; menu</span></div>
 <div class="t small" id="tex" style="top:1700px">Example listing</div>
-<div class="t" id="t4" style="top:190px"><div class="h" style="font-size:96px">See a <span class="o">free demo</span><br>of your own site</div><div class="s" style="margin-top:28px">Pay only if you love it. From $150.</div></div>
+<div class="t" id="t4" style="top:190px"><div class="h" style="font-size:96px">See a <span class="o">free demo</span><br>of your own site</div><div class="s" style="margin-top:28px">Ready within 3 days. No card needed.</div></div>
+<div class="t" id="t6" style="top:560px"><div class="h" style="font-size:104px">How it works</div></div>
+<div id="steps">
+  <div class="step" id="st1"><b>1</b><span>Send a few details</span></div>
+  <div class="step" id="st2"><b>2</b><span>Free demo in 3 days</span></div>
+  <div class="step" id="st3"><b>3</b><span>Pick a package from <em>$150</em></span></div>
+  <div class="step" id="st4"><b>4</b><span>Live in about a week</span></div>
+</div>
+<div class="t" id="t7" style="top:1560px"><div class="s" style="color:#fff;font-size:50px">Don't love it? <span style="color:#FC734D">You pay nothing.</span></div></div>
 <div class="t small" id="tex2" style="top:1730px">Example designs</div>
 <div class="t" id="t5" style="top:1400px"><div class="s" style="color:#fff;font-size:54px">Your business, open online in one week.</div><div style="margin-top:44px"><span class="pill">Get a free demo</span></div><div class="s" style="margin-top:40px;font-size:42px">weeekone@gmail.com</div></div>
 <div id="logo">Weeek<span>One</span></div>
@@ -151,71 +163,94 @@ const out = p => 1 - Math.pow(1 - p, 4);                                        
 const back = p => { const c = 1.6; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
 const lerp = (a, b, p) => a + (b - a) * p;
 const fade = (t, a, b, inD = .35, outD = .35) => Math.min(prog(t, a, a + inD), 1 - prog(t, b - outD, b));
-function text(id, t, a, b, rise = 40) {
-  const el = document.getElementById(id), o = fade(t, a, b);
-  el.style.opacity = o; el.style.transform = `translateY(${(1 - out(prog(t, a, a + .5))) * rise}px)`;
+function show(el, t, a, b, rise = 40) {
+  if (typeof el === 'string') el = document.getElementById(el);
+  const o = fade(t, a, b); el.style.opacity = o; el.style.transform = `translateY(${(1 - out(prog(t, a, a + .5))) * rise}px)`;
+}
+
+/* ---------- Scenes, timed to the voiceover ----------
+   Each scene starts LEAD seconds before its line and lasts until the next one. */
+const ORDER = ['hook', 'week', 'what', 'demo', 'steps', 'end'];
+const LEAD = .45, GAP = .35, TAIL = 1.8;
+let S = {}; window.VOICE_STARTS = {};
+async function buildTimeline() {
+  const d = await (await fetch('voice/durations.json')).json();
+  let cur = LEAD;
+  ORDER.forEach(id => { window.VOICE_STARTS[id] = cur; cur += d[id] + GAP; });
+  window.DURATION = cur - GAP + TAIL;
+  ORDER.forEach((id, i) => { S[id] = [i ? window.VOICE_STARTS[id] - LEAD * .6 : 0, i < ORDER.length - 1 ? window.VOICE_STARTS[ORDER[i + 1]] - LEAD * .6 : window.DURATION]; });
 }
 
 window.renderFrame = (t) => {
-  /* Scene 1 (0–3 s): calendar flies in and spins. Scene 2 (3–6 s): push in, "one week". */
-  const inP = out(prog(t, 0, 1.6));
-  const calOut = ease(prog(t, 5.6, 6.5));
-  const calBack = out(prog(t, 12.4, 13.4));
-  let cs = lerp(.2, 1.25, inP);
-  cal.position.set(0, lerp(-.25, -.15, inP) + Math.sin(t * 1.6) * .03, lerp(-6, 0, inP));
-  cal.rotation.set(lerp(.6, .12, inP) + Math.sin(t * .9) * .05, lerp(-Math.PI * 2.2, -.35, inP) + prog(t, 1.6, 5.6) * .7, lerp(-.4, 0, inP));
-  // scene 2 push-in with a little tilt
-  const push = ease(prog(t, 2.8, 4.2));
-  cs *= lerp(1, 1.18, push); cal.position.y += lerp(0, -.35, push);
-  // leave to the side for the phone, come back small for the end card
-  cal.position.x += lerp(0, -3.2, calOut); cal.rotation.y += calOut * 1.2;
-  if (t > 12.4) { cs = lerp(.2, .62, back(calBack)); cal.position.set(0, .95, 0); cal.rotation.set(.08 + Math.sin(t * 1.4) * .04, Math.sin(t * 1.1) * .35 + (1 - calBack) * 3, 0); }
-  cal.scale.setScalar(cs);
-  cal.visible = t < 6.6 || t > 12.4;
+  const [h0] = S.hook, [w0, w1] = S.week, [a0, a1] = S.what, [d0, d1] = S.demo, [s0, s1] = S.steps, [e0, e1] = S.end;
 
-  /* Scene 3 (6–9.5 s): phone rises with the listing, OPEN sign swings in */
-  const phIn = out(prog(t, 5.9, 7.3)), phOut = ease(prog(t, 9.4, 10.3));
-  phone.visible = t > 5.8 && t < 10.4;
+  /* Calendar: flies in (hook), push-in (week), leaves, comes back small for steps + end card */
+  const inP = out(prog(t, h0, h0 + 1.6));
+  const push = ease(prog(t, w0, w0 + 1.4));
+  const calOut = ease(prog(t, w1 - .7, w1 + .2));
+  let cs = lerp(.2, 1.25, inP) * lerp(1, 1.18, push);
+  cal.position.set(lerp(0, -3.2, calOut), lerp(-.25, -.15, inP) + Math.sin(t * 1.6) * .03 + lerp(0, -.35, push), lerp(-6, 0, inP));
+  cal.rotation.set(lerp(.6, .12, inP) + Math.sin(t * .9) * .05, lerp(-Math.PI * 2.2, -.35, inP) + prog(t, h0 + 1.6, w1) * .7 + calOut * 1.2, lerp(-.4, 0, inP));
+  if (t > s0) {
+    const back1 = out(prog(t, s0, s0 + 1)), toEnd = ease(prog(t, e0, e0 + .8));
+    cs = lerp(.2, lerp(.42, .62, toEnd), back(back1));
+    cal.position.set(0, lerp(1.32, .95, toEnd), 0);
+    cal.rotation.set(.08 + Math.sin(t * 1.4) * .04, Math.sin(t * 1.1) * .35 + (1 - back1) * 3, 0);
+  }
+  cal.scale.setScalar(cs);
+  cal.visible = t < w1 + .3 || t > s0;
+
+  /* Phone with the example listing: rises in "what", drops out in "demo" */
+  const phIn = out(prog(t, a0, a0 + 1.4)), phOut = ease(prog(t, d0, d0 + .9));
+  phone.visible = t > a0 - .1 && t < d0 + 1;
   phone.position.set(lerp(.15, .35, phIn), lerp(-3.6, -.12, phIn) + Math.sin(t * 1.3) * .025 - phOut * 4.2, 0);
   phone.rotation.set(lerp(.5, .06, phIn), lerp(-1.1, -.28, phIn) + Math.sin(t * .8) * .06 + phOut * .28, lerp(.15, 0, phIn));
   phone.scale.setScalar(lerp(.95, 1, phIn));
-  const sIn = back(prog(t, 6.5, 7.7)), sOut = ease(prog(t, 9.2, 9.8));
-  sign.visible = t > 6.4 && t < 9.9;
+  const sIn = back(prog(t, a0 + .6, a0 + 1.8)), sOut = ease(prog(t, d0 - .2, d0 + .4));
+  sign.visible = t > a0 + .5 && t < d0 + .5;
   sign.position.set(lerp(-1.5, -.42, sIn) + sOut * -2.6, lerp(3.2, 1.62, sIn), .5);
-  sign.rotation.set(0, .25, Math.sin((t - 6.5) * 3.1) * .22 * Math.exp(-(t - 6.5) * .45) + .02);
+  sign.rotation.set(0, .25, Math.sin((t - a0 - .6) * 3.1) * .22 * Math.exp(-(t - a0 - .6) * .45) + .02);
   sign.scale.setScalar(.66);
 
-  /* Scene 4 (9.5–12.5 s): example designs fan out around the phone */
+  /* Example designs fan out in "demo", fly away at the start of "steps" */
   cards.forEach((g, i) => {
-    const p = back(prog(t, 9.6 + i * .18, 10.6 + i * .18)), o = ease(prog(t, 12.0, 12.6));
+    const p = back(prog(t, d0 + .3 + i * .18, d0 + 1.3 + i * .18)), o = ease(prog(t, s0 - .2, s0 + .5));
     const slots = [[0, -.8, .7, 0], [-.74, .12, 0, .32], [.74, .12, 0, -.32]];
     const [x, y, z, ry] = slots[i];
-    g.visible = t > 9.5 && t < 12.7;
+    g.visible = t > d0 + .2 && t < s0 + .6;
     g.position.set(lerp(x * .2, x, p), lerp(y * .2 - .2, y, p) + Math.sin(t * 1.5 + i) * .02, lerp(-1.2, z, p) + o * 3);
     g.rotation.set(-.05, ry + Math.sin(t * .7 + i) * .05, (i - 1) * .03);
     g.scale.setScalar(lerp(.3, .82, p) * (1 - o * .5));
   });
 
   /* Camera: slow orbit + push, like a cinematic dolly */
-  const camZ = lerp(7.6, 6.9, prog(t, 0, 15));
-  camera.position.set(Math.sin(t * .35) * .35, .1 + Math.sin(t * .27) * .08, camZ);
+  camera.position.set(Math.sin(t * .35) * .35, .1 + Math.sin(t * .27) * .08, lerp(7.6, 6.9, prog(t, 0, window.DURATION)));
   camera.lookAt(0, 0, 0);
 
   /* Text overlays */
-  text('t1', t, .5, 2.95);
-  text('t2', t, 3.1, 5.9);
-  text('t3', t, 7.0, 9.4);
-  text('tex', t, 7.2, 9.3, 0);
-  text('t4', t, 9.7, 12.3);
-  text('tex2', t, 10.4, 12.2, 0);
-  text('t5', t, 13.0, 15.2);
-  const lg = document.getElementById('logo'), lo = out(prog(t, 12.8, 13.5));
+  show('t1', t, h0 + .4, w0 + .1);
+  show('t2', t, w0 + .2, w1);
+  show('t3', t, a0 + 1.0, d0);
+  show('tex', t, a0 + 1.2, d0, 0);
+  show('t4', t, d0 + .3, s0 + .1);
+  show('tex2', t, d0 + 1.0, s0, 0);
+  show('t6', t, s0 + .3, e0 + .1);
+  // steps appear as the voice gets to them: "Love it? Pick a package ... live in about a week. Don't love it?"
+  const sv = window.VOICE_STARTS.steps, sd = S.steps[1] - sv;
+  [[s0 + .5], [s0 + .8], [sv + sd * .18], [sv + sd * .42]].forEach(([at], i) => {
+    const el = document.getElementById('st' + (i + 1)), o = fade(t, at, e0 + .1);
+    el.style.opacity = o; el.style.transform = `translateX(${(1 - out(prog(t, at, at + .5))) * -60}px)`;
+  });
+  show('t7', t, sv + sd * .66, e0 + .1);
+  show('t5', t, e0 + .5, e1 + 1);
+  const lg = document.getElementById('logo'), lo = out(prog(t, e0 + .3, e0 + 1));
   lg.style.opacity = lo; lg.style.transform = `translateY(${(1 - lo) * 30}px)`;
 
   renderer.render(scene, camera);
 };
 
 window.ready = (async () => {
+  await buildTimeline();
   await buildTextures();
   await new Promise(r => setTimeout(r, 300)); // let the example card textures load
   window.renderFrame(0);
