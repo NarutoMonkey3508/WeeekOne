@@ -4,6 +4,19 @@ A single-page site for WeeekOne, which gets local businesses online in one week.
 
 The whole site is plain HTML in `index.html`, with no build step and no libraries. The only outside request is Google Fonts (Bricolage Grotesque and Figtree).
 
+## How the site is organised
+
+The home page asks one question: **do you have a business, or an idea?** Each visitor then sees only their path.
+
+| Link | What it shows |
+| --- | --- |
+| `/` | Home: the two choices |
+| `/#business` | Business path: free demo, examples, Starter and Launch prices, founding offer. **Use this link in ads for local businesses.** |
+| `/#idea` | Idea path: Idea Launch, the AI idea assistant, idea questions |
+| `/idea-assistant.html` | The AI idea assistant |
+
+In `index.html`, every section is tagged `data-for="business"`, `data-for="idea"` or both. A link to any section (like `/#prices`) opens the right path automatically.
+
 ## Files
 
 | Path | What it is |
