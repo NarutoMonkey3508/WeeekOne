@@ -20,7 +20,7 @@ The whole site is plain HTML in `index.html`, with no build step and no librarie
 1. **Contact details.** The site shows weeekone@gmail.com and (647) 960-3508. To change them, edit `EMAIL`, `PHONE` and `PHONE_LINK` near the bottom of `index.html`, and the fallback text in the HTML (search for the old value).
 2. **Payments.** The FAQ says clients pay by PayPal invoice (card or PayPal) or Interac e-Transfer. Set up the PayPal Business account with a parent before the first invoice.
 3. **Founding offer.** Once the 3 spots are taken, remove or update the `#founding` section.
-4. **Idea Launch.** Once the first local clients are done and the price is decided ($400 or $600), add it where the `IDEA LAUNCH` comment is.
+4. **Idea Launch** is on the site at $400 (`#ideas`). Its waitlist sign-ups for clients need a working form, such as Netlify Forms.
 5. **Real examples.** After the first clients, replace the made-up example designs with real before/after screenshots and quotes (see the `REAL EXAMPLES` comment). Never use made-up reviews, ratings or numbers.
 
 ## Preview locally

@@ -154,10 +154,11 @@
   .brand { display: block; margin-left: -10px; }
   .brand img { height: 50px; width: auto; }
   .nav { display: none; gap: 28px; font-weight: 600; font-size: 1rem; }
-  .nav a { text-decoration: none; color: var(--muted); }
+  .nav a { text-decoration: none; color: var(--muted); white-space: nowrap; }
   .nav a:hover { color: var(--ink); }
   .header-right { display: flex; align-items: center; gap: 28px; }
-  @media (min-width: 860px) { .nav { display: flex; } }
+  .header-right .btn { white-space: nowrap; }
+  @media (min-width: 1080px) { .nav { display: flex; } }
 
   /* ---------- Hero ---------- */
   .hero { padding: 36px 0 64px; overflow: hidden; }
@@ -381,6 +382,24 @@
   .home-note svg { width: 28px; height: 28px; flex: none; margin-top: 2px; }
   .home-note p { color: var(--muted); margin-top: 4px; }
 
+  /* ---------- Idea Launch ---------- */
+  .idea-box { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 32px 22px; display: grid; gap: 32px; }
+  .idea-box .lead { margin-top: 12px; }
+  .idea-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+  .idea-list li { display: flex; gap: 12px; align-items: flex-start; }
+  .idea-list svg { width: 22px; height: 22px; flex: none; margin-top: 2px; color: var(--support); }
+  .idea-price { margin-top: 26px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .idea-price b { font-family: var(--font-head); font-weight: 800; font-size: 3rem; line-height: 1; letter-spacing: -.02em; }
+  .idea-price span { color: var(--muted); font-weight: 600; }
+  .idea-note { color: var(--muted); font-size: 1rem; margin-top: 10px; }
+  .idea-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; align-content: start; }
+  .idea-steps li { display: flex; gap: 14px; align-items: flex-start; background: var(--bg); border-radius: 18px; padding: 16px 18px; }
+  .idea-steps .n { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-weight: 700; }
+  .idea-steps small { display: block; color: var(--muted); font-size: .95rem; }
+  .idea-proof { margin-top: 4px; font-size: 1rem; color: var(--muted); }
+  .idea-proof strong { color: var(--ink); }
+  @media (min-width: 900px) { .idea-box { grid-template-columns: 1.1fr 1fr; padding: 52px; gap: 48px; } }
+
   /* ---------- FAQ ---------- */
   .faq { display: grid; gap: 10px; max-width: 820px; }
   .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
@@ -490,6 +509,7 @@
     <div class="header-right">
       <nav class="nav" aria-label="Main">
         <a href="#examples">Examples</a>
+        <a href="#ideas">Business ideas</a>
         <a href="#how">How it works</a>
         <a href="#prices">Prices</a>
         <a href="#questions">Questions</a>
@@ -719,6 +739,7 @@
       <div class="price-note">
         <p><strong>The only extra cost is your domain name</strong> (like yourbakery.ca), about $20 a year.</p>
         <p>It's registered in your name, so your site and your address are always yours.</p>
+        <p>Have a business idea instead of a shop? See <a href="#ideas">Idea Launch, $400</a>.</p>
       </div>
     </div>
   </section>
@@ -773,6 +794,8 @@
         <li class="home">Cleaners</li>
         <li class="home">Crafters</li>
         <li class="home">Music teachers</li>
+        <li>Online businesses</li>
+        <li>Startup ideas</li>
       </ul>
       <div class="home-note">
         <svg aria-hidden="true"><use href="#i-home"/></svg>
@@ -784,8 +807,43 @@
     </div>
   </section>
 
-  <!-- Later: IDEA LAUNCH ($400–600, price still to decide) — for online businesses and startup founders.
-       Add once the first local clients are done (see PRD: Services and packages). -->
+  <!-- IDEA LAUNCH — for online businesses and startup founders (PRD: Services and packages) -->
+  <section id="ideas" aria-labelledby="ideas-title">
+    <div class="wrap">
+      <div class="idea-box">
+        <div>
+          <span class="eyebrow">Idea Launch</span>
+          <h2 id="ideas-title">Have a business idea? <span class="key">I'll help you launch it.</span></h2>
+          <p class="lead">For online businesses and startup ideas. In about a week, your idea gets a name, a look and a page where people can sign up.</p>
+          <ul class="idea-list">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Name ideas, with a short reason for each</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A logo</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A landing page with a waitlist sign-up that sends new sign-ups to your email</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A short brand guide: your colours, fonts and how to use your logo</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>2 rounds of changes included</span></li>
+          </ul>
+          <div class="idea-price"><b>$400</b><span>one time</span></div>
+          <p class="idea-note">Apps, logins, online stores and payment systems aren't included. Ask and I'll quote them separately or tell you honestly if I can't help.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="mailto:weeekone@gmail.com" data-mailto data-body="idea" data-subject="Idea Launch: my business idea">
+              <svg aria-hidden="true"><use href="#i-mail"/></svg>Tell me your idea
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:16px">How it works</h3>
+          <ol class="idea-steps">
+            <li><span class="n">1</span><div><strong>Listen</strong><small>We talk through your idea, who it's for and what makes it different.</small></div></li>
+            <li><span class="n">2</span><div><strong>Recommend</strong><small>I suggest names, a logo direction, the page and pricing, with a reason for each.</small></div></li>
+            <li><span class="n">3</span><div><strong>You decide</strong><small>It's your business, so you make the final calls.</small></div></li>
+            <li><span class="n">4</span><div><strong>Build</strong><small>Name, logo, landing page and brand guide, usually within a week.</small></div></li>
+            <li><span class="n">5</span><div><strong>Test</strong><small>Your waitlist shows if real people want it, before you spend money building it.</small></div></li>
+          </ol>
+          <p class="idea-proof" style="margin-top:18px"><strong>WeeekOne is the first example.</strong> Its name, logo and this website were made with this same process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Later: REAL EXAMPLES — Confident in the quality.
        After the first 3 clients, add a section here with before/after screenshots,
@@ -968,14 +1026,28 @@
     "Thanks!"
   ].join("\n");
 
-  function mailto(subject) {
+  const IDEA_BODY = [
+    "Hi WeeekOne,",
+    "",
+    "I have a business idea and I'd like to talk about Idea Launch.",
+    "",
+    "My idea in one sentence:",
+    "Who it's for:",
+    "What makes it different:",
+    "Any name ideas so far:",
+    "How I want people to feel when they see it:",
+    "",
+    "Thanks!"
+  ].join("\n");
+
+  function mailto(subject, body = BODY) {
     return "mailto:" + EMAIL +
       "?subject=" + encodeURIComponent(subject || "Free demo request") +
-      "&body=" + encodeURIComponent(BODY);
+      "&body=" + encodeURIComponent(body);
   }
 
   document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
-  document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject); });
+  document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject, a.dataset.body === "idea" ? IDEA_BODY : BODY); });
   document.querySelectorAll("[data-phone]").forEach(el => { el.textContent = PHONE; });
   document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = "tel:" + PHONE_LINK; });
   document.querySelectorAll('a[href^="sms:"]').forEach(a => { a.href = "sms:" + PHONE_LINK; });
