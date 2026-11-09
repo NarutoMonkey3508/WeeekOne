@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Idea Assistant · WeeekOne</title>
+<meta name="description" content="Chat with the free WeeekOne idea assistant to find a small business idea that fits you.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F3F6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#02070A" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/logo/weeekone-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --midnight: #02070A;
+    --orange: #FC734D;
+    --orange-hover: #FF8A68;
+    --blue: #0297DE;
+    --white: #FFFFFF;
+
+    --bg: #F3F6F8;
+    --surface: var(--white);
+    --surface-2: #E6EDF1;
+    --ink: var(--midnight);
+    --muted: #46545E;
+    --line: #D9E1E7;
+    --accent: var(--orange);          /* button fill */
+    --accent-hover: #E9603A;
+    --on-accent: var(--midnight);     /* text on orange buttons (white fails contrast) */
+    --accent-text: #C84A26;           /* orange key words on light backgrounds */
+    --support: #0278B3;               /* blue checkmarks on light backgrounds */
+    --band: var(--midnight);          /* founding offer, examples, footer */
+    --band-surface: #0B161D;
+    --band-ink: var(--white);
+    --band-muted: #A2B0BA;
+    --shadow: 0 1px 2px rgba(2,7,10,.06), 0 8px 24px rgba(2,7,10,.08);
+    --ok: var(--support);
+
+    --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 18px;
+    --wrap: 1120px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: var(--midnight);
+      --surface: #0B161D;
+      --surface-2: #122129;
+      --ink: #F1F5F7;
+      --muted: #9AA9B3;
+      --line: #1D2D37;
+      --accent-hover: var(--orange-hover);
+      --accent-text: var(--orange);
+      --support: var(--blue);
+      --band: #060E13;
+      --band-surface: #0E1B23;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(2.5rem, 9vw, 4.25rem); }
+  h2 { font-size: clamp(2rem, 6.4vw, 3rem); }
+  h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
+  p { margin: 0; text-wrap: pretty; }
+  .key { color: var(--accent-text); }
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; scroll-margin-top: 64px; }
+  .eyebrow {
+    display: inline-block;
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 38em; margin-top: 16px; }
+  .section-head { margin-bottom: 36px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; border-radius: 8px; z-index: 100; }
+  .skip:focus { left: 8px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 52px; padding: 0 26px;
+    border-radius: 999px; border: 0;
+    background: var(--accent); color: var(--on-accent);
+    font: 700 1.05rem/1 var(--font-body);
+    text-decoration: none; cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn svg { width: 20px; height: 20px; }
+  .btn-sm { min-height: 42px; padding: 0 18px; font-size: .95rem; }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    box-shadow: inset 0 0 0 2px var(--line);
+  }
+  .btn-ghost:hover { background: var(--surface-2); }
+  .link-arrow { font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; min-height: 52px; padding: 0 6px; }
+  .link-arrow:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .site-header.scrolled { border-bottom-color: var(--line); }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+  .brand { display: block; margin-left: -10px; }
+  .brand img { height: 50px; width: auto; }
+  .nav { display: none; gap: 28px; font-weight: 600; font-size: 1rem; }
+  .nav a { text-decoration: none; color: var(--muted); white-space: nowrap; }
+  .nav a:hover { color: var(--ink); }
+  .header-right { display: flex; align-items: center; gap: 28px; }
+  .header-right .btn { white-space: nowrap; }
+  @media (min-width: 1080px) { .nav { display: flex; } }
+
+  /* ---------- Idea helper ---------- */
+  .helper { margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 30px 22px; display: grid; gap: 24px; }
+  .helper-head { display: grid; gap: 8px; }
+  .helper-head .eyebrow { margin-bottom: 0; }
+  .helper-head h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+  .helper-head p { color: var(--muted); }
+  .helper-label { font-weight: 700; margin-bottom: 10px; }
+  .helper-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .helper-opts button {
+    font: 600 1rem/1.2 var(--font-body); color: var(--ink); cursor: pointer;
+    background: var(--surface-2); border: 2px solid transparent; border-radius: 999px; padding: 10px 16px; min-height: 44px;
+  }
+  .helper-opts button:hover { border-color: var(--line); }
+  .helper-opts button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .helper-empty { color: var(--muted); }
+  .helper-results { display: grid; gap: 12px; }
+  .idea-cards { display: grid; gap: 12px; }
+  .idea-card { background: var(--bg); border-radius: 20px; padding: 20px; display: grid; gap: 8px; }
+  .idea-card h4 { margin: 0; font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; letter-spacing: -.01em; }
+  .idea-card p { color: var(--muted); font-size: 1rem; }
+  .idea-card .first { color: var(--ink); }
+  .idea-card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .idea-card .tags span { font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
+  .idea-card .btn { justify-self: start; margin-top: 6px; }
+  .helper-more { justify-self: start; }
+  @media (min-width: 900px) {
+    .helper { padding: 44px 52px; }
+    .idea-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ---------- Send dialog (works even without an email app) ---------- */
+  .send-dialog {
+    width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto;
+    border: 1px solid var(--line); border-radius: 24px; padding: 0;
+    background: var(--surface); color: var(--ink); box-shadow: 0 30px 80px rgba(2,7,10,.45);
+  }
+  .send-dialog::backdrop { background: rgba(2,7,10,.6); }
+  .send-inner { padding: 26px 22px 22px; display: grid; gap: 14px; }
+  .send-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+  .send-top h3 { font-size: 1.5rem; }
+  .send-close { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .send-dialog p { color: var(--muted); font-size: 1rem; }
+  .send-options { display: grid; gap: 10px; }
+  .send-options .btn { width: 100%; }
+  .send-to { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--bg); border-radius: 14px; padding: 12px 14px; font-weight: 700; }
+  .send-to span { flex: 1 1 auto; overflow-wrap: anywhere; }
+  .send-preview { background: var(--bg); border-radius: 14px; padding: 12px 14px; font: 500 .9rem/1.45 var(--font-body); color: var(--muted); white-space: pre-wrap; max-height: 180px; overflow: auto; margin: 0; }
+  .send-status { min-height: 1.2em; font-weight: 600; color: var(--support) !important; }
+
+  /* ---------- Idea assistant page ---------- */
+  .page-top { padding-block: 40px 8px; }
+  .page-top h1 { font-size: clamp(2.3rem, 8vw, 3.6rem); }
+  .page-top .lead { margin-top: 14px; }
+  .back { display: inline-flex; gap: 6px; font-weight: 700; text-decoration: none; color: var(--muted); margin-bottom: 18px; min-height: 44px; align-items: center; }
+  .back:hover { color: var(--ink); }
+  section.chat-section { padding-block: 24px 24px; }
+  .chat { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; box-shadow: var(--shadow); }
+  .chat-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .chat-head .dot { width: 40px; height: 40px; flex: none; }
+  .chat-head strong { display: block; }
+  .chat-head small { color: var(--muted); font-size: .9rem; }
+  .chat-new { margin-left: auto; white-space: nowrap; }
+  .chat-log { padding: 20px; display: flex; flex-direction: column; gap: 14px; min-height: 340px; max-height: min(62vh, 640px); overflow-y: auto; overscroll-behavior: contain; }
+  .msg { max-width: 88%; padding: 13px 16px; border-radius: 20px; font-size: 1.02rem; line-height: 1.5; overflow-wrap: anywhere; }
+  .msg p + p, .msg p + ul, .msg ul + p, .msg p + ol, .msg ol + p { margin-top: 8px; }
+  .msg ul, .msg ol { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+  .msg.bot { background: var(--bg); align-self: flex-start; border-bottom-left-radius: 6px; }
+  .msg.me { background: var(--ink); color: var(--bg); align-self: flex-end; border-bottom-right-radius: 6px; }
+  .msg.note { background: transparent; border: 1px dashed var(--line); color: var(--muted); align-self: stretch; max-width: none; font-size: .95rem; }
+  .msg.note a { color: var(--ink); font-weight: 700; }
+  .typing { display: inline-flex; gap: 5px; align-items: center; height: 1.5em; }
+  .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .typing i { animation: none; opacity: .6; } }
+  .starters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .starters button { font: 600 .95rem/1.2 var(--font-body); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 14px; min-height: 42px; cursor: pointer; }
+  .starters button:hover { border-color: var(--ink); }
+  .chat-form { border-top: 1px solid var(--line); padding: 12px; display: flex; gap: 8px; align-items: flex-end; }
+  .chat-form textarea {
+    flex: 1; min-width: 0; resize: none; max-height: 160px; min-height: 52px;
+    font: 500 1.02rem/1.45 var(--font-body); color: var(--ink); background: var(--bg);
+    border: 1.5px solid var(--line); border-radius: 18px; padding: 13px 16px;
+  }
+  .chat-form textarea:focus { outline: none; border-color: var(--ink); }
+  .chat-form .btn { min-height: 52px; padding: 0 20px; flex: none; }
+  .chat-form .btn[disabled] { opacity: .5; cursor: default; }
+  .chat-foot { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: space-between; margin-top: 16px; }
+  .chat-foot p { color: var(--muted); font-size: .92rem; max-width: 46em; }
+  .picks { padding-block: 24px 72px; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--band); color: var(--band-muted); padding: 48px 0 40px; margin-top: 72px; font-size: 1rem; }
+  footer .wrap { display: grid; gap: 20px; }
+  footer img { height: 56px; width: auto; margin-left: -12px; }
+  footer p strong { color: var(--band-ink); }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+  footer nav a { color: var(--band-ink); text-decoration: none; }
+  footer nav a:hover { text-decoration: underline; }
+  footer .legal { font-size: .9rem; }
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="WeeekOne home">
+      <picture>
+        <source srcset="assets/logo/weeekone-logo-dark.svg" media="(prefers-color-scheme: dark)">
+        <img src="assets/logo/weeekone-logo.svg" alt="WeeekOne" width="189" height="50">
+      </picture>
+    </a>
+    <div class="header-right">
+      <a class="btn btn-sm" href="index.html#ideas">Idea Launch · $400</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-top">
+    <div class="wrap">
+      <a class="back" href="index.html#ideas"><span aria-hidden="true">←</span> Back to WeeekOne</a>
+      <span class="eyebrow" style="display:block">Free idea assistant</span>
+      <h1>Find your <span class="key">business idea</span></h1>
+      <p class="lead">Tell the assistant what you enjoy and what you're good at. It asks a few questions, then suggests ideas that fit you, each with a cheap first step.</p>
+    </div>
+  </section>
+
+  <section class="chat-section" aria-label="Idea assistant chat">
+    <div class="wrap">
+      <div class="chat">
+        <div class="chat-head">
+          <svg class="dot" viewBox="0 0 120 132" aria-hidden="true"><defs><clipPath id="cc3"><rect x="0" y="12" width="120" height="120" rx="24"/></clipPath></defs><g clip-path="url(#cc3)"><rect x="0" y="12" width="120" height="120" style="fill:var(--ink)"/><rect x="0" y="12" width="120" height="34" fill="#FC734D"/></g><rect x="28" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><rect x="78" y="0" width="14" height="28" rx="7" style="fill:var(--ink)"/><path d="M70.18 114.74L57.47 114.74L57.47 80.89L49.82 80.89L49.82 69.89Q53.64 69.89 55.98 68.52Q58.32 67.16 59.03 63.26L70.18 63.26Z" style="fill:var(--surface)"/></svg>
+          <div><strong>Idea assistant</strong><small>AI helper · free to use</small></div>
+          <button type="button" class="btn btn-ghost btn-sm chat-new" id="chat-new">New chat</button>
+        </div>
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+        <form class="chat-form" id="chat-form">
+          <label for="chat-input" class="skip">Your message</label>
+          <textarea id="chat-input" rows="1" maxlength="1500" placeholder="Type what you enjoy or are good at…" autocomplete="off"></textarea>
+          <button class="btn" type="submit" id="chat-send" aria-label="Send">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="chat-foot">
+        <p>The assistant is AI and can make mistakes. Ideas are starting points, not promises, so check your local rules. Please don't share private details like your address or passwords.</p>
+        <a class="btn" href="#" id="send-idea" data-idea-send>Send my idea to WeeekOne</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="picks" id="quick-picks" aria-label="Quick picks">
+    <div class="wrap">
+      <div class="helper" id="idea-helper">
+        <div class="helper-head">
+          <span class="eyebrow">Quick picks</span>
+          <h3>Rather tap than type?</h3>
+          <p>Answer 3 quick questions and get business ideas that fit you. Nothing is saved or sent.</p>
+        </div>
+        <div class="helper-q">
+          <p class="helper-label" id="q1">1. What are you good at, or love doing?</p>
+          <div class="helper-opts" role="group" aria-labelledby="q1" data-q="interest">
+            <button type="button" data-v="food">Cooking and baking</button>
+            <button type="button" data-v="art">Art and design</button>
+            <button type="button" data-v="tech">Tech and gaming</button>
+            <button type="button" data-v="fitness">Sports and fitness</button>
+            <button type="button" data-v="teach">Teaching and helping</button>
+            <button type="button" data-v="fix">Fixing and building</button>
+            <button type="button" data-v="pets">Animals</button>
+            <button type="button" data-v="style">Fashion and beauty</button>
+            <button type="button" data-v="music">Music</button>
+            <button type="button" data-v="media">Writing, photos and video</button>
+          </div>
+        </div>
+        <div class="helper-q">
+          <p class="helper-label" id="q2">2. Where do you want to run it?</p>
+          <div class="helper-opts" role="group" aria-labelledby="q2" data-q="mode">
+            <button type="button" data-v="online">Online</button>
+            <button type="button" data-v="local">In person, near me</button>
+            <button type="button" data-v="any">Either is fine</button>
+          </div>
+        </div>
+        <div class="helper-q">
+          <p class="helper-label" id="q3">3. How much can you spend to start?</p>
+          <div class="helper-opts" role="group" aria-labelledby="q3" data-q="budget">
+            <button type="button" data-v="1">Under $100</button>
+            <button type="button" data-v="2">$100 to $500</button>
+            <button type="button" data-v="3">More than $500</button>
+          </div>
+        </div>
+        <div class="helper-results" id="helper-results" aria-live="polite">
+          <p class="helper-empty">Pick one answer for each question to see your ideas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo/weeekone-logo-dark.svg" alt="WeeekOne" width="211" height="56" loading="lazy">
+    <p><strong>Your business, open online in one week.</strong><br>A student-run studio. A parent handles invoices and agreements.</p>
+    <nav aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="index.html#ideas">Idea Launch</a>
+      <a href="index.html#prices">Prices</a>
+      <a href="index.html#start">Get a free demo</a>
+    </nav>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span> · <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+  </div>
+</footer>
+
+<dialog class="send-dialog" id="send-dialog" aria-labelledby="send-title">
+  <div class="send-inner">
+    <div class="send-top">
+      <h3 id="send-title">Send your message</h3>
+      <button type="button" class="send-close" id="send-close" aria-label="Close">×</button>
+    </div>
+    <p>Pick whichever works for you. Your message is already written, just fill in the blanks.</p>
+    <div class="send-options">
+      <a class="btn" id="send-app" href="#">Open my email app</a>
+      <a class="btn btn-ghost" id="send-gmail" href="#" target="_blank" rel="noopener">Open Gmail</a>
+      <button class="btn btn-ghost" type="button" id="send-copy">Copy the message</button>
+    </div>
+    <div class="send-to"><span>To: <span data-email>weeekone@gmail.com</span></span><button class="btn btn-ghost btn-sm" type="button" id="send-copy-email">Copy</button></div>
+    <pre class="send-preview" id="send-preview"></pre>
+    <p class="send-status" id="send-status" aria-live="polite"></p>
+    <p>Rather call or text? <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+  </div>
+</dialog>
+
+<script>
+  /* ====== Contact details: change them here ====== */
+  const EMAIL = "weeekone@gmail.com";
+  const PHONE = "(647) 960-3508";
+  const PHONE_LINK = "+16479603508";
+
+  const IDEA_BODY = [
+    "Hi WeeekOne,",
+    "",
+    "I have a business idea and I'd like to talk about Idea Launch.",
+    "",
+    "My idea in one sentence:",
+    "Who it's for:",
+    "What makes it different:",
+    "Any name ideas so far:",
+    "How I want people to feel when they see it:",
+    "",
+    "Thanks!"
+  ].join("\n");
+
+  function mailto(subject, body = BODY) {
+    return "mailto:" + EMAIL +
+      "?subject=" + encodeURIComponent(subject || "Free demo request") +
+      "&body=" + encodeURIComponent(body);
+  }
+
+  document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
+  document.querySelectorAll("[data-phone]").forEach(el => { el.textContent = PHONE; });
+  document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = "tel:" + PHONE_LINK; });
+
+  /* ---------- Free idea helper ----------
+     Ideas are matched in the browser. Nothing is saved or sent anywhere.
+     i = interests, m = online / local / both, b = 1 (under $100), 2 ($100-500), 3 (over $500) */
+  const IDEAS = [
+    { t: "Home bakery pre-orders", i: ["food"], m: "local", b: 1, d: "Bake to order for birthdays and weekends, with pickup at set times.", f: "Post 3 photos and take pre-orders from friends and neighbours this weekend." },
+    { t: "Meal prep for busy families", i: ["food"], m: "local", b: 2, d: "Healthy weekly meals, cooked once and delivered nearby.", f: "Make one week of meals for 2 families you know and ask what they'd pay." },
+    { t: "Online cooking class", i: ["food", "teach"], m: "online", b: 1, d: "Teach one recipe you're great at, live on video or as a short course.", f: "Run a free 30-minute class for 5 people and ask for honest feedback." },
+    { t: "Cookie decorating kits", i: ["food", "art"], m: "both", b: 2, d: "Boxed cookies, icing and sprinkles for parties and rainy days.", f: "Make 5 kits and sell them to parents you know before making more." },
+    { t: "Custom pet portraits", i: ["art", "pets"], m: "online", b: 1, d: "Drawings or paintings of people's pets, made from a photo.", f: "Draw 3 pets for free to build a portfolio, then post them." },
+    { t: "Sticker and print shop", i: ["art"], m: "online", b: 1, d: "Sell your designs as stickers and prints.", f: "Print 3 designs in small batches and see which one sells first." },
+    { t: "Shop window and chalkboard signs", i: ["art"], m: "local", b: 1, d: "Hand-lettered signs and menu boards for cafés and shops.", f: "Offer one free chalkboard to a local café in exchange for a photo." },
+    { t: "Tech help for seniors", i: ["tech", "teach"], m: "local", b: 1, d: "Help older people set up phones, video calls and email.", f: "Help 2 older relatives or neighbours and ask them to tell a friend." },
+    { t: "Game coaching", i: ["tech"], m: "online", b: 1, d: "Coach players who want to rank up in a game you're good at.", f: "Offer 3 free sessions and record before-and-after results." },
+    { t: "App idea with a waitlist", i: ["tech"], m: "online", b: 1, d: "Describe the app, launch a landing page and see who signs up before building.", f: "Write one sentence about the problem your app fixes and who has it." },
+    { t: "Outdoor fitness classes", i: ["fitness"], m: "local", b: 1, d: "Small group workouts in a local park.", f: "Run a free first class for friends and ask who'd come every week." },
+    { t: "Online workout plans", i: ["fitness"], m: "online", b: 1, d: "Simple weekly plans for one goal, like a first 5 km run.", f: "Write a 4-week plan and test it with 3 people." },
+    { t: "Kids sports camp", i: ["fitness", "teach"], m: "local", b: 2, d: "Half-day sports camps during school breaks.", f: "Ask 5 parents which week they'd need a camp, before booking a field." },
+    { t: "Tutoring", i: ["teach"], m: "both", b: 1, d: "Help with a subject you're strong in, in person or online.", f: "Offer one free trial lesson to a family you know." },
+    { t: "Homework club", i: ["teach"], m: "local", b: 1, d: "A small after-school group where kids get homework done.", f: "Ask a community centre or library if you can use a room." },
+    { t: "Handyman small jobs", i: ["fix"], m: "local", b: 2, d: "Shelves, furniture assembly, small repairs.", f: "List 5 jobs you can do well and tell 10 neighbours." },
+    { t: "Bike repair and tune-ups", i: ["fix", "fitness"], m: "local", b: 2, d: "Fix flats, brakes and gears, from home or at a pop-up stand.", f: "Tune up 3 bikes for friends and take before-and-after photos." },
+    { t: "Furniture flipping", i: ["fix", "art"], m: "local", b: 2, d: "Buy old furniture, fix it up, sell it.", f: "Find one free or cheap piece, restore it and list it." },
+    { t: "Dog walking", i: ["pets"], m: "local", b: 1, d: "Daily walks for busy dog owners nearby.", f: "Walk 2 neighbours' dogs for a week and ask for a review." },
+    { t: "Pet sitting", i: ["pets"], m: "local", b: 1, d: "Visits and care while owners are away.", f: "Pet-sit once for someone you know and get a written reference." },
+    { t: "Homemade dog treats", i: ["pets", "food"], m: "both", b: 2, d: "Simple, healthy treats sold online and at markets.", f: "Check your area's food rules, then test 2 recipes with dog-owning friends." },
+    { t: "Thrift reselling", i: ["style"], m: "online", b: 1, d: "Find great second-hand clothes and resell them online.", f: "Buy 5 pieces under budget and see how fast they sell." },
+    { t: "Custom embroidery", i: ["style", "art"], m: "both", b: 2, d: "Names, logos and designs stitched on clothes and hats.", f: "Make 3 pieces for friends and post them." },
+    { t: "Nail art at home", i: ["style"], m: "local", b: 2, d: "Nail designs from a home studio or at clients' homes.", f: "Check what training or licence your area needs, then practise on friends." },
+    { t: "Music lessons", i: ["music", "teach"], m: "both", b: 1, d: "Beginner lessons on an instrument you play well.", f: "Teach one free first lesson and offer a 4-lesson package." },
+    { t: "Jingles for local businesses", i: ["music"], m: "online", b: 1, d: "Short songs and sounds for shops' ads and videos.", f: "Make one sample jingle for a made-up shop to show what you can do." },
+    { t: "Party DJ", i: ["music"], m: "local", b: 3, d: "Music for birthdays, school events and small parties.", f: "DJ a friend's party and record a short clip." },
+    { t: "Social media for local shops", i: ["media", "tech"], m: "both", b: 1, d: "Photos, posts and captions for shops that don't have time.", f: "Make a week of sample posts for a local shop and show the owner." },
+    { t: "Video editing for creators", i: ["media", "tech"], m: "online", b: 1, d: "Edit short videos for people who post online.", f: "Edit one free video for a creator you like." },
+    { t: "Event photography", i: ["media", "art"], m: "local", b: 3, d: "Photos for birthdays, sports days and small events.", f: "Shoot one event for free and build a gallery." },
+    { t: "Online newsletter", i: ["media", "teach"], m: "online", b: 1, d: "A weekly email about one topic you know a lot about.", f: "Write 3 issues before launching, then share it with 20 people." }
+  ];
+  const BUDGET_LABEL = { 1: "Low cost to start", 2: "Some money to start", 3: "Bigger start-up cost" };
+  const MODE_LABEL = { online: "Online", local: "In person", both: "Online or in person" };
+  const answers = {};
+  let shown = 0;
+  const resultsEl = document.getElementById("helper-results");
+
+  function matches() {
+    const budget = Number(answers.budget);
+    return IDEAS
+      .filter(x => x.i.includes(answers.interest) && x.b <= budget)
+      .map(x => ({ x, s: (answers.mode === "any" || x.m === "both" || x.m === answers.mode ? 2 : 0) + (x.i[0] === answers.interest ? 1 : 0) }))
+      .sort((a, b) => b.s - a.s)
+      .map(r => r.x);
+  }
+  const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  function renderIdeas() {
+    if (!answers.interest || !answers.mode || !answers.budget) return;
+    const list = matches();
+    if (!list.length) {
+      resultsEl.innerHTML = '<p class="helper-empty">Nothing fits that budget yet. Try a bigger budget, or <a href="index.html#ideas">tell me your own idea</a>.</p>';
+      return;
+    }
+    const pick = [0, 1, 2].map(k => list[(shown + k) % list.length]).filter((x, k, a) => a.indexOf(x) === k);
+    resultsEl.innerHTML = '<div class="idea-cards">' + pick.map(x => {
+      const body = IDEA_BODY.replace("My idea in one sentence:", "My idea in one sentence: " + x.t + ". " + x.d);
+      const href = mailto("Idea Launch: " + x.t, body);
+      return `<article class="idea-card"><h4>${esc(x.t)}</h4><p>${esc(x.d)}</p>
+        <p class="first"><strong>First step:</strong> ${esc(x.f)}</p>
+        <div class="tags"><span>${MODE_LABEL[x.m]}</span><span>${BUDGET_LABEL[x.b]}</span></div>
+        <a class="btn btn-sm" href="${href}">Launch this idea with me</a></article>`;
+    }).join("") + "</div>" +
+      (list.length > 3 ? '<button type="button" class="btn btn-ghost btn-sm helper-more" id="helper-more">Show me other ideas</button>' : "") +
+      '<p class="helper-empty">These are starting points, not promises. Every business takes work, and some need a licence or permit, so check your local rules.</p>';
+    const more = document.getElementById("helper-more");
+    if (more) more.addEventListener("click", () => { shown += 3; renderIdeas(); });
+  }
+
+  document.querySelectorAll(".helper-opts").forEach(group => {
+    group.querySelectorAll("button").forEach(btn => {
+      btn.setAttribute("aria-pressed", "false");
+      btn.addEventListener("click", () => {
+        group.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+        answers[group.dataset.q] = btn.dataset.v;
+        shown = 0;
+        renderIdeas();
+      });
+    });
+  });
+
+  /* In-page links (like "Get a free demo" → the checklist): scroll with JS so they work in every viewer */
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute("href") === "#") return;
+    const target = document.getElementById(a.getAttribute("href").slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+  });
+
+  /* Email buttons: open a small "Send your message" box with 3 ways to send,
+     because a plain mailto: link does nothing on devices without an email app */
+  const dlg = document.getElementById("send-dialog");
+  let sendText = "";
+  function copyText(text, okMsg) {
+    const status = document.getElementById("send-status");
+    const done = ok => { status.textContent = ok ? okMsg : "Press and hold the text to copy it."; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => done(true), () => done(fallbackCopy(text)));
+    } else done(fallbackCopy(text));
+  }
+  function fallbackCopy(text) {
+    const t = document.createElement("textarea");
+    t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+    (dlg.open ? dlg : document.body).appendChild(t); t.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    t.remove(); return ok;
+  }
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="mailto:"]');
+    if (!a || !dlg || typeof dlg.showModal !== "function" || dlg.contains(a)) return;
+    e.preventDefault();
+    const u = new URL(a.href);
+    const subject = u.searchParams.get("subject") || "Free demo request";
+    const body = u.searchParams.get("body") || "";
+    document.getElementById("send-app").href = a.href;
+    document.getElementById("send-gmail").href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(EMAIL) +
+      "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    sendText = "Subject: " + subject + "\n\n" + body;
+    document.getElementById("send-preview").textContent = sendText;
+    document.getElementById("send-status").textContent = "";
+    dlg.showModal();
+  });
+  document.getElementById("send-copy-email").addEventListener("click", () => copyText(EMAIL, "Email address copied."));
+  document.getElementById("send-copy").addEventListener("click", () => copyText(sendText, "Message copied. Paste it into an email to " + EMAIL + "."));
+  document.getElementById("send-close").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+  /* ---------- Idea assistant chat ----------
+     The chat is sent to /api/idea-chat (netlify/functions/idea-chat.mjs), which calls the AI.
+     If that isn't set up yet, the page says so and points to the quick picks below. */
+  const API = "/api/idea-chat";
+  const MAX_MESSAGES = 24;
+  const GREETING = "Hi! I'm the WeeekOne idea assistant. I'll ask you a few quick questions, then suggest business ideas that fit you. To start: what do you enjoy doing, or what are you good at?";
+  const STARTERS = ["I love baking", "I'm good with computers", "I want to work with animals", "I'm into art and design", "I have no idea where to start"];
+  const log = document.getElementById("chat-log");
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("chat-input");
+  const sendBtn = document.getElementById("chat-send");
+  let history = [];
+  let busy = false;
+
+  function render(text) {
+    // Small, safe formatter: escapes HTML, then supports **bold**, "-" bullets and "1." lists.
+    const blocks = esc(text.trim()).split(/\n\s*\n/);
+    return blocks.map(block => {
+      const lines = block.split("\n").map(l => l.trim()).filter(Boolean);
+      const bold = t => t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      if (lines.length && lines.every(l => /^[-*•]\s+/.test(l))) return "<ul>" + lines.map(l => "<li>" + bold(l.replace(/^[-*•]\s+/, "")) + "</li>").join("") + "</ul>";
+      if (lines.length && lines.every(l => /^\d+[.)]\s+/.test(l))) return "<ol>" + lines.map(l => "<li>" + bold(l.replace(/^\d+[.)]\s+/, "")) + "</li>").join("") + "</ol>";
+      return lines.map(l => /^[-*•]\s+/.test(l) ? "<ul><li>" + bold(l.replace(/^[-*•]\s+/, "")) + "</li></ul>" : "<p>" + bold(l) + "</p>").join("");
+    }).join("");
+  }
+  function addMsg(kind, html) {
+    const el = document.createElement("div");
+    el.className = "msg " + kind; el.innerHTML = html;
+    log.appendChild(el); log.scrollTop = log.scrollHeight;
+    return el;
+  }
+  function showStarters() {
+    const wrap = document.createElement("div"); wrap.className = "starters"; wrap.id = "starters";
+    STARTERS.forEach(t => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = t;
+      b.addEventListener("click", () => send(t));
+      wrap.appendChild(b);
+    });
+    log.appendChild(wrap);
+  }
+  function reset() {
+    history = []; log.innerHTML = "";
+    addMsg("bot", render(GREETING)); showStarters();
+    input.value = ""; autosize();
+  }
+  function autosize() { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 160) + "px"; }
+
+  async function send(text) {
+    text = (text || "").trim();
+    if (!text || busy) return;
+    if (history.length >= MAX_MESSAGES) {
+      addMsg("note", "This chat is full. Tap <strong>New chat</strong> to start again, or send your idea to WeeekOne.");
+      return;
+    }
+    const starters = document.getElementById("starters"); if (starters) starters.remove();
+    history.push({ role: "user", content: text });
+    addMsg("me", render(text));
+    input.value = ""; autosize();
+    busy = true; sendBtn.disabled = true;
+    const typing = addMsg("bot", '<span class="typing" aria-label="The assistant is typing"><i></i><i></i><i></i></span>');
+    let data = null, status = 0;
+    try {
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) });
+      status = res.status;
+      data = await res.json().catch(() => null);
+    } catch (e) { status = 0; }
+    typing.remove();
+    busy = false; sendBtn.disabled = false;
+    if (data && data.reply) {
+      history.push({ role: "assistant", content: data.reply });
+      addMsg("bot", render(data.reply));
+      input.focus();
+      return;
+    }
+    history.pop(); // the message didn't go through, so it isn't part of the conversation
+    const err = data && data.error;
+    if (err === "busy") addMsg("note", "Lots of people are chatting right now. Please try again in a minute.");
+    else if (err === "too_long_or_invalid") addMsg("note", "That was a bit long for me. Try a shorter message, or tap <strong>New chat</strong>.");
+    else addMsg("note", 'The AI assistant isn\'t switched on yet. In the meantime, try the <a href="#quick-picks">quick picks</a> below, or <a href="index.html#ideas">tell me your idea</a> directly.');
+  }
+
+  form.addEventListener("submit", e => { e.preventDefault(); send(input.value); });
+  input.addEventListener("input", autosize);
+  input.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(input.value); } });
+  document.getElementById("chat-new").addEventListener("click", reset);
+
+  // "Send my idea": opens the send box with the ideas from this chat filled in
+  document.getElementById("send-idea").addEventListener("click", e => {
+    e.preventDefault();
+    const bot = history.filter(m => m.role === "assistant").map(m => m.content.replace(/\*\*/g, ""));
+    let excerpt = bot.slice(-2).join("\n\n");
+    if (excerpt.length > 1400) excerpt = excerpt.slice(0, 1400) + "…";
+    const body = IDEA_BODY + (excerpt ? "\n\nFrom my chat with the idea assistant:\n\n" + excerpt : "");
+    const a = document.createElement("a"); a.href = mailto("Idea Launch: my idea from the idea assistant", body);
+    a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  reset();
+
+  /* Header border on scroll */
+  const header = document.querySelector(".site-header");
+  addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+</script>
+</body>
+</html>

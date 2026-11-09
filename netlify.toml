@@ -1,0 +1,9 @@
+# Netlify settings for the WeeekOne site.
+# Deploy by connecting the GitHub repo (drag-and-drop deploys can't run the idea assistant).
+[build]
+  publish = "."
+  command = "npm install"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

@@ -1,0 +1,9 @@
+{
+  "name": "weeekone-site",
+  "private": true,
+  "description": "WeeekOne website. The idea assistant runs as a Netlify Function in netlify/functions/.",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.6.0"
+  }
+}

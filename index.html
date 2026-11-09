@@ -403,35 +403,13 @@
   .idea-free { margin-top: 14px; font-size: 1rem; color: var(--muted); }
   .idea-free strong { color: var(--ink); }
 
-  /* ---------- Idea helper ---------- */
-  .helper { margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 30px 22px; display: grid; gap: 24px; }
-  .helper-head { display: grid; gap: 8px; }
-  .helper-head .eyebrow { margin-bottom: 0; }
-  .helper-head h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
-  .helper-head p { color: var(--muted); }
-  .helper-label { font-weight: 700; margin-bottom: 10px; }
-  .helper-opts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .helper-opts button {
-    font: 600 1rem/1.2 var(--font-body); color: var(--ink); cursor: pointer;
-    background: var(--surface-2); border: 2px solid transparent; border-radius: 999px; padding: 10px 16px; min-height: 44px;
-  }
-  .helper-opts button:hover { border-color: var(--line); }
-  .helper-opts button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-  .helper-empty { color: var(--muted); }
-  .helper-results { display: grid; gap: 12px; }
-  .idea-cards { display: grid; gap: 12px; }
-  .idea-card { background: var(--bg); border-radius: 20px; padding: 20px; display: grid; gap: 8px; }
-  .idea-card h4 { margin: 0; font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; letter-spacing: -.01em; }
-  .idea-card p { color: var(--muted); font-size: 1rem; }
-  .idea-card .first { color: var(--ink); }
-  .idea-card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .idea-card .tags span { font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
-  .idea-card .btn { justify-self: start; margin-top: 6px; }
-  .helper-more { justify-self: start; }
-  @media (min-width: 900px) {
-    .helper { padding: 44px 52px; }
-    .idea-cards { grid-template-columns: repeat(3, 1fr); }
-  }
+  .find-idea { margin-top: 20px; background: var(--band); color: var(--band-ink); border-radius: 28px; padding: 30px 22px; display: grid; gap: 20px; align-items: center;
+    background: radial-gradient(ellipse 60% 90% at 100% 0%, rgba(2,151,222,.35), transparent 70%), radial-gradient(ellipse 50% 80% at 0% 100%, rgba(252,115,77,.25), transparent 70%), var(--band); }
+  .find-idea .eyebrow { color: var(--band-muted); margin-bottom: 8px; }
+  .find-idea h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+  .find-idea p { color: var(--band-muted); margin-top: 8px; }
+  .find-idea .btn { justify-self: start; }
+  @media (min-width: 900px) { .find-idea { grid-template-columns: 1fr auto; padding: 40px 52px; gap: 40px; } }
 
   /* ---------- Send dialog (works even without an email app) ---------- */
   .send-dialog {
@@ -896,46 +874,13 @@
         </div>
       </div>
 
-      <div class="helper" id="idea-helper">
-        <div class="helper-head">
-          <span class="eyebrow">Free idea helper</span>
-          <h3>No idea yet? Find one in 30 seconds.</h3>
-          <p>Answer 3 quick questions and get business ideas that fit you. Free, and nothing is saved or sent.</p>
+      <div class="find-idea">
+        <div>
+          <span class="eyebrow">Free idea assistant</span>
+          <h3>No idea yet? Find one with the AI idea assistant.</h3>
+          <p>Chat about what you enjoy and what you're good at. It suggests ideas that fit you, each with a cheap first step.</p>
         </div>
-        <div class="helper-q">
-          <p class="helper-label" id="q1">1. What are you good at, or love doing?</p>
-          <div class="helper-opts" role="group" aria-labelledby="q1" data-q="interest">
-            <button type="button" data-v="food">Cooking and baking</button>
-            <button type="button" data-v="art">Art and design</button>
-            <button type="button" data-v="tech">Tech and gaming</button>
-            <button type="button" data-v="fitness">Sports and fitness</button>
-            <button type="button" data-v="teach">Teaching and helping</button>
-            <button type="button" data-v="fix">Fixing and building</button>
-            <button type="button" data-v="pets">Animals</button>
-            <button type="button" data-v="style">Fashion and beauty</button>
-            <button type="button" data-v="music">Music</button>
-            <button type="button" data-v="media">Writing, photos and video</button>
-          </div>
-        </div>
-        <div class="helper-q">
-          <p class="helper-label" id="q2">2. Where do you want to run it?</p>
-          <div class="helper-opts" role="group" aria-labelledby="q2" data-q="mode">
-            <button type="button" data-v="online">Online</button>
-            <button type="button" data-v="local">In person, near me</button>
-            <button type="button" data-v="any">Either is fine</button>
-          </div>
-        </div>
-        <div class="helper-q">
-          <p class="helper-label" id="q3">3. How much can you spend to start?</p>
-          <div class="helper-opts" role="group" aria-labelledby="q3" data-q="budget">
-            <button type="button" data-v="1">Under $100</button>
-            <button type="button" data-v="2">$100 to $500</button>
-            <button type="button" data-v="3">More than $500</button>
-          </div>
-        </div>
-        <div class="helper-results" id="helper-results" aria-live="polite">
-          <p class="helper-empty">Pick one answer for each question to see your ideas.</p>
-        </div>
+        <a class="btn" href="idea-assistant.html">Find your idea <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -1189,92 +1134,6 @@
         status.textContent = "Press and hold to copy it.";
       }
       setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); status.textContent = ""; }, 2500);
-    });
-  });
-
-  /* ---------- Free idea helper ----------
-     Ideas are matched in the browser. Nothing is saved or sent anywhere.
-     i = interests, m = online / local / both, b = 1 (under $100), 2 ($100-500), 3 (over $500) */
-  const IDEAS = [
-    { t: "Home bakery pre-orders", i: ["food"], m: "local", b: 1, d: "Bake to order for birthdays and weekends, with pickup at set times.", f: "Post 3 photos and take pre-orders from friends and neighbours this weekend." },
-    { t: "Meal prep for busy families", i: ["food"], m: "local", b: 2, d: "Healthy weekly meals, cooked once and delivered nearby.", f: "Make one week of meals for 2 families you know and ask what they'd pay." },
-    { t: "Online cooking class", i: ["food", "teach"], m: "online", b: 1, d: "Teach one recipe you're great at, live on video or as a short course.", f: "Run a free 30-minute class for 5 people and ask for honest feedback." },
-    { t: "Cookie decorating kits", i: ["food", "art"], m: "both", b: 2, d: "Boxed cookies, icing and sprinkles for parties and rainy days.", f: "Make 5 kits and sell them to parents you know before making more." },
-    { t: "Custom pet portraits", i: ["art", "pets"], m: "online", b: 1, d: "Drawings or paintings of people's pets, made from a photo.", f: "Draw 3 pets for free to build a portfolio, then post them." },
-    { t: "Sticker and print shop", i: ["art"], m: "online", b: 1, d: "Sell your designs as stickers and prints.", f: "Print 3 designs in small batches and see which one sells first." },
-    { t: "Shop window and chalkboard signs", i: ["art"], m: "local", b: 1, d: "Hand-lettered signs and menu boards for cafés and shops.", f: "Offer one free chalkboard to a local café in exchange for a photo." },
-    { t: "Tech help for seniors", i: ["tech", "teach"], m: "local", b: 1, d: "Help older people set up phones, video calls and email.", f: "Help 2 older relatives or neighbours and ask them to tell a friend." },
-    { t: "Game coaching", i: ["tech"], m: "online", b: 1, d: "Coach players who want to rank up in a game you're good at.", f: "Offer 3 free sessions and record before-and-after results." },
-    { t: "App idea with a waitlist", i: ["tech"], m: "online", b: 1, d: "Describe the app, launch a landing page and see who signs up before building.", f: "Write one sentence about the problem your app fixes and who has it." },
-    { t: "Outdoor fitness classes", i: ["fitness"], m: "local", b: 1, d: "Small group workouts in a local park.", f: "Run a free first class for friends and ask who'd come every week." },
-    { t: "Online workout plans", i: ["fitness"], m: "online", b: 1, d: "Simple weekly plans for one goal, like a first 5 km run.", f: "Write a 4-week plan and test it with 3 people." },
-    { t: "Kids sports camp", i: ["fitness", "teach"], m: "local", b: 2, d: "Half-day sports camps during school breaks.", f: "Ask 5 parents which week they'd need a camp, before booking a field." },
-    { t: "Tutoring", i: ["teach"], m: "both", b: 1, d: "Help with a subject you're strong in, in person or online.", f: "Offer one free trial lesson to a family you know." },
-    { t: "Homework club", i: ["teach"], m: "local", b: 1, d: "A small after-school group where kids get homework done.", f: "Ask a community centre or library if you can use a room." },
-    { t: "Handyman small jobs", i: ["fix"], m: "local", b: 2, d: "Shelves, furniture assembly, small repairs.", f: "List 5 jobs you can do well and tell 10 neighbours." },
-    { t: "Bike repair and tune-ups", i: ["fix", "fitness"], m: "local", b: 2, d: "Fix flats, brakes and gears, from home or at a pop-up stand.", f: "Tune up 3 bikes for friends and take before-and-after photos." },
-    { t: "Furniture flipping", i: ["fix", "art"], m: "local", b: 2, d: "Buy old furniture, fix it up, sell it.", f: "Find one free or cheap piece, restore it and list it." },
-    { t: "Dog walking", i: ["pets"], m: "local", b: 1, d: "Daily walks for busy dog owners nearby.", f: "Walk 2 neighbours' dogs for a week and ask for a review." },
-    { t: "Pet sitting", i: ["pets"], m: "local", b: 1, d: "Visits and care while owners are away.", f: "Pet-sit once for someone you know and get a written reference." },
-    { t: "Homemade dog treats", i: ["pets", "food"], m: "both", b: 2, d: "Simple, healthy treats sold online and at markets.", f: "Check your area's food rules, then test 2 recipes with dog-owning friends." },
-    { t: "Thrift reselling", i: ["style"], m: "online", b: 1, d: "Find great second-hand clothes and resell them online.", f: "Buy 5 pieces under budget and see how fast they sell." },
-    { t: "Custom embroidery", i: ["style", "art"], m: "both", b: 2, d: "Names, logos and designs stitched on clothes and hats.", f: "Make 3 pieces for friends and post them." },
-    { t: "Nail art at home", i: ["style"], m: "local", b: 2, d: "Nail designs from a home studio or at clients' homes.", f: "Check what training or licence your area needs, then practise on friends." },
-    { t: "Music lessons", i: ["music", "teach"], m: "both", b: 1, d: "Beginner lessons on an instrument you play well.", f: "Teach one free first lesson and offer a 4-lesson package." },
-    { t: "Jingles for local businesses", i: ["music"], m: "online", b: 1, d: "Short songs and sounds for shops' ads and videos.", f: "Make one sample jingle for a made-up shop to show what you can do." },
-    { t: "Party DJ", i: ["music"], m: "local", b: 3, d: "Music for birthdays, school events and small parties.", f: "DJ a friend's party and record a short clip." },
-    { t: "Social media for local shops", i: ["media", "tech"], m: "both", b: 1, d: "Photos, posts and captions for shops that don't have time.", f: "Make a week of sample posts for a local shop and show the owner." },
-    { t: "Video editing for creators", i: ["media", "tech"], m: "online", b: 1, d: "Edit short videos for people who post online.", f: "Edit one free video for a creator you like." },
-    { t: "Event photography", i: ["media", "art"], m: "local", b: 3, d: "Photos for birthdays, sports days and small events.", f: "Shoot one event for free and build a gallery." },
-    { t: "Online newsletter", i: ["media", "teach"], m: "online", b: 1, d: "A weekly email about one topic you know a lot about.", f: "Write 3 issues before launching, then share it with 20 people." }
-  ];
-  const BUDGET_LABEL = { 1: "Low cost to start", 2: "Some money to start", 3: "Bigger start-up cost" };
-  const MODE_LABEL = { online: "Online", local: "In person", both: "Online or in person" };
-  const answers = {};
-  let shown = 0;
-  const resultsEl = document.getElementById("helper-results");
-
-  function matches() {
-    const budget = Number(answers.budget);
-    return IDEAS
-      .filter(x => x.i.includes(answers.interest) && x.b <= budget)
-      .map(x => ({ x, s: (answers.mode === "any" || x.m === "both" || x.m === answers.mode ? 2 : 0) + (x.i[0] === answers.interest ? 1 : 0) }))
-      .sort((a, b) => b.s - a.s)
-      .map(r => r.x);
-  }
-  const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-  function renderIdeas() {
-    if (!answers.interest || !answers.mode || !answers.budget) return;
-    const list = matches();
-    if (!list.length) {
-      resultsEl.innerHTML = '<p class="helper-empty">Nothing fits that budget yet. Try a bigger budget, or <a href="#ideas">tell me your own idea</a>.</p>';
-      return;
-    }
-    const pick = [0, 1, 2].map(k => list[(shown + k) % list.length]).filter((x, k, a) => a.indexOf(x) === k);
-    resultsEl.innerHTML = '<div class="idea-cards">' + pick.map(x => {
-      const body = IDEA_BODY.replace("My idea in one sentence:", "My idea in one sentence: " + x.t + ". " + x.d);
-      const href = mailto("Idea Launch: " + x.t, body);
-      return `<article class="idea-card"><h4>${esc(x.t)}</h4><p>${esc(x.d)}</p>
-        <p class="first"><strong>First step:</strong> ${esc(x.f)}</p>
-        <div class="tags"><span>${MODE_LABEL[x.m]}</span><span>${BUDGET_LABEL[x.b]}</span></div>
-        <a class="btn btn-sm" href="${href}">Launch this idea with me</a></article>`;
-    }).join("") + "</div>" +
-      (list.length > 3 ? '<button type="button" class="btn btn-ghost btn-sm helper-more" id="helper-more">Show me other ideas</button>' : "") +
-      '<p class="helper-empty">These are starting points, not promises. Every business takes work, and some need a licence or permit, so check your local rules.</p>';
-    const more = document.getElementById("helper-more");
-    if (more) more.addEventListener("click", () => { shown += 3; renderIdeas(); });
-  }
-
-  document.querySelectorAll(".helper-opts").forEach(group => {
-    group.querySelectorAll("button").forEach(btn => {
-      btn.setAttribute("aria-pressed", "false");
-      btn.addEventListener("click", () => {
-        group.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
-        answers[group.dataset.q] = btn.dataset.v;
-        shown = 0;
-        renderIdeas();
-      });
     });
   });
 
