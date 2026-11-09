@@ -552,9 +552,9 @@
   .copy-btn { min-height: 54px; }
   .copy-btn.done { background: var(--support); color: var(--white); }
   .email-card .fine { color: var(--muted); font-size: .95rem; }
-  .phone-block { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
-  .phone-links { display: flex; gap: 18px; }
-  .phone-links .link-arrow { min-height: 44px; }
+  .talk-block { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .talk-label { font-weight: 700; font-size: .9rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  [hidden] { display: none !important; }
   .email-card .btn { width: 100%; }
   @media (min-width: 900px) { .contact-box { grid-template-columns: 1.1fr 1fr; padding: 56px; gap: 48px; } }
 
@@ -1105,6 +1105,10 @@
           <div class="answer"><p>First we agree in writing on exactly what's included. Then you get an invoice from WeeekOne by email, sent through PayPal.</p><p>Tap "Pay Now" in the email and pay with a credit or debit card or your PayPal account. Local clients can also pay by Interac e-Transfer.</p></div>
         </details>
         <details>
+          <summary>Can I call you?</summary>
+          <div class="answer"><p>Not out of the blue. I set aside time for calls, so when we talk you get my full attention.</p><p>Book a free 15-minute call at a time that suits you, or email me and we'll pick one. I reply within 24 hours.</p></div>
+        </details>
+        <details>
           <summary>Who runs WeeekOne?</summary>
           <div class="answer"><p>WeeekOne is a student-run studio. I build every site myself.</p><p>A parent handles invoices and agreements, so the paperwork is always done properly.</p></div>
         </details>
@@ -1200,16 +1204,11 @@
           <p class="fine">The button gives you a ready-written message. Just fill in the blanks.</p>
           <p class="fine" data-for="business"><strong style="color:var(--ink)">No card, no commitment.</strong> If you don't love the demo, you don't pay.</p>
           <p class="fine" data-for="idea"><strong style="color:var(--ink)">Your idea stays yours.</strong> Talking it through first is free.</p>
-          <div class="phone-block">
-            <label for="phone-num">Rather call or text?</label>
-            <div class="email-row">
-              <output id="phone-num" data-phone>(647) 960-3508</output>
-              <button class="btn btn-ghost copy-btn" type="button" id="copy-phone" data-copy="phone" aria-describedby="copy-status">Copy</button>
-            </div>
-            <div class="phone-links">
-              <a class="link-arrow" href="tel:+16479603508">Call</a>
-              <a class="link-arrow" href="sms:+16479603508">Text</a>
-            </div>
+          <div class="talk-block">
+            <span class="talk-label">Want to talk first?</span>
+            <p class="fine" data-booking hidden>Book a free 15-minute call at a time that suits you. I only call at the time you pick.</p>
+            <a class="btn btn-ghost" href="#" data-booking hidden>Book a time to talk</a>
+            <p class="fine" data-booking-fallback>Email me and we'll pick a time that suits us both. I only call at a time we've agreed.</p>
           </div>
           <span id="copy-status" class="fine" aria-live="polite"></span>
         </div>
@@ -1233,7 +1232,7 @@
     <div class="send-to"><span>To: <span data-email>weeekone@gmail.com</span></span><button class="btn btn-ghost btn-sm" type="button" id="send-copy-email">Copy</button></div>
     <pre class="send-preview" id="send-preview"></pre>
     <p class="send-status" id="send-status" aria-live="polite"></p>
-    <p>Rather call or text? <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+    <p data-booking hidden>Rather talk first? <a href="#" data-booking hidden>Book a time to talk</a></p>
   </div>
 </dialog>
 
@@ -1247,15 +1246,13 @@
       <a href="idea-assistant.html">Idea assistant</a>
       <a href="#questions">Questions</a>
     </nav>
-    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span> · <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span></p>
   </div>
 </footer>
 
 <script>
   /* ====== Contact details: change them here ====== */
   const EMAIL = "weeekone@gmail.com";
-  const PHONE = "(647) 960-3508";
-  const PHONE_LINK = "+16479603508";
 
   const BODY = [
     "Hi WeeekOne,",
@@ -1297,32 +1294,30 @@
 
   document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
   document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject, a.dataset.body === "idea" ? IDEA_BODY : BODY); });
-  document.querySelectorAll("[data-phone]").forEach(el => { el.textContent = PHONE; });
-  document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = "tel:" + PHONE_LINK; });
-  document.querySelectorAll('a[href^="sms:"]').forEach(a => { a.href = "sms:" + PHONE_LINK; });
+  /* ====== Booking page: paste your booking link between the quotes (see README) ======
+     Until it's set, the site asks people to email you to pick a time. */
+  const BOOKING_URL = "";
+  document.querySelectorAll("[data-booking]").forEach(el => {
+    el.hidden = !BOOKING_URL;
+    if (el.tagName === "A" && BOOKING_URL) { el.href = BOOKING_URL; el.target = "_blank"; el.rel = "noopener"; }
+  });
+  document.querySelectorAll("[data-booking-fallback]").forEach(el => { el.hidden = !!BOOKING_URL; });
 
-  /* Copy buttons (email and phone) */
+  /* Copy button (email) */
   const status = document.getElementById("copy-status");
   document.querySelectorAll("[data-copy]").forEach(btn => {
     btn.addEventListener("click", async () => {
-      const isPhone = btn.dataset.copy === "phone";
-      const text = isPhone ? PHONE : EMAIL;
       let ok = false;
-      try { await navigator.clipboard.writeText(text); ok = true; }
+      try { await navigator.clipboard.writeText(EMAIL); ok = true; }
       catch (e) {
         const t = document.createElement("textarea");
-        t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+        t.value = EMAIL; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
         document.body.appendChild(t); t.select();
         try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
         t.remove();
       }
-      if (ok) {
-        btn.textContent = "Copied!";
-        btn.classList.add("done");
-        status.textContent = isPhone ? "Phone number copied." : "Email address copied.";
-      } else {
-        status.textContent = "Press and hold to copy it.";
-      }
+      if (ok) { btn.textContent = "Copied!"; btn.classList.add("done"); status.textContent = "Email address copied."; }
+      else status.textContent = "Press and hold to copy it.";
       setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); status.textContent = ""; }, 2500);
     });
   });

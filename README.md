@@ -33,7 +33,7 @@ In `index.html`, every section is tagged `data-for="business"`, `data-for="idea"
 
 ## Before launch
 
-1. **Contact details.** The site shows weeekone@gmail.com and (647) 960-3508. To change them, edit `EMAIL`, `PHONE` and `PHONE_LINK` near the bottom of `index.html`, and the fallback text in the HTML (search for the old value).
+1. **Contact details.** The site shows weeekone@gmail.com, and no phone number, so nobody calls out of the blue. To change the email, edit `EMAIL` near the bottom of `index.html` and `idea-assistant.html`, and the fallback text in the HTML (search for the old value).
 2. **Payments.** The FAQ says clients pay by PayPal invoice (card or PayPal) or Interac e-Transfer. Set up the PayPal Business account with a parent before the first invoice.
 3. **Founding offer.** Once the 3 spots are taken, remove or update the `#founding` section.
 4. **Idea Launch** is on the site at $400 (`#ideas`). Its waitlist sign-ups for clients need a working form, such as Netlify Forms.
@@ -66,3 +66,21 @@ The assistant page works without any setup: until the AI is switched on, it says
 **What it costs:** the assistant uses Claude Opus 5.5 ($4 per million input tokens, $20 per million output tokens). A full chat of about 5 replies is roughly 10 to 20 cents. Each reply is capped in length and each chat is limited to about 12 back-and-forths, so one visitor can't run up a big bill. A cheaper model can be swapped in by changing `MODEL` in `netlify/functions/idea-chat.mjs`.
 
 **To change how it talks**, edit the `SYSTEM` instructions in `netlify/functions/idea-chat.mjs`.
+
+## Booking a time to talk
+
+The site never shows a phone number. Instead, people book a call at a time you've chosen. Until a booking link is set, the site asks them to email you to pick a time.
+
+To turn on booking (free, with the WeeekOne Gmail account):
+
+1. Open **Google Calendar** on a computer, signed in as weeekone@gmail.com.
+2. Click **Create → Appointment schedule**.
+3. Name it "Free 15-minute chat with WeeekOne" and set **15 minutes**.
+4. Under **General availability**, add only times you're really free (for example, weekdays 4–6 PM).
+5. In **Booking window**, set the **minimum notice to 24 hours**, so nobody can book a call in the next hour.
+6. Add **buffer time** of 10 minutes and a **maximum of 2 bookings per day**.
+7. Under **Location**, choose **Google Meet video conferencing** (or "phone call: I'll call you", if you prefer to make the call yourself).
+8. Under **Booking form**, keep name and email, and add a question: "What's your business or idea?"
+9. Save, click **Share → Copy link**, and paste the link between the quotes in `const BOOKING_URL = "";` in both `index.html` and `idea-assistant.html`.
+
+Google sends you and the visitor a confirmation and a reminder, and the call shows up in your calendar.

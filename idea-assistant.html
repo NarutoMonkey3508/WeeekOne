@@ -199,6 +199,7 @@
   .send-preview { background: var(--bg); border-radius: 14px; padding: 12px 14px; font: 500 .9rem/1.45 var(--font-body); color: var(--muted); white-space: pre-wrap; max-height: 180px; overflow: auto; margin: 0; }
   .send-status { min-height: 1.2em; font-weight: 600; color: var(--support) !important; }
 
+  [hidden] { display: none !important; }
   /* ---------- Idea assistant page ---------- */
   .page-top { padding-block: 40px 8px; }
   .page-top h1 { font-size: clamp(2.3rem, 8vw, 3.6rem); }
@@ -361,7 +362,7 @@
       <a href="index.html#idea">For ideas</a>
       <a href="index.html#ideas">Idea Launch</a>
     </nav>
-    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span> · <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span></p>
   </div>
 </footer>
 
@@ -380,15 +381,13 @@
     <div class="send-to"><span>To: <span data-email>weeekone@gmail.com</span></span><button class="btn btn-ghost btn-sm" type="button" id="send-copy-email">Copy</button></div>
     <pre class="send-preview" id="send-preview"></pre>
     <p class="send-status" id="send-status" aria-live="polite"></p>
-    <p>Rather call or text? <a href="tel:+16479603508" data-phone>(647) 960-3508</a></p>
+    <p data-booking hidden>Rather talk first? <a href="#" data-booking hidden>Book a time to talk</a></p>
   </div>
 </dialog>
 
 <script>
   /* ====== Contact details: change them here ====== */
   const EMAIL = "weeekone@gmail.com";
-  const PHONE = "(647) 960-3508";
-  const PHONE_LINK = "+16479603508";
 
   const IDEA_BODY = [
     "Hi WeeekOne,",
@@ -411,8 +410,14 @@
   }
 
   document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
-  document.querySelectorAll("[data-phone]").forEach(el => { el.textContent = PHONE; });
-  document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = "tel:" + PHONE_LINK; });
+  /* ====== Booking page: paste your booking link between the quotes (see README) ======
+     Until it's set, the site asks people to email you to pick a time. */
+  const BOOKING_URL = "";
+  document.querySelectorAll("[data-booking]").forEach(el => {
+    el.hidden = !BOOKING_URL;
+    if (el.tagName === "A" && BOOKING_URL) { el.href = BOOKING_URL; el.target = "_blank"; el.rel = "noopener"; }
+  });
+  document.querySelectorAll("[data-booking-fallback]").forEach(el => { el.hidden = !!BOOKING_URL; });
 
   /* ---------- Free idea helper ----------
      Ideas are matched in the browser. Nothing is saved or sent anywhere.
