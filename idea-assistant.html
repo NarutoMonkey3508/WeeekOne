@@ -434,37 +434,95 @@
      Ideas are matched in the browser. Nothing is saved or sent anywhere.
      i = interests, m = online / local / both, b = 1 (under $100), 2 ($100-500), 3 (over $500) */
   const IDEAS = [
+    // Cooking and baking
     { t: "Home bakery pre-orders", i: ["food"], m: "local", b: 1, d: "Bake to order for birthdays and weekends, with pickup at set times.", f: "Post 3 photos and take pre-orders from friends and neighbours this weekend." },
-    { t: "Meal prep for busy families", i: ["food"], m: "local", b: 2, d: "Healthy weekly meals, cooked once and delivered nearby.", f: "Make one week of meals for 2 families you know and ask what they'd pay." },
-    { t: "Online cooking class", i: ["food", "teach"], m: "online", b: 1, d: "Teach one recipe you're great at, live on video or as a short course.", f: "Run a free 30-minute class for 5 people and ask for honest feedback." },
+    { t: "Online cooking class", i: ["food", "teach"], m: "online", b: 1, d: "Teach one recipe you're great at, live on video.", f: "Run a free 30-minute class for 5 people and ask for honest feedback." },
+    { t: "Meal plan guides", i: ["food"], m: "online", b: 1, d: "Simple weekly meal plans with shopping lists, sold as downloads.", f: "Make one week's plan and share it with 10 people to see who'd pay for more." },
+    { t: "Meal prep for busy families", i: ["food"], m: "local", b: 2, d: "Healthy weekly meals, cooked once and delivered nearby.", f: "Cook one week of meals for 2 families you know and ask what they'd pay." },
+    { t: "Farmers' market stall", i: ["food"], m: "local", b: 2, d: "Sell baked goods or snacks at a weekend market.", f: "Ask your local market about stall fees and food rules, then test one weekend." },
+    { t: "Cookies by mail", i: ["food"], m: "online", b: 2, d: "Gift boxes of cookies that ship well, sold online.", f: "Mail one test box to a friend in another town and see how it arrives." },
     { t: "Cookie decorating kits", i: ["food", "art"], m: "both", b: 2, d: "Boxed cookies, icing and sprinkles for parties and rainy days.", f: "Make 5 kits and sell them to parents you know before making more." },
+    { t: "Small event catering", i: ["food"], m: "local", b: 3, d: "Food for birthdays, office lunches and small parties.", f: "Check your area's food-safety rules, then cater one small event for a friend." },
+    { t: "Pop-up food stand", i: ["food"], m: "local", b: 3, d: "A tent or cart selling one great food at events and markets.", f: "Pick one item, work out your cost per serving, and ask an event about a spot." },
+    { t: "Snack stand at local games", i: ["food"], m: "local", b: 1, d: "Sell drinks and homemade snacks at weekend sports games.", f: "Ask a local league if you can set up a table at one game." },
+    // Art and design
     { t: "Custom pet portraits", i: ["art", "pets"], m: "online", b: 1, d: "Drawings or paintings of people's pets, made from a photo.", f: "Draw 3 pets for free to build a portfolio, then post them." },
     { t: "Sticker and print shop", i: ["art"], m: "online", b: 1, d: "Sell your designs as stickers and prints.", f: "Print 3 designs in small batches and see which one sells first." },
+    { t: "Print-on-demand T-shirts", i: ["art", "style"], m: "online", b: 1, d: "Upload your designs; shirts are only printed when someone orders.", f: "Make 3 designs and share mock-ups to see which one people like best." },
     { t: "Shop window and chalkboard signs", i: ["art"], m: "local", b: 1, d: "Hand-lettered signs and menu boards for cafés and shops.", f: "Offer one free chalkboard to a local café in exchange for a photo." },
+    { t: "Face painting at parties", i: ["art"], m: "local", b: 1, d: "Face painting for kids' birthdays and school events.", f: "Practise 5 designs, then paint at a friend's party for photos." },
+    { t: "Art classes for kids", i: ["art", "teach"], m: "local", b: 2, d: "Small weekend art classes at a community centre or at home.", f: "Run a free trial class for 4 kids and ask parents for feedback." },
+    { t: "Murals for shops and rooms", i: ["art"], m: "local", b: 2, d: "Paint walls for shops, cafés and kids' bedrooms.", f: "Paint one small wall for free in exchange for photos and a review." },
+    { t: "Custom phone cases and tech skins", i: ["art", "tech"], m: "online", b: 2, d: "Your designs on cases and laptop stickers, sold online.", f: "Order 3 samples and post them to see which design gets the most interest." },
+    { t: "3D-printed and laser-cut gifts", i: ["art", "fix", "tech"], m: "both", b: 3, d: "Name signs, keychains and custom gifts made with your own machine.", f: "Use a library maker-space first to test 3 products before buying a machine." },
+    // Tech and gaming
     { t: "Tech help for seniors", i: ["tech", "teach"], m: "local", b: 1, d: "Help older people set up phones, video calls and email.", f: "Help 2 older relatives or neighbours and ask them to tell a friend." },
     { t: "Game coaching", i: ["tech"], m: "online", b: 1, d: "Coach players who want to rank up in a game you're good at.", f: "Offer 3 free sessions and record before-and-after results." },
     { t: "App idea with a waitlist", i: ["tech"], m: "online", b: 1, d: "Describe the app, launch a landing page and see who signs up before building.", f: "Write one sentence about the problem your app fixes and who has it." },
+    { t: "Coding classes for kids", i: ["tech", "teach"], m: "both", b: 2, d: "Beginner coding lessons, in small groups or online.", f: "Teach one free lesson to 3 kids using a free tool like Scratch." },
+    { t: "Smart home setup", i: ["tech"], m: "local", b: 2, d: "Set up Wi-Fi, smart speakers, lights and cameras for people.", f: "Set up one home for family or a neighbour and write down how long it took." },
+    { t: "Phone screen repair", i: ["tech", "fix"], m: "local", b: 3, d: "Replace cracked screens and batteries.", f: "Practise on 2 old phones before fixing anyone else's." },
+    { t: "Custom gaming PC builds", i: ["tech"], m: "local", b: 3, d: "Build gaming PCs to order from parts the customer pays for.", f: "Build one PC for a friend who buys the parts, and charge only for your time." },
+    // Sports and fitness
     { t: "Outdoor fitness classes", i: ["fitness"], m: "local", b: 1, d: "Small group workouts in a local park.", f: "Run a free first class for friends and ask who'd come every week." },
     { t: "Online workout plans", i: ["fitness"], m: "online", b: 1, d: "Simple weekly plans for one goal, like a first 5 km run.", f: "Write a 4-week plan and test it with 3 people." },
+    { t: "Sports skills coaching", i: ["fitness", "teach"], m: "local", b: 1, d: "One-on-one practice in a sport you're good at, for younger kids.", f: "Offer 2 free sessions to families you know and ask what they'd pay." },
     { t: "Kids sports camp", i: ["fitness", "teach"], m: "local", b: 2, d: "Half-day sports camps during school breaks.", f: "Ask 5 parents which week they'd need a camp, before booking a field." },
+    { t: "Online coaching with check-ins", i: ["fitness"], m: "online", b: 2, d: "Weekly plans plus short video check-ins to keep people on track.", f: "Coach 2 people for a month and track their progress." },
+    { t: "Used sports gear resale", i: ["fitness", "style"], m: "both", b: 2, d: "Buy, clean and resell used sports equipment.", f: "Buy 3 items cheaply and see how fast they sell online." },
+    { t: "Mobile bootcamp with equipment", i: ["fitness"], m: "local", b: 3, d: "Workouts with your own weights and gear, brought to parks or offices.", f: "Run 2 free sessions and ask who'd sign up for a month." },
+    { t: "Stretching and mobility videos", i: ["fitness"], m: "online", b: 1, d: "Short follow-along videos for stiff backs and tight legs.", f: "Post 3 free 5-minute routines and ask viewers what they need next." },
+    // Teaching and helping
     { t: "Tutoring", i: ["teach"], m: "both", b: 1, d: "Help with a subject you're strong in, in person or online.", f: "Offer one free trial lesson to a family you know." },
     { t: "Homework club", i: ["teach"], m: "local", b: 1, d: "A small after-school group where kids get homework done.", f: "Ask a community centre or library if you can use a room." },
+    { t: "Language conversation practice", i: ["teach"], m: "online", b: 1, d: "Video chats that help people practise a language you speak well.", f: "Run 3 free 20-minute chats and ask what helped most." },
+    { t: "Exam prep workshops", i: ["teach"], m: "local", b: 2, d: "Small group study sessions before big tests.", f: "Run one free session before a test and ask students what they'd pay." },
+    { t: "Online mini-course", i: ["teach", "media"], m: "online", b: 2, d: "A short recorded course on something you know well.", f: "Record one free lesson, share it, and see who asks for more." },
+    { t: "Small learning centre", i: ["teach"], m: "local", b: 3, d: "Rent a room for regular tutoring or classes.", f: "Fill one weekly class before you rent anything." },
+    // Fixing and building
+    { t: "Furniture assembly", i: ["fix"], m: "local", b: 1, d: "Put together flat-pack furniture for busy or older neighbours.", f: "Assemble one piece for a neighbour and time how long it takes." },
+    { t: "Fix-it help by video call", i: ["fix", "teach"], m: "online", b: 1, d: "Walk people through simple fixes at home over a video call.", f: "Help 3 friends fix something small by video and ask what it was worth to them." },
+    { t: "Lawn care and snow shovelling", i: ["fix", "fitness"], m: "local", b: 1, d: "Mow lawns in summer and shovel snow in winter for neighbours.", f: "Knock on 10 doors on your street and offer one free first visit." },
+    { t: "Repair how-to videos", i: ["fix", "media"], m: "online", b: 1, d: "Short videos showing how to fix common things.", f: "Film 3 short fixes and post them to see which gets the most views." },
     { t: "Handyman small jobs", i: ["fix"], m: "local", b: 2, d: "Shelves, furniture assembly, small repairs.", f: "List 5 jobs you can do well and tell 10 neighbours." },
     { t: "Bike repair and tune-ups", i: ["fix", "fitness"], m: "local", b: 2, d: "Fix flats, brakes and gears, from home or at a pop-up stand.", f: "Tune up 3 bikes for friends and take before-and-after photos." },
-    { t: "Furniture flipping", i: ["fix", "art"], m: "local", b: 2, d: "Buy old furniture, fix it up, sell it.", f: "Find one free or cheap piece, restore it and list it." },
+    { t: "Furniture flipping", i: ["fix", "art"], m: "both", b: 2, d: "Buy old furniture, fix it up and sell it online.", f: "Find one free or cheap piece, restore it and list it." },
+    { t: "Pressure washing", i: ["fix"], m: "local", b: 3, d: "Clean driveways, decks and fences.", f: "Rent a washer for a day and clean 2 driveways for neighbours." },
+    // Animals
     { t: "Dog walking", i: ["pets"], m: "local", b: 1, d: "Daily walks for busy dog owners nearby.", f: "Walk 2 neighbours' dogs for a week and ask for a review." },
     { t: "Pet sitting", i: ["pets"], m: "local", b: 1, d: "Visits and care while owners are away.", f: "Pet-sit once for someone you know and get a written reference." },
+    { t: "Pet care tips channel", i: ["pets", "media"], m: "online", b: 1, d: "Short videos with tips for new pet owners.", f: "Post 5 short videos and see which topics people ask about." },
     { t: "Homemade dog treats", i: ["pets", "food"], m: "both", b: 2, d: "Simple, healthy treats sold online and at markets.", f: "Check your area's food rules, then test 2 recipes with dog-owning friends." },
+    { t: "Pet accessories shop", i: ["pets", "style"], m: "online", b: 2, d: "Handmade bandanas, collars and toys sold online.", f: "Make 5 items and post them to see which sells first." },
+    { t: "Dog training basics", i: ["pets", "teach"], m: "local", b: 2, d: "Help owners with puppy basics like sit, stay and walking nicely.", f: "Train one friend's puppy for free for a month and film the progress." },
+    { t: "Mobile dog grooming", i: ["pets"], m: "local", b: 3, d: "Baths and trims at the owner's home.", f: "Take a grooming course first, then groom 3 dogs you know." },
+    // Fashion and beauty
     { t: "Thrift reselling", i: ["style"], m: "online", b: 1, d: "Find great second-hand clothes and resell them online.", f: "Buy 5 pieces under budget and see how fast they sell." },
+    { t: "Closet clean-outs and styling", i: ["style"], m: "local", b: 1, d: "Help people sort their clothes and put together outfits they love.", f: "Do one free closet clean-out for a friend and take before-and-after photos." },
+    { t: "Hair braiding", i: ["style"], m: "local", b: 1, d: "Braids and simple styles for events and school.", f: "Do 3 styles for friends and post the photos." },
     { t: "Custom embroidery", i: ["style", "art"], m: "both", b: 2, d: "Names, logos and designs stitched on clothes and hats.", f: "Make 3 pieces for friends and post them." },
+    { t: "Clothing alterations", i: ["style", "fix"], m: "local", b: 2, d: "Hem pants, take in dresses and fix zips.", f: "Fix 3 pieces for family and ask what a fair price would be." },
+    { t: "Handmade jewellery shop", i: ["style", "art"], m: "online", b: 2, d: "Bracelets, earrings and necklaces sold online.", f: "Make 10 pieces and sell them to friends before opening a shop." },
     { t: "Nail art at home", i: ["style"], m: "local", b: 2, d: "Nail designs from a home studio or at clients' homes.", f: "Check what training or licence your area needs, then practise on friends." },
+    { t: "Small clothing brand", i: ["style", "art"], m: "online", b: 3, d: "Your own designs on quality clothes, made in small batches.", f: "Take pre-orders for one design before you pay for a batch." },
+    // Music
     { t: "Music lessons", i: ["music", "teach"], m: "both", b: 1, d: "Beginner lessons on an instrument you play well.", f: "Teach one free first lesson and offer a 4-lesson package." },
     { t: "Jingles for local businesses", i: ["music"], m: "online", b: 1, d: "Short songs and sounds for shops' ads and videos.", f: "Make one sample jingle for a made-up shop to show what you can do." },
+    { t: "Selling beats online", i: ["music", "tech"], m: "online", b: 1, d: "Make beats and sell them to singers and creators.", f: "Make 3 beats and share them to see which gets the most interest." },
+    { t: "Busking and small gigs", i: ["music"], m: "local", b: 1, d: "Play at markets, cafés and small events.", f: "Ask one café if you can play on a quiet afternoon." },
+    { t: "Instrument setup and repair", i: ["music", "fix"], m: "local", b: 2, d: "Restring and set up guitars and fix small problems.", f: "Set up 3 friends' instruments and ask for honest feedback." },
     { t: "Party DJ", i: ["music"], m: "local", b: 3, d: "Music for birthdays, school events and small parties.", f: "DJ a friend's party and record a short clip." },
+    { t: "Home recording studio", i: ["music", "tech"], m: "both", b: 3, d: "Record and mix songs for local musicians, in person or by file.", f: "Record one song for a friend for free and use it as a sample." },
+    // Writing, photos and video
     { t: "Social media for local shops", i: ["media", "tech"], m: "both", b: 1, d: "Photos, posts and captions for shops that don't have time.", f: "Make a week of sample posts for a local shop and show the owner." },
     { t: "Video editing for creators", i: ["media", "tech"], m: "online", b: 1, d: "Edit short videos for people who post online.", f: "Edit one free video for a creator you like." },
+    { t: "Online newsletter", i: ["media", "teach"], m: "online", b: 1, d: "A weekly email about one topic you know a lot about.", f: "Write 3 issues before launching, then share it with 20 people." },
+    { t: "Podcast editing", i: ["media"], m: "online", b: 1, d: "Clean up audio and edit episodes for podcasters.", f: "Edit one free episode for a small podcast and ask for a review." },
+    { t: "Photos for local sports teams", i: ["media"], m: "local", b: 1, d: "Game-day photos for kids' teams that parents can buy.", f: "Shoot one game for free with your phone and share the best 10 photos with parents." },
+    { t: "Headshots for local workers", i: ["media"], m: "local", b: 2, d: "Simple, good-looking photos for real estate agents, tutors and shops.", f: "Shoot 3 friends for free with good daylight and build a portfolio." },
+    { t: "Product photos for small shops", i: ["media", "art"], m: "local", b: 2, d: "Clean photos of products for websites and Instagram.", f: "Shoot 5 products for one local shop for free and ask if they'd pay next time." },
     { t: "Event photography", i: ["media", "art"], m: "local", b: 3, d: "Photos for birthdays, sports days and small events.", f: "Shoot one event for free and build a gallery." },
-    { t: "Online newsletter", i: ["media", "teach"], m: "online", b: 1, d: "A weekly email about one topic you know a lot about.", f: "Write 3 issues before launching, then share it with 20 people." }
+    { t: "Drone photos for businesses", i: ["media", "tech"], m: "local", b: 3, d: "Aerial photos and videos of properties and events.", f: "Check your country's drone rules first. In Canada most drones need a pilot certificate." }
   ];
   const BUDGET_LABEL = { 1: "Low cost to start", 2: "Some money to start", 3: "Bigger start-up cost" };
   const MODE_LABEL = { online: "Online", local: "In person", both: "Online or in person" };
@@ -473,11 +531,14 @@
   const resultsEl = document.getElementById("helper-results");
 
   function matches() {
-    const budget = Number(answers.budget);
+    // Online / in person and budget really filter; ideas that use the budget chosen come first.
+    const budget = Number(answers.budget), mode = answers.mode;
+    const modeOk = x => mode === "any" || x.m === "both" || x.m === mode;
+    const score = x => (x.b === budget ? 4 : budget - x.b === 1 ? 2 : 0) + (x.i[0] === answers.interest ? 1 : 0) + (mode !== "any" && x.m === mode ? 1 : 0);
     return IDEAS
-      .filter(x => x.i.includes(answers.interest) && x.b <= budget)
-      .map(x => ({ x, s: (answers.mode === "any" || x.m === "both" || x.m === answers.mode ? 2 : 0) + (x.i[0] === answers.interest ? 1 : 0) }))
-      .sort((a, b) => b.s - a.s)
+      .filter(x => x.i.includes(answers.interest) && modeOk(x) && x.b <= budget)
+      .map((x, k) => ({ x, s: score(x), k }))
+      .sort((a, b) => b.s - a.s || a.k - b.k)
       .map(r => r.x);
   }
   const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -490,7 +551,8 @@
       return;
     }
     const pick = [0, 1, 2].map(k => list[(shown + k) % list.length]).filter((x, k, a) => a.indexOf(x) === k);
-    resultsEl.innerHTML = '<div class="idea-cards">' + pick.map(x => {
+    const few = list.length < 3 ? '<p class="helper-empty">Only ' + list.length + ' idea' + (list.length === 1 ? '' : 's') + ' fit all 3 answers. Try "Either is fine" or a bigger budget to see more.</p>' : '';
+    resultsEl.innerHTML = few + '<div class="idea-cards">' + pick.map(x => {
       const body = IDEA_BODY.replace("My idea in one sentence:", "My idea in one sentence: " + x.t + ". " + x.d);
       const href = mailto("Idea Launch: " + x.t, body);
       return `<article class="idea-card"><h4>${esc(x.t)}</h4><p>${esc(x.d)}</p>
@@ -565,6 +627,23 @@
   document.getElementById("send-copy-email").addEventListener("click", () => copyText(EMAIL, "Email address copied."));
   document.getElementById("send-copy").addEventListener("click", () => copyText(sendText, "Message copied. Paste it into an email to " + EMAIL + "."));
   document.getElementById("send-close").addEventListener("click", () => dlg.close());
+  /* "Open my email app": try to open it, and if the page is still showing after 2 seconds,
+     nothing opened (no email app, an in-app browser like Instagram's, or a preview that blocks it). */
+  document.getElementById("send-app").addEventListener("click", e => {
+    e.preventDefault();
+    const statusEl = document.getElementById("send-status");
+    statusEl.textContent = "Opening your email app…";
+    let left = false;
+    const mark = () => { left = true; };
+    addEventListener("blur", mark, { once: true });
+    addEventListener("pagehide", mark, { once: true });
+    document.addEventListener("visibilitychange", mark, { once: true });
+    try { window.location.href = e.currentTarget.href; } catch (err) { /* blocked */ }
+    setTimeout(() => {
+      removeEventListener("blur", mark); removeEventListener("pagehide", mark); document.removeEventListener("visibilitychange", mark);
+      statusEl.textContent = left ? "" : "Your email app didn't open. That happens on devices without one, or inside apps like Instagram. Tap Open Gmail, or Copy the message and paste it into any email.";
+    }, 2000);
+  });
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
   /* ---------- Idea assistant chat ----------
