@@ -309,6 +309,24 @@
   @keyframes swing { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } }
   @media (prefers-reduced-motion: reduce) { .open-sign { animation: none; transform: rotate(-3deg); } }
 
+  /* ---------- Watch (ad video) ---------- */
+  .watch { padding-block: 24px 40px; }
+  .watch-box {
+    border-radius: 28px; padding: 32px 22px; display: grid; gap: 28px; align-items: center; color: var(--band-ink);
+    background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(2,151,222,.4), transparent 70%), radial-gradient(ellipse 60% 60% at 0% 100%, rgba(252,115,77,.3), transparent 70%), var(--band);
+  }
+  .watch-box .eyebrow, .watch-box .lead { color: var(--band-muted); }
+  .watch-box .key { color: var(--orange); }
+  .watch-note { margin-top: 16px; font-size: .9rem; color: var(--band-muted); }
+  .watch-frame { position: relative; justify-self: center; width: min(100%, 340px); aspect-ratio: 9 / 16; border-radius: 30px; overflow: hidden; background: #000;
+    box-shadow: 0 0 0 8px #0B1014, 0 30px 70px -20px rgba(0,0,0,.6); }
+  .watch-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sound-btn { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px;
+    border: 0; border-radius: 999px; padding: 10px 16px; min-height: 44px; cursor: pointer;
+    background: rgba(2,7,10,.72); color: #fff; font: 700 .95rem/1 var(--font-body); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); white-space: nowrap; }
+  .sound-btn svg { width: 22px; height: 22px; }
+  @media (min-width: 900px) { .watch-box { grid-template-columns: 1.1fr 1fr; padding: 48px 56px; gap: 48px; } }
+
   /* ---------- Sound familiar + What you get ---------- */
   .pains { display: grid; gap: 12px; margin-bottom: 48px; }
   .pain {
@@ -727,6 +745,32 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WATCH — the 25-second ad (assets/video). Loads only when scrolled near, plays muted. -->
+  <section class="watch" id="watch" data-for="business" aria-labelledby="watch-title">
+    <div class="wrap">
+      <div class="watch-box">
+        <div class="watch-text">
+          <span class="eyebrow">Watch</span>
+          <h2 id="watch-title">WeeekOne in <span class="key">25 seconds</span></h2>
+          <p class="lead">What I do, how it works and what it costs, in one short video.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="#start"><svg aria-hidden="true"><use href="#i-mail"/></svg>Get a free demo</a>
+          </div>
+          <p class="watch-note">The people in this video are AI-generated examples, not real clients.</p>
+        </div>
+        <div class="watch-frame">
+          <video id="ad-video" muted loop playsinline preload="none" poster="assets/video/weeekone-ad-poster.jpg" aria-label="WeeekOne ad: customers can't find you online? Get online in one week. Website, Google Maps, Instagram, logo and menu. Free demo first, from $75.">
+            <source src="assets/video/weeekone-ad.mp4" type="video/mp4">
+          </video>
+          <button class="sound-btn" type="button" id="ad-sound" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path id="ad-sound-wave" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" opacity=".35"/></svg>
+            <span id="ad-sound-label">Tap for sound</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1469,6 +1513,30 @@
     }, 2000);
   });
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+  /* Ad video: load and play (muted) only when it's on screen; button turns sound on or off */
+  const adVideo = document.getElementById("ad-video");
+  if (adVideo) {
+    const soundBtn = document.getElementById("ad-sound"), soundLabel = document.getElementById("ad-sound-label"), wave = document.getElementById("ad-sound-wave");
+    const setSound = on => {
+      adVideo.muted = !on; soundBtn.setAttribute("aria-pressed", String(on));
+      soundLabel.textContent = on ? "Sound on" : "Tap for sound"; wave.setAttribute("opacity", on ? "1" : ".35");
+    };
+    soundBtn.addEventListener("click", () => {
+      const on = adVideo.muted;
+      if (on) { adVideo.currentTime = 0; }
+      setSound(on);
+      adVideo.play().catch(() => {});
+    });
+    if ("IntersectionObserver" in window && !reduceMotion) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { adVideo.preload = "auto"; adVideo.play().catch(() => {}); }
+        else { adVideo.pause(); }
+      }, { threshold: 0.4 }).observe(adVideo);
+    } else {
+      adVideo.controls = true;   // reduced motion: no autoplay, the visitor starts it
+    }
+  }
 
   /* Header border on scroll */
   const header = document.querySelector(".site-header");
