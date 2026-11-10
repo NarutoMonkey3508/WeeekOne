@@ -629,8 +629,9 @@
   document.getElementById("send-close").addEventListener("click", () => dlg.close());
   /* "Open my email app": try to open it, and if the page is still showing after 2 seconds,
      nothing opened (no email app, an in-app browser like Instagram's, or a preview that blocks it). */
-  document.getElementById("send-app").addEventListener("click", e => {
-    e.preventDefault();
+  document.getElementById("send-app").addEventListener("click", () => {
+    // The link itself opens the email app (a real tap on a mailto: link works in more
+    // browsers than opening it from code). This only watches whether anything opened.
     const statusEl = document.getElementById("send-status");
     statusEl.textContent = "Opening your email app…";
     let left = false;
@@ -638,7 +639,6 @@
     addEventListener("blur", mark, { once: true });
     addEventListener("pagehide", mark, { once: true });
     document.addEventListener("visibilitychange", mark, { once: true });
-    try { window.location.href = e.currentTarget.href; } catch (err) { /* blocked */ }
     setTimeout(() => {
       removeEventListener("blur", mark); removeEventListener("pagehide", mark); document.removeEventListener("visibilitychange", mark);
       statusEl.textContent = left ? "" : "Your email app didn't open. That happens on devices without one, or inside apps like Instagram. Tap Open Gmail, or Copy the message and paste it into any email.";

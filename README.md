@@ -90,3 +90,9 @@ Google sends you and the visitor a confirmation and a reminder, and the call sho
 The WeeekOne Instagram is **@weeek.one**. To change it, edit the username (without the @) in `const INSTAGRAM = "weeek.one";` in both `index.html` and `idea-assistant.html`. A "Message @username" button then appears in the contact section, the send box and the footer. It opens a direct message on Instagram.
 
 Use the calendar icon (`assets/logo/weeekone-icon.png`) as the profile picture, as the PRD's logo rules say.
+
+## 3D background (home page)
+
+The home page has a 3D background of glossy shapes in the brand colours, including the WeeekOne calendar (`assets/bg3d.js`, built with three.js in `assets/vendor/`). It loads only after the page has loaded, stops when the home section is off screen, shows one still frame for people who turn on reduced motion, and is skipped on data-saver or devices without 3D support. The plain background stays as the fallback.
+
+**To use a Spline scene instead:** make the scene in Spline, then **Export → Viewer**, copy the link that ends in `scene.splinecode`, and paste it into `data-spline=""` on `<div id="bg3d">` in `index.html`. The site then loads the Spline viewer (pinned to version 2.0.113) instead of the built-in scene. Keep the Spline scene light, because a heavy scene makes the page slow on phones.
