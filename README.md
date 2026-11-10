@@ -87,6 +87,6 @@ Google sends you and the visitor a confirmation and a reminder, and the call sho
 
 ## Instagram
 
-When the WeeekOne Instagram account exists, put the username (without the @) between the quotes in `const INSTAGRAM = "";` in both `index.html` and `idea-assistant.html`. A "Message @username" button then appears in the contact section, the send box and the footer. It opens a direct message on Instagram.
+The WeeekOne Instagram is **@weeek_one**. To change it, edit the username (without the @) in `const INSTAGRAM = "weeek_one";` in both `index.html` and `idea-assistant.html`. A "Message @username" button then appears in the contact section, the send box and the footer. It opens a direct message on Instagram.
 
 Use the calendar icon (`assets/logo/weeekone-icon.png`) as the profile picture, as the PRD's logo rules say.
