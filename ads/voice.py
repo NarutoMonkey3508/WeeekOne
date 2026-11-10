@@ -1,8 +1,8 @@
 # Generates the voiceover lines in launch-ad/voice/ with Kokoro (open-source neural TTS).
-# Usage: <venv>/bin/python voice.py <folder with kokoro-v1.0.onnx and voices-v1.0.bin>
+# Usage: <venv>/bin/python voice.py <folder with kokoro-v1.0.onnx and voices-v1.0.bin> [ad folder, default launch-ad]
 import json, sys, os, soundfile as sf
 from kokoro_onnx import Kokoro
-here = os.path.dirname(os.path.abspath(__file__)); vdir = os.path.join(here, 'launch-ad', 'voice')
+here = os.path.dirname(os.path.abspath(__file__)); vdir = os.path.join(here, sys.argv[2] if len(sys.argv) > 2 else 'launch-ad', 'voice')
 cfg = json.load(open(os.path.join(vdir, 'script.json')))
 k = Kokoro(os.path.join(sys.argv[1], 'kokoro-v1.0.onnx'), os.path.join(sys.argv[1], 'voices-v1.0.bin'))
 durs = {}

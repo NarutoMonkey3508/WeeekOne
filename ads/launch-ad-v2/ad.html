@@ -1,0 +1,194 @@
+<!doctype html>
+<!-- WeeekOne ad v2: Higgsfield scenes (scenes/), animated with text, logo and voiceover.
+     About 25 s, 9:16 (1080x1920). Rendered frame by frame by ../render.js (AD=launch-ad-v2).
+     window.renderFrame(seconds) draws one exact frame, so the video is the same every time. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WeeekOne ad v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #02070A; }
+  .scene { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+  .scene img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 45%; will-change: transform; }
+  /* legibility: soft midnight fade at the top and bottom of every scene */
+  .scene::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(2,7,10,.78) 0%, rgba(2,7,10,.25) 26%, rgba(2,7,10,0) 42%, rgba(2,7,10,0) 70%, rgba(2,7,10,.55) 100%); }
+  #s1 img { filter: saturate(1.15) contrast(1.05); }
+
+  .sweep { position: absolute; top: -10%; height: 120%; width: 70%; left: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none; z-index: 20;
+    background: linear-gradient(100deg, transparent 0%, rgba(252,115,77,.0) 15%, rgba(252,115,77,.75) 42%, rgba(2,151,222,.75) 62%, transparent 85%); filter: blur(18px); }
+
+  .txt { position: absolute; left: 70px; right: 70px; text-align: center; z-index: 10; color: #fff; text-wrap: balance; }
+  .h { font: 800 118px/1.0 "Bricolage Grotesque", sans-serif; letter-spacing: -.025em; text-shadow: 0 6px 40px rgba(2,7,10,.55); }
+  .h .w { display: inline-block; opacity: 0; will-change: transform, opacity; }
+  .o { color: #FC734D; }
+  .b { color: #5CC3FF; }
+  .s { font: 700 48px/1.3 "Figtree", sans-serif; color: #E8F1F6; text-shadow: 0 4px 24px rgba(2,7,10,.7); opacity: 0; }
+  .hl { position: relative; display: inline-block; padding: 0 18px; margin: 0 -6px; }
+  .hl::before { content: ""; position: absolute; inset: 8px 0 2px; border-radius: 18px; background: #FC734D; transform: scaleX(var(--k, 0)); transform-origin: 0 50%; z-index: -1; }
+  .hl.blue::before { background: #0297DE; }
+
+  .tag { position: absolute; z-index: 10; font: 800 30px/1 "Figtree"; letter-spacing: .12em; text-transform: uppercase; color: #02070A; background: rgba(255,255,255,.92); padding: 14px 22px; border-radius: 999px; opacity: 0; }
+
+  .chips { position: absolute; left: 60px; right: 60px; top: 1290px; z-index: 10; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+  .chip { font: 800 50px/1 "Figtree"; padding: 26px 38px; border-radius: 999px; color: #02070A; opacity: 0; box-shadow: 0 18px 40px -12px rgba(0,0,0,.55); }
+  .chip:nth-child(1) { background: #FC734D; } .chip:nth-child(2) { background: #5CC3FF; } .chip:nth-child(3) { background: #FFFFFF; } .chip:nth-child(4) { background: #FFC06B; }
+
+  .sticker { position: absolute; z-index: 11; width: 300px; height: 300px; border-radius: 50%; right: 70px; top: 760px;
+    background: radial-gradient(circle at 35% 30%, #FF9A7A, #FC734D 60%, #E5582F); color: #02070A; display: grid; place-items: center; text-align: center;
+    box-shadow: 0 0 0 10px rgba(255,255,255,.9), 0 30px 60px -10px rgba(0,0,0,.5); opacity: 0; }
+  .sticker small { display: block; font: 800 34px/1 "Figtree"; letter-spacing: .06em; text-transform: uppercase; }
+  .sticker b { display: block; font: 800 110px/1 "Bricolage Grotesque"; letter-spacing: -.03em; }
+
+  #logo { position: absolute; z-index: 10; left: 50%; top: 520px; width: 860px; transform: translateX(-50%); opacity: 0; }
+  .cta { position: absolute; z-index: 10; left: 0; right: 0; text-align: center; opacity: 0; }
+  .pill { display: inline-block; font: 800 60px/1 "Figtree"; padding: 38px 64px; border-radius: 999px; background: #FC734D; color: #02070A; box-shadow: 0 0 60px rgba(252,115,77,.55); }
+  .handle { display: inline-flex; align-items: center; gap: 18px; font: 800 56px/1 "Figtree"; color: #fff; }
+  .handle svg { width: 64px; height: 64px; }
+  .mail { font: 700 40px/1 "Figtree"; color: #B9CBD6; }
+</style>
+</head>
+<body>
+
+<div class="scene" id="s1"><img src="scenes/scene1.png" alt=""></div>
+<div class="scene" id="s2"><img src="scenes/scene2-listing.png" alt=""></div>
+<div class="scene" id="s3"><img src="scenes/scene3.png" alt=""></div>
+<div class="scene" id="s4"><img src="scenes/scene4.png" alt=""></div>
+<div class="scene" id="s5"><img src="scenes/scene5.png" alt=""></div>
+<div class="scene" id="s6"><img src="scenes/scene6.png" alt=""></div>
+<div class="sweep" id="sweep"></div>
+
+<!-- 1 hook -->
+<div class="txt h" id="t1" style="top:200px"><span class="w">Customers</span> <span class="w">can't</span> <span class="w">find</span> <span class="w">you</span> <span class="w o">online?</span></div>
+<!-- 2 one week -->
+<div class="txt h" id="t2" style="top:150px"><span class="w">Get</span> <span class="w">online</span> <span class="w">in</span><br><span class="w"><span class="hl" id="hl2">one week</span></span></div>
+<div class="tag" id="tag2" style="left:50%;top:1420px;transform:translateX(-50%)">Example listing</div>
+<!-- 3 what you get -->
+<div class="txt h" id="t3" style="top:170px;font-size:104px"><span class="w">Everything</span> <span class="w">you</span> <span class="w o">need</span></div>
+<div class="chips" id="chips"><span class="chip">Website</span><span class="chip">Google Maps</span><span class="chip">Instagram</span><span class="chip">Logo &amp; menu</span></div>
+<!-- 4 done for you -->
+<div class="txt h" id="t4" style="top:1240px;font-size:104px"><span class="w">I</span> <span class="w">set</span> <span class="w">it</span> <span class="w">all</span> <span class="w o">up.</span></div>
+<div class="txt s" id="t4s" style="top:1500px">You don't touch any of the tech.</div>
+<!-- 5 free demo -->
+<div class="txt h" id="t5" style="top:170px"><span class="w"><span class="hl blue" id="hl5">Free demo</span></span><br><span class="w">first</span></div>
+<div class="txt s" id="t5s" style="top:470px">Pay only if you love it.</div>
+<div class="sticker" id="sticker"><div><small>From</small><b>$75</b></div></div>
+<!-- 6 end card -->
+<img id="logo" src="../../assets/logo/weeekone-logo-dark.svg" alt="WeeekOne">
+<div class="cta" id="c1" style="top:860px"><div class="s" style="opacity:1;font-size:56px;color:#fff">Your business, open online in one week.</div></div>
+<div class="cta" id="c2" style="top:1060px"><span class="pill">Get a free demo</span></div>
+<div class="cta" id="c3" style="top:1290px"><span class="handle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg>@weeek.one</span></div>
+<div class="cta" id="c4" style="top:1400px"><span class="mail">weeekone@gmail.com</span></div>
+
+<script>
+/* ---------- helpers ---------- */
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const out = p => 1 - Math.pow(1 - p, 4);
+const back = p => { const c = 1.7; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+const $ = id => document.getElementById(id);
+
+/* ---------- timeline from the voiceover ---------- */
+const ORDER = ['hook', 'week', 'what', 'open', 'demo', 'end'];
+const LEAD = .5, GAP = .45, TAIL = 2.4;
+let S = {}; window.VOICE_STARTS = {};
+async function buildTimeline() {
+  const d = await (await fetch('voice/durations.json')).json();
+  let cur = LEAD;
+  ORDER.forEach(id => { window.VOICE_STARTS[id] = cur; cur += d[id] + GAP; });
+  window.DURATION = cur - GAP + TAIL;
+  ORDER.forEach((id, i) => { S[id] = [i ? window.VOICE_STARTS[id] - .3 : 0, i < ORDER.length - 1 ? window.VOICE_STARTS[ORDER[i + 1]] - .3 : window.DURATION]; });
+}
+
+/* Ken Burns per scene: start and end of the camera move */
+const KB = {
+  s1: { s: [1.18, 1.06], x: [40, -30], y: [30, -10] },
+  s2: { s: [1.08, 1.0], x: [0, 0], y: [190, 130] },
+  s3: { s: [1.02, 1.14], x: [0, 0], y: [0, -40] },
+  s4: { s: [1.06, 1.18], x: [-30, 30], y: [0, -30] },
+  s5: { s: [1.16, 1.05], x: [30, -20], y: [-20, 10] },
+  s6: { s: [1.0, 1.1], x: [0, 0], y: [0, 0] },
+};
+const SCENE_OF = { hook: 's1', week: 's2', what: 's3', open: 's4', demo: 's5', end: 's6' };
+
+function sceneFrame(t) {
+  ORDER.forEach((id, i) => {
+    const [a, b] = S[id], el = $(SCENE_OF[id]), k = KB[SCENE_OF[id]];
+    const fadeIn = i === 0 ? 1 : out(prog(t, a - .15, a + .3));
+    const visible = t >= a - .15 && t < b + .35;
+    el.style.opacity = visible ? fadeIn : 0;
+    el.style.zIndex = i + 1;
+    if (!visible) return;
+    const p = prog(t, a - .15, b + .35), punch = i === 0 ? 0 : (1 - out(prog(t, a - .15, a + .45))) * .1;
+    el.querySelector('img').style.transform =
+      `translate(${lerp(k.x[0], k.x[1], p)}px, ${lerp(k.y[0], k.y[1], p)}px) scale(${lerp(k.s[0], k.s[1], p) + punch})`;
+  });
+  // colourful light sweep over each cut
+  let sw = 0, swp = 0;
+  ORDER.slice(1).forEach(id => { const c = S[id][0]; const q = prog(t, c - .35, c + .35); if (q > 0 && q < 1) { sw = Math.sin(q * Math.PI); swp = q; } });
+  $('sweep').style.opacity = sw;
+  $('sweep').style.transform = `translateX(${lerp(-90, 190, swp)}%) skewX(-12deg)`;
+}
+
+function words(id, t, a, end, step = .09) {
+  const el = $(id); el.style.opacity = 1;
+  const fadeOut = 1 - prog(t, end - .3, end);
+  el.querySelectorAll('.w').forEach((w, i) => {
+    const p = back(prog(t, a + i * step, a + i * step + .4));
+    w.style.opacity = clamp(p * 1.4) * fadeOut;
+    w.style.transform = `translateY(${(1 - p) * 60}px) scale(${.85 + .15 * clamp(p)})`;
+  });
+}
+function fade(id, t, a, end, rise = 30) {
+  const el = $(id), o = Math.min(out(prog(t, a, a + .4)), 1 - prog(t, end - .3, end));
+  el.style.opacity = o; el.style.transform = (el.style.transform.includes('translateX') ? 'translateX(-50%) ' : '') + `translateY(${(1 - out(prog(t, a, a + .5))) * rise}px)`;
+}
+
+window.renderFrame = (t) => {
+  sceneFrame(t);
+  const V = window.VOICE_STARTS;
+  // 1 hook
+  words('t1', t, V.hook - .1, S.hook[1] + .1);
+  // 2 one week + example listing tag
+  words('t2', t, V.week - .1, S.week[1] + .1, .12);
+  $('hl2').style.setProperty('--k', out(prog(t, V.week + .55, V.week + .95)));
+  fade('tag2', t, V.week + .4, S.week[1] + .1, 0);
+  // 3 what you get: chips pop as they're said
+  words('t3', t, V.what - .15, S.what[1] + .1);
+  const chipAt = [.05, .3, .55, .72].map(f => V.what + f * 4.4);
+  document.querySelectorAll('#chips .chip').forEach((c, i) => {
+    const p = back(prog(t, chipAt[i], chipAt[i] + .45)), o = 1 - prog(t, S.what[1] - .2, S.what[1] + .1);
+    c.style.opacity = clamp(p * 1.5) * o; c.style.transform = `translateY(${(1 - p) * 80}px) scale(${.7 + .3 * clamp(p)}) rotate(${(1 - clamp(p)) * (i % 2 ? 6 : -6)}deg)`;
+  });
+  // 4 done for you
+  words('t4', t, V.open - .1, S.open[1] + .1);
+  fade('t4s', t, V.open + 1.1, S.open[1] + .1);
+  // 5 free demo + price sticker
+  words('t5', t, V.demo - .1, S.demo[1] + .1, .15);
+  $('hl5').style.setProperty('--k', out(prog(t, V.demo + .35, V.demo + .8)));
+  fade('t5s', t, V.demo + 1.4, S.demo[1] + .1);
+  const st = back(prog(t, V.demo + 3.7, V.demo + 4.25)), sto = 1 - prog(t, S.demo[1] - .2, S.demo[1] + .1);
+  $('sticker').style.opacity = clamp(st * 1.5) * sto;
+  $('sticker').style.transform = `scale(${clamp(st, 0, 1.2)}) rotate(${lerp(-25, -8, clamp(st))}deg)`;
+  // 6 end card
+  const lg = back(prog(t, S.end[0] + .1, S.end[0] + .7));
+  $('logo').style.opacity = clamp(lg * 1.4);
+  $('logo').style.transform = `translateX(-50%) scale(${.8 + .2 * clamp(lg, 0, 1.1)})`;
+  [['c1', .5], ['c2', .8], ['c3', 1.6], ['c4', 1.9]].forEach(([id, d]) => fade(id, t, S.end[0] + d, S.end[1] + 1));
+  const pulse = 1 + .03 * Math.sin(Math.max(0, t - S.end[0] - 1.2) * 5);
+  $('c2').querySelector('.pill').style.transform = `scale(${pulse})`;
+};
+
+window.ready = (async () => {
+  await buildTimeline();
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+  window.renderFrame(0);
+  return true;
+})();
+</script>
+</body>
+</html>

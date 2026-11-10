@@ -1,0 +1,12 @@
+{
+  "voice": "af_heart",
+  "speed": 1.05,
+  "lines": [
+    { "id": "hook", "text": "Customers can't find your business online?" },
+    { "id": "week", "text": "Week One gets you online in one week." },
+    { "id": "what", "text": "A website, your Google Maps listing, Instagram, even your logo and menu." },
+    { "id": "open", "text": "I set it all up. You don't touch any of the tech." },
+    { "id": "demo", "text": "And you see a free demo of your own site before you pay a thing. Prices start at seventy-five dollars." },
+    { "id": "end",  "text": "Get your free demo today. Message Week One on Instagram." }
+  ]
+}

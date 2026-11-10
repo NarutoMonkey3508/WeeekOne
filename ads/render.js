@@ -1,15 +1,15 @@
 // Renders ads/launch-ad/ad.html to ads/launch-ad/weeekone-ad.mp4 (1080x1920, 30 fps) with the voiceover in launch-ad/voice/.
-// Usage: node render.js            full video
+// Usage: node render.js            full video (AD=launch-ad-v2 node render.js for the v2 ad)
 //        node render.js 1.5 4.5    just those moments, as PNG stills (for checking)
 const { chromium } = require('playwright'); const serve = require('./serve');
 const fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
-const FPS = 30, dir = path.join(__dirname, 'launch-ad');
+const FPS = 30, AD = process.env.AD || 'launch-ad', dir = path.join(__dirname, AD);
 (async () => {
   const srv = await serve();
   const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   p.on('pageerror', e => console.error('page error:', e.message));
-  await p.goto('http://localhost:8799/ads/launch-ad/ad.html', { waitUntil: 'networkidle' });
+  await p.goto(`http://localhost:8799/ads/${AD}/ad.html`, { waitUntil: 'networkidle' });
   await p.evaluate(() => window.ready);
   const { DURATION, VOICE_STARTS } = await p.evaluate(() => ({ DURATION: window.DURATION, VOICE_STARTS: window.VOICE_STARTS }));
   console.log('duration', DURATION.toFixed(2), 's');
