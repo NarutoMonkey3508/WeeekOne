@@ -398,6 +398,19 @@
   .price ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; font-size: 1rem; }
   .price li { display: flex; gap: 10px; align-items: flex-start; }
   .price li svg { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--ok); }
+  .mix { scroll-margin-top: 80px; margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px 22px; display: grid; gap: 18px; }
+  .mix-head h3 { font-size: 1.45rem; }
+  .mix-head p { color: var(--muted); margin-top: 6px; }
+  .mix-grid { display: grid; gap: 18px; }
+  .mix-col { display: grid; gap: 8px; align-content: start; }
+  .mix-label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .mix-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; background: var(--bg); border-radius: 16px; padding: 14px 16px; }
+  .mix-row strong { display: block; }
+  .mix-row small { display: block; color: var(--muted); font-size: .92rem; }
+  .mix-row b { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .mix-foot { color: var(--muted); font-size: 1rem; }
+  .mix-foot strong { color: var(--ink); }
+  @media (min-width: 900px) { .mix { padding: 32px; } .mix-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
   .price-note {
     margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
     border: 1px dashed var(--line); color: var(--muted); font-size: 1rem;
@@ -879,6 +892,24 @@
           </ul>
         </article>
       </div>
+      <div class="mix" id="pick-parts">
+        <div class="mix-head">
+          <h3>Only need part of it?</h3>
+          <p>You never pay for something you don't need. Start with Starter and add only what you want, or ask for just your Google listing.</p>
+        </div>
+        <div class="mix-grid">
+          <div class="mix-col">
+            <span class="mix-label">Just one thing</span>
+            <div class="mix-row"><div><strong>Google listing only</strong><small>Set up or fix your Google Maps listing, without a website</small></div><b>$75</b></div>
+          </div>
+          <div class="mix-col">
+            <span class="mix-label">Add to Starter</span>
+            <div class="mix-row"><div><strong>A simple logo</strong><small>For your sign, Instagram and website</small></div><b>+$75</b></div>
+            <div class="mix-row"><div><strong>Instagram set up, with 3 posts</strong><small>Your profile, bio, link and first posts</small></div><b>+$75</b></div>
+          </div>
+        </div>
+        <p class="mix-foot">Need all of it? <strong>Launch</strong> gives you everything for $300, with a bigger 3–5 page website. Already have a logo or Instagram? Leave it out, or swap it for something else, like a printable menu. Before I start, we agree in writing on exactly what's included.</p>
+      </div>
       <div class="price-note">
         <p><strong>The only extra cost is your domain name</strong> (like yourbakery.ca), about $20 a year.</p>
         <p>It's registered in your name, so your site and your address are always yours.</p>
@@ -1071,6 +1102,10 @@
         <details data-for="business">
           <summary>When and how do I pay?</summary>
           <div class="answer"><p>Only after you've seen and approved your demo. You get an invoice from WeeekOne by email, sent through PayPal.</p><p>Tap "Pay Now" in the email and pay with a credit or debit card or your PayPal account. Local clients can also pay by Interac e-Transfer.</p><p>The care plan is a monthly invoice, paid the same way.</p></div>
+        </details>
+        <details data-for="business">
+          <summary>What if I don't need everything in a package?</summary>
+          <div class="answer"><p>Then you don't pay for it. Start with Starter ($150) and add only what you want: a logo (+$75) or Instagram set up with 3 posts (+$75). If you only need your Google listing fixed, that's $75 on its own.</p><p>Already have something, like a logo? Leave it out, or swap it for something else of similar size, like a printable menu. <a href="#pick-parts">See all the options</a>.</p></div>
         </details>
         <details data-for="business">
           <summary>What exactly is included?</summary>
