@@ -31,3 +31,22 @@ The script says "Week One" so the voice pronounces the name right. The example l
 3. If the website's example listing changed: `node capture-textures.js`
 4. Check a few moments as stills: `node render.js 1.5 8 14`
 5. Render the video with the voiceover (about 3–4 minutes): `node render.js`
+
+## Ad v2 (`launch-ad-v2/`): colourful, with Higgsfield scenes
+
+A 25-second vertical ad (1080×1920) for Reels, TikTok and Stories, with an AI voiceover. Finished video: `launch-ad-v2/weeekone-ad.mp4`.
+
+The 6 scene pictures in `launch-ad-v2/scenes/` were made with Higgsfield (Z Image model, about 0.9 credits in total). The text, prices, logo and example listing are added on top, so every word is sharp and spelled correctly.
+
+| Voiceover | On screen |
+| --- | --- |
+| "Customers can't find your business online?" | Quiet bakery street at dusk |
+| "Week One gets you online in one week." | Phone with the example listing (labelled "Example listing") |
+| "A website, your Google Maps listing, Instagram, even your logo and menu." | 3D icons, with a chip popping in for each item |
+| "I set it all up. You don't touch any of the tech." | Café owner switching on the OPEN sign |
+| "And you see a free demo of your own site before you pay a thing. Prices start at seventy-five dollars." | Happy shop owner at a laptop, "From $75" sticker |
+| "Get your free demo today. Message Week One on Instagram." | Logo, "Get a free demo", @weeek.one, email |
+
+To re-render: `node launch-ad-v2/composite_phone.py` (only if the listing changed), then `AD=launch-ad-v2 node render.js`. Voice lines: edit `launch-ad-v2/voice/script.json`, then `python voice.py <kokoro folder> launch-ad-v2`.
+
+When you post it, turn on the platform's "AI-generated" label: the people in the scenes are AI pictures, not real clients.
