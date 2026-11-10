@@ -895,12 +895,13 @@
       <div class="mix" id="pick-parts">
         <div class="mix-head">
           <h3>Only need part of it?</h3>
-          <p>You never pay for something you don't need. Start with Starter and add only what you want, or ask for just your Google listing.</p>
+          <p>You never pay for something you don't need. Pick just one thing, or start with Starter (both together) and add only what you want.</p>
         </div>
         <div class="mix-grid">
           <div class="mix-col">
             <span class="mix-label">Just one thing</span>
             <div class="mix-row"><div><strong>Google listing only</strong><small>Set up or fix your Google Maps listing, without a website</small></div><b>$75</b></div>
+            <div class="mix-row"><div><strong>Website only</strong><small>A 1-page website that works on phones, without the Google listing</small></div><b>$75</b></div>
           </div>
           <div class="mix-col">
             <span class="mix-label">Add to Starter</span>
@@ -1105,7 +1106,7 @@
         </details>
         <details data-for="business">
           <summary>What if I don't need everything in a package?</summary>
-          <div class="answer"><p>Then you don't pay for it. Start with Starter ($150) and add only what you want: a logo (+$75) or Instagram set up with 3 posts (+$75). If you only need your Google listing fixed, that's $75 on its own.</p><p>Already have something, like a logo? Leave it out, or swap it for something else of similar size, like a printable menu. <a href="#pick-parts">See all the options</a>.</p></div>
+          <div class="answer"><p>Then you don't pay for it. Start with Starter ($150) and add only what you want: a logo (+$75) or Instagram set up with 3 posts (+$75). If you only need your Google listing fixed, or only a website, each is $75 on its own.</p><p>Already have something, like a logo? Leave it out, or swap it for something else of similar size, like a printable menu. <a href="#pick-parts">See all the options</a>.</p></div>
         </details>
         <details data-for="business">
           <summary>What exactly is included?</summary>
@@ -1239,6 +1240,10 @@
           <p class="fine">The button gives you a ready-written message. Just fill in the blanks.</p>
           <p class="fine" data-for="business"><strong style="color:var(--ink)">No card, no commitment.</strong> If you don't love the demo, you don't pay.</p>
           <p class="fine" data-for="idea"><strong style="color:var(--ink)">Your idea stays yours.</strong> Talking it through first is free.</p>
+          <div class="talk-block" data-insta hidden>
+            <span class="talk-label">Prefer Instagram?</span>
+            <a class="btn btn-ghost" href="#" data-insta hidden><svg aria-hidden="true"><use href="#i-insta"/></svg><span>Message <span data-insta-name></span></span></a>
+          </div>
           <div class="talk-block">
             <span class="talk-label">Want to talk first?</span>
             <p class="fine" data-booking hidden>Book a free 15-minute call at a time that suits you. I only call at the time you pick.</p>
@@ -1268,6 +1273,7 @@
     <pre class="send-preview" id="send-preview"></pre>
     <p class="send-status" id="send-status" aria-live="polite"></p>
     <p data-booking hidden>Rather talk first? <a href="#" data-booking hidden>Book a time to talk</a></p>
+    <p data-insta hidden>Prefer Instagram? <a href="#" data-insta hidden>Message <span data-insta-name></span></a></p>
   </div>
 </dialog>
 
@@ -1281,7 +1287,7 @@
       <a href="idea-assistant.html">Idea assistant</a>
       <a href="#questions">Questions</a>
     </nav>
-    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span></p>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span><span data-insta hidden> · Instagram <a href="#" data-insta hidden><span data-insta-name></span></a></span></p>
   </div>
 </footer>
 
@@ -1331,6 +1337,16 @@
   document.querySelectorAll("[data-mailto]").forEach(a => { a.href = mailto(a.dataset.subject, a.dataset.body === "idea" ? IDEA_BODY : BODY); });
   /* ====== Booking page: paste your booking link between the quotes (see README) ======
      Until it's set, the site asks people to email you to pick a time. */
+  /* ====== Instagram: put your WeeekOne username between the quotes, without the @ ======
+     Until it's set, the Instagram options stay hidden. */
+  const INSTAGRAM = "";
+  document.querySelectorAll("[data-insta]").forEach(el => {
+    el.hidden = !INSTAGRAM;
+    if (!INSTAGRAM) return;
+    if (el.tagName === "A") { el.href = "https://ig.me/m/" + encodeURIComponent(INSTAGRAM); el.target = "_blank"; el.rel = "noopener"; }
+    el.querySelectorAll("[data-insta-name]").forEach(n => { n.textContent = "@" + INSTAGRAM; });
+    if (el.hasAttribute("data-insta-name")) el.textContent = "@" + INSTAGRAM;
+  });
   const BOOKING_URL = "";
   document.querySelectorAll("[data-booking]").forEach(el => {
     el.hidden = !BOOKING_URL;

@@ -362,7 +362,7 @@
       <a href="index.html#idea">For ideas</a>
       <a href="index.html#ideas">Idea Launch</a>
     </nav>
-    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span></p>
+    <p class="legal">© 2026 WeeekOne · <span data-email>weeekone@gmail.com</span><span data-insta hidden> · Instagram <a href="#" data-insta hidden><span data-insta-name></span></a></span></p>
   </div>
 </footer>
 
@@ -382,6 +382,7 @@
     <pre class="send-preview" id="send-preview"></pre>
     <p class="send-status" id="send-status" aria-live="polite"></p>
     <p data-booking hidden>Rather talk first? <a href="#" data-booking hidden>Book a time to talk</a></p>
+    <p data-insta hidden>Prefer Instagram? <a href="#" data-insta hidden>Message <span data-insta-name></span></a></p>
   </div>
 </dialog>
 
@@ -412,6 +413,16 @@
   document.querySelectorAll("[data-email]").forEach(el => { el.textContent = EMAIL; });
   /* ====== Booking page: paste your booking link between the quotes (see README) ======
      Until it's set, the site asks people to email you to pick a time. */
+  /* ====== Instagram: put your WeeekOne username between the quotes, without the @ ======
+     Until it's set, the Instagram options stay hidden. */
+  const INSTAGRAM = "";
+  document.querySelectorAll("[data-insta]").forEach(el => {
+    el.hidden = !INSTAGRAM;
+    if (!INSTAGRAM) return;
+    if (el.tagName === "A") { el.href = "https://ig.me/m/" + encodeURIComponent(INSTAGRAM); el.target = "_blank"; el.rel = "noopener"; }
+    el.querySelectorAll("[data-insta-name]").forEach(n => { n.textContent = "@" + INSTAGRAM; });
+    if (el.hasAttribute("data-insta-name")) el.textContent = "@" + INSTAGRAM;
+  });
   const BOOKING_URL = "";
   document.querySelectorAll("[data-booking]").forEach(el => {
     el.hidden = !BOOKING_URL;
